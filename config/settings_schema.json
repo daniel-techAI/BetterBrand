@@ -1,0 +1,29 @@
+[
+  {
+    "name": "Theme info",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "R/CREATION custom Shopify theme."
+      }
+    ]
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "background",
+        "label": "Background",
+        "default": "#080706"
+      },
+      {
+        "type": "color",
+        "id": "accent",
+        "label": "Accent",
+        "default": "#d6bd7a"
+      }
+    ]
+  }
+]
+

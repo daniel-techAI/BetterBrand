@@ -1,0 +1,78 @@
+<section class="product-page">
+  <div class="product-gallery">
+    {% if product.media.size > 0 %}
+      {% for media in product.media limit: 4 %}
+        <div class="product-media">
+          {{ media | image_url: width: 1200 | image_tag: loading: 'lazy', sizes: '(min-width: 900px) 50vw, 100vw' }}
+        </div>
+      {% endfor %}
+    {% else %}
+      <div class="product-media"><div class="placeholder-product dark"></div></div>
+      <div class="product-media"><div class="placeholder-product light"></div></div>
+      <div class="product-media"><div class="placeholder-product stone"></div></div>
+      <div class="product-media"><div class="placeholder-product brown"></div></div>
+    {% endif %}
+  </div>
+
+  <div class="product-info">
+    <p class="product-vendor">{{ product.vendor | default: 'R/CREATION' }}</p>
+    <h1>{{ product.title | default: 'Core Hoodie' }}</h1>
+    <p class="product-price">{{ product.selected_or_first_available_variant.price | money | default: '€119.00' }}</p>
+    <p class="product-description">
+      {{ product.description | strip_html | default: 'Made for weight, movement, and intention.' }}
+    </p>
+
+    {% form 'product', product, class: 'product-form' %}
+      {% unless product.has_only_default_variant %}
+        {% for option in product.options_with_values %}
+          <fieldset class="variant-field">
+            <legend>{{ option.name }}</legend>
+            <div class="variant-options">
+              {% for value in option.values %}
+                <label>
+                  <input
+                    type="radio"
+                    name="options[{{ option.name | escape }}]"
+                    value="{{ value | escape }}"
+                    {% if option.selected_value == value %}checked{% endif %}
+                  >
+                  <span>{{ value }}</span>
+                </label>
+              {% endfor %}
+            </div>
+          </fieldset>
+        {% endfor %}
+      {% endunless %}
+
+      <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+      <div class="quantity-row">
+        <label for="Quantity-{{ section.id }}">Quantity</label>
+        <input id="Quantity-{{ section.id }}" type="number" name="quantity" value="1" min="1">
+      </div>
+      <button class="button button-primary product-submit" type="submit">Add to Cart</button>
+      {{ form | payment_button }}
+    {% endform %}
+
+    <div class="product-accordions">
+      <details open>
+        <summary>Details</summary>
+        <p>Heavy cotton feel, neutral styling, and a clean silhouette made for everyday layering.</p>
+      </details>
+      <details>
+        <summary>Shipping</summary>
+        <p>Shipping rates and delivery windows are calculated at checkout.</p>
+      </details>
+      <details>
+        <summary>Returns</summary>
+        <p>Returns follow the policy configured in your Shopify store.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main product",
+  "settings": []
+}
+{% endschema %}

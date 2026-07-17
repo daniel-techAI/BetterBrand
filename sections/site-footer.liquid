@@ -1,0 +1,39 @@
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div>
+      <a class="brand-mark footer-brand" href="{{ routes.root_url }}">R/CREATION</a>
+      <p>You wear what you are.</p>
+    </div>
+    <div>
+      <h2>Shop</h2>
+      <a href="/collections/tees">Tees</a>
+      <a href="/collections/hoodies">Hoodies</a>
+      <a href="/collections/pants">Pants</a>
+      <a href="/collections/hats-caps">Hats & Caps</a>
+    </div>
+    <div>
+      <h2>Support</h2>
+      <a href="/pages/contact">Contact</a>
+      <a href="/pages/faq">FAQ</a>
+      <a href="/policies/shipping-policy">Shipping</a>
+      <a href="/policies/refund-policy">Returns</a>
+      <a href="/policies/privacy-policy">Privacy</a>
+      <a href="/policies/terms-of-service">Terms</a>
+    </div>
+    <div>
+      <h2>Stay Close</h2>
+      <p>Drop notes, restocks, and quiet updates.</p>
+      {% form 'customer', class: 'newsletter-form' %}
+        <input type="email" name="contact[email]" placeholder="Email address" aria-label="Email address" required>
+        <button type="submit" aria-label="Subscribe">{% render 'icon-arrow' %}</button>
+      {% endform %}
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Site footer",
+  "settings": []
+}
+{% endschema %}

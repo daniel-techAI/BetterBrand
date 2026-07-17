@@ -1,0 +1,17 @@
+<article class="product-card">
+  <a href="{{ product.url }}" class="product-card-media">
+    {% if product.featured_image %}
+      {{ product.featured_image | image_url: width: 900 | image_tag: loading: 'lazy', sizes: '(min-width: 900px) 25vw, 50vw' }}
+    {% else %}
+      <div class="placeholder-product dark"></div>
+    {% endif %}
+  </a>
+  <div class="product-card-info">
+    <div>
+      <h3><a href="{{ product.url }}">{{ product.title }}</a></h3>
+      <p>{{ product.price | money }}</p>
+    </div>
+    <button type="button" aria-label="Quick view {{ product.title | escape }}">{% render 'icon-plus' %}</button>
+  </div>
+</article>
+

@@ -1,0 +1,49 @@
+<header class="site-header" data-header>
+  <div class="header-inner">
+    <a class="brand-mark" href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }}">
+      <span>R/CREATION</span>
+    </a>
+
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="{{ routes.collections_url }}">Shop</a>
+      <a href="/collections/hoodies">Hoodies</a>
+      <a href="/collections/tees">Tees</a>
+      <a href="/pages/lookbook">Lookbook</a>
+      <a href="/pages/about">About</a>
+    </nav>
+
+    <div class="header-actions">
+      <a class="icon-link" href="{{ routes.search_url }}" aria-label="Search">
+        {% render 'icon-search' %}
+      </a>
+      <a class="cart-link" href="{{ routes.cart_url }}" aria-label="Cart">
+        {% render 'icon-bag' %}
+        <span>Cart</span>
+        {% if cart.item_count > 0 %}
+          <b>{{ cart.item_count }}</b>
+        {% endif %}
+      </a>
+      <button class="menu-toggle" type="button" data-menu-toggle aria-label="Open menu">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="mobile-nav" data-mobile-nav>
+    <a href="{{ routes.collections_url }}">Shop</a>
+    <a href="/collections/hoodies">Hoodies</a>
+    <a href="/collections/tees">Tees</a>
+    <a href="/collections/pants">Pants</a>
+    <a href="/collections/hats-caps">Hats & Caps</a>
+    <a href="/pages/lookbook">Lookbook</a>
+    <a href="/pages/about">About</a>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Site header",
+  "settings": []
+}
+{% endschema %}
+

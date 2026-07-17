@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "settings": {}
+    },
+    "related": {
+      "type": "featured-products",
+      "settings": {
+        "heading": "Complete the uniform"
+      }
+    }
+  },
+  "order": ["main", "related"]
+}
+

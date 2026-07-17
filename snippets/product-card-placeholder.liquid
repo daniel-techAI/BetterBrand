@@ -1,0 +1,15 @@
+<article class="product-card">
+  <a href="{{ routes.collections_url }}" class="product-card-media" aria-label="{{ title }}">
+    <div class="placeholder-product {{ tone }}">
+      <span>R/C</span>
+    </div>
+  </a>
+  <div class="product-card-info">
+    <div>
+      <h3><a href="{{ routes.collections_url }}">{{ title }}</a></h3>
+      <p>{{ price }}</p>
+    </div>
+    <button type="button" aria-label="Quick view {{ title }}">{% render 'icon-plus' %}</button>
+  </div>
+</article>
+

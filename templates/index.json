@@ -1,0 +1,27 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero-creation",
+      "settings": {}
+    },
+    "drop": {
+      "type": "collection-strip",
+      "settings": {
+        "heading": "The first layer of intention",
+        "copy": "Quiet cuts, heavy fabric, and neutral tones made to move between seasons."
+      }
+    },
+    "featured": {
+      "type": "featured-products",
+      "settings": {
+        "heading": "Shop the drop"
+      }
+    },
+    "lookbook": {
+      "type": "lookbook-story",
+      "settings": {}
+    }
+  },
+  "order": ["hero", "drop", "featured", "lookbook"]
+}
+

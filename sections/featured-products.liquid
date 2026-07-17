@@ -1,0 +1,45 @@
+<section class="featured-products">
+  <div class="section-heading compact">
+    <h2>{{ section.settings.heading }}</h2>
+    <a href="{{ routes.collections_url }}">View all</a>
+  </div>
+
+  <div class="product-grid">
+    {% assign chosen_collection = section.settings.collection | default: collections.all %}
+    {% if chosen_collection.products_count > 0 %}
+      {% for product in chosen_collection.products limit: 4 %}
+        {% render 'product-card', product: product %}
+      {% endfor %}
+    {% else %}
+      {% render 'product-card-placeholder', title: 'Core Hoodie', price: '€119.00', tone: 'dark' %}
+      {% render 'product-card-placeholder', title: 'Weight Tee', price: '€59.00', tone: 'light' %}
+      {% render 'product-card-placeholder', title: 'Intent Pant', price: '€94.00', tone: 'stone' %}
+      {% render 'product-card-placeholder', title: 'R/ Cap', price: '€39.00', tone: 'brown' %}
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured products",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Shop the drop"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured products"
+    }
+  ]
+}
+{% endschema %}
+

@@ -1,0 +1,17 @@
+<section class="content-page">
+  <h1>Contact</h1>
+  {% form 'contact', class: 'contact-form' %}
+    <input type="text" name="contact[name]" placeholder="Name" aria-label="Name">
+    <input type="email" name="contact[email]" placeholder="Email" aria-label="Email" required>
+    <textarea name="contact[body]" placeholder="Message" aria-label="Message" rows="6"></textarea>
+    <button class="button button-primary" type="submit">Send</button>
+  {% endform %}
+</section>
+
+{% schema %}
+{
+  "name": "Contact page",
+  "settings": []
+}
+{% endschema %}
+

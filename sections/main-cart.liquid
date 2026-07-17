@@ -1,0 +1,58 @@
+<section class="cart-page">
+  <h1>Cart</h1>
+  {% if cart.item_count > 0 %}
+    <form action="{{ routes.cart_url }}" method="post" class="cart-form">
+      {% for item in cart.items %}
+        <div class="cart-row">
+          <a href="{{ item.url }}" class="cart-image">
+            {% if item.image %}
+              {{ item.image | image_url: width: 240 | image_tag: loading: 'lazy' }}
+            {% endif %}
+          </a>
+          <div>
+            <h2>{{ item.product.title }}</h2>
+            {% unless item.product.has_only_default_variant %}
+              <p>{{ item.variant.title }}</p>
+            {% endunless %}
+            <p>{{ item.final_line_price | money }}</p>
+            <a class="remove-link" href="{{ routes.cart_change_url }}?line={{ forloop.index }}&quantity=0">Remove</a>
+          </div>
+          <div class="cart-quantity">
+            <label for="Quantity-{{ forloop.index }}">Qty</label>
+            <input id="Quantity-{{ forloop.index }}" type="number" name="updates[]" value="{{ item.quantity }}" min="0" aria-label="Quantity for {{ item.product.title | escape }}">
+          </div>
+        </div>
+      {% endfor %}
+      <div class="cart-summary">
+        <div class="cart-notes">
+          <label for="Cart-note">Order note</label>
+          <textarea id="Cart-note" name="note" rows="4" placeholder="Sizing notes, delivery details, or anything we should know.">{{ cart.note }}</textarea>
+        </div>
+        <div class="cart-checkout">
+          <div class="cart-policy-note">
+            <p>Subtotal {{ cart.total_price | money }}</p>
+            <small>Shipping, taxes, and delivery windows are calculated at checkout.</small>
+          </div>
+          <label class="terms-check">
+            <input type="checkbox" required>
+            <span>I agree to the Terms, Privacy Policy, and Return Policy.</span>
+          </label>
+          <button class="button button-quiet" type="submit" name="update">Update Cart</button>
+          <button class="button button-primary" type="submit" name="checkout">Checkout</button>
+        </div>
+      </div>
+    </form>
+  {% else %}
+    <div class="empty-state">
+      <p>Your cart is empty.</p>
+      <a class="button button-primary" href="{{ routes.collections_url }}">Shop the Drop</a>
+    </div>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Main cart",
+  "settings": []
+}
+{% endschema %}

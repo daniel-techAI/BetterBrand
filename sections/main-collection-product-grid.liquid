@@ -1,0 +1,180 @@
+<section class="collection-page">
+  <div class="collection-hero">
+    <h1>{{ collection.title | default: 'Shop' }}</h1>
+    <p>{{ collection.description | strip_html | default: 'Seasonless essentials in black, stone, bone, charcoal, and muted earth tones.' }}</p>
+  </div>
+
+  <div class="collection-toolbar">
+    <nav class="category-tabs" aria-label="Categories">
+      <a href="{{ routes.collections_url }}">All</a>
+      <a href="/collections/tees">Tees</a>
+      <a href="/collections/hoodies">Hoodies</a>
+      <a href="/collections/pants">Pants</a>
+      <a href="/collections/shorts">Shorts</a>
+      <a href="/collections/socks">Socks</a>
+      <a href="/collections/hats-caps">Hats & Caps</a>
+      <a href="/collections/accessories">Accessories</a>
+    </nav>
+
+    <div class="toolbar-actions">
+      <button type="button" data-filter-toggle>Filter</button>
+      <form class="sort-form" method="get">
+        {% assign sort_by = collection.sort_by | default: collection.default_sort_by %}
+        {% for filter in collection.filters %}
+          {% for value in filter.active_values %}
+            <input type="hidden" name="{{ value.param_name }}" value="{{ value.value }}">
+          {% endfor %}
+          {% if filter.type == 'price_range' %}
+            {% if filter.min_value.value %}
+              <input type="hidden" name="{{ filter.min_value.param_name }}" value="{{ filter.min_value.value | money_without_currency | replace: ',', '' }}">
+            {% endif %}
+            {% if filter.max_value.value %}
+              <input type="hidden" name="{{ filter.max_value.param_name }}" value="{{ filter.max_value.value | money_without_currency | replace: ',', '' }}">
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+        <label for="SortBy">Sort</label>
+        <select id="SortBy" name="sort_by" onchange="this.form.submit()">
+          {% for option in collection.sort_options %}
+            <option value="{{ option.value }}" {% if option.value == sort_by %}selected{% endif %}>{{ option.name }}</option>
+          {% endfor %}
+        </select>
+      </form>
+    </div>
+  </div>
+
+  {% paginate collection.products by 24 %}
+    <div class="collection-count">
+      <span>{{ collection.products_count | default: 0 }} pieces</span>
+      {% if collection.filters.size > 0 %}
+        <a href="{{ collection.url }}">Clear filters</a>
+      {% endif %}
+    </div>
+
+    <div class="collection-layout">
+      <aside class="facets-panel" data-facets-panel>
+        <form class="facets-form" method="get">
+          {% if collection.filters.size > 0 %}
+            {% for filter in collection.filters %}
+              <details class="facet-group" open>
+                <summary>{{ filter.label }}</summary>
+                <div class="facet-options">
+                  {% case filter.type %}
+                    {% when 'boolean', 'list' %}
+                      {% for value in filter.values %}
+                        <label class="facet-option {% if value.count == 0 and value.active == false %}is-disabled{% endif %}">
+                          <input
+                            type="checkbox"
+                            name="{{ value.param_name }}"
+                            value="{{ value.value }}"
+                            {% if value.active %}checked{% endif %}
+                            {% if value.count == 0 and value.active == false %}disabled{% endif %}
+                          >
+                          <span>{{ value.label }}</span>
+                          <small>{{ value.count }}</small>
+                        </label>
+                      {% endfor %}
+                    {% when 'price_range' %}
+                      <div class="price-filter">
+                        <label>
+                          <span>Min</span>
+                          <input
+                            name="{{ filter.min_value.param_name }}"
+                            type="number"
+                            min="0"
+                            {% if filter.range_max %}max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"{% endif %}
+                            placeholder="0"
+                            {% if filter.min_value.value %}value="{{ filter.min_value.value | money_without_currency | replace: ',', '' }}"{% endif %}
+                          >
+                        </label>
+                        <label>
+                          <span>Max</span>
+                          <input
+                            name="{{ filter.max_value.param_name }}"
+                            type="number"
+                            min="0"
+                            {% if filter.range_max %}max="{{ filter.range_max | money_without_currency | replace: ',', '' }}"{% endif %}
+                            placeholder="{{ filter.range_max | money_without_currency | replace: ',', '' }}"
+                            {% if filter.max_value.value %}value="{{ filter.max_value.value | money_without_currency | replace: ',', '' }}"{% endif %}
+                          >
+                        </label>
+                      </div>
+                  {% endcase %}
+                </div>
+              </details>
+            {% endfor %}
+
+            <input type="hidden" name="sort_by" value="{{ sort_by }}">
+            <button class="button button-primary" type="submit">Apply filters</button>
+          {% else %}
+            <div class="facet-empty">
+              <p>Filters appear here after you enable them in Shopify Search & Discovery.</p>
+            </div>
+          {% endif %}
+        </form>
+      </aside>
+
+      <div>
+        {% assign has_active_filters = false %}
+        {% for filter in collection.filters %}
+          {% if filter.active_values.size > 0 %}
+            {% assign has_active_filters = true %}
+          {% endif %}
+          {% if filter.type == 'price_range' %}
+            {% if filter.min_value.value or filter.max_value.value %}
+              {% assign has_active_filters = true %}
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+
+        {% if has_active_filters %}
+          <div class="active-filters" aria-label="Active filters">
+            {% for filter in collection.filters %}
+              {% for value in filter.active_values %}
+                <a href="{{ value.url_to_remove }}">{{ filter.label }}: {{ value.label }}</a>
+              {% endfor %}
+              {% if filter.type == 'price_range' %}
+                {% if filter.min_value.value or filter.max_value.value %}
+                  <a href="{{ filter.url_to_remove }}">
+                    Price:
+                    {{ filter.min_value.value | default: 0 | money }}
+                    -
+                    {{ filter.max_value.value | default: filter.range_max | money }}
+                  </a>
+                {% endif %}
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        <div class="product-grid collection-grid">
+          {% if collection.products.size > 0 %}
+            {% for product in collection.products %}
+              {% render 'product-card', product: product %}
+            {% endfor %}
+          {% else %}
+            {% render 'product-card-placeholder', title: 'Core Hoodie', price: 'EUR 119.00', tone: 'dark' %}
+            {% render 'product-card-placeholder', title: 'Weight Tee', price: 'EUR 59.00', tone: 'light' %}
+            {% render 'product-card-placeholder', title: 'Intent Pant', price: 'EUR 94.00', tone: 'stone' %}
+            {% render 'product-card-placeholder', title: 'Drift Short', price: 'EUR 54.00', tone: 'beige' %}
+            {% render 'product-card-placeholder', title: 'R/ Cap', price: 'EUR 39.00', tone: 'brown' %}
+            {% render 'product-card-placeholder', title: 'Everyday Sock', price: 'EUR 18.00', tone: 'white' %}
+          {% endif %}
+        </div>
+
+        {% if paginate.pages > 1 %}
+          <nav class="pagination" aria-label="Pagination">
+            {{ paginate | default_pagination }}
+          </nav>
+        {% endif %}
+      </div>
+    </div>
+  {% endpaginate %}
+</section>
+
+{% schema %}
+{
+  "name": "Collection product grid",
+  "settings": []
+}
+{% endschema %}
