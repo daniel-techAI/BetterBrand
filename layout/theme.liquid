@@ -36,6 +36,7 @@
       {{ content_for_layout }}
     </main>
 
+    {% section 'cart-drawer' %}
     {% sections 'footer-group' %}
     <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
   </body>

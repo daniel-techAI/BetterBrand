@@ -13,25 +13,29 @@
     </a>
 
     <nav class="main-nav" aria-label="Main navigation">
-      <a href="{{ routes.collections_url }}">Shop</a>
-      <a href="/collections/tees">Tees</a>
-      <a href="/collections/hoodies">Hoodies</a>
-      <a href="/collections/pants">Pants</a>
-      <a href="/collections/shorts">Shorts</a>
-      <a href="/collections/hats-caps">Hats & Caps</a>
-      <a href="/pages/lookbook">Editorial</a>
+      {% if section.settings.menu != blank %}
+        {% for link in section.settings.menu.links %}
+          <a href="{{ link.url }}" {% if link.current %}aria-current="page"{% endif %}>{{ link.title }}</a>
+        {% endfor %}
+      {% else %}
+        <a href="{{ routes.collections_url }}">Shop</a>
+        <a href="/collections/tees">Tees</a>
+        <a href="/collections/hoodies">Hoodies</a>
+        <a href="/collections/pants">Pants</a>
+        <a href="/collections/shorts">Shorts</a>
+        <a href="/collections/hats-caps">Hats & Caps</a>
+        <a href="/pages/lookbook">Editorial</a>
+      {% endif %}
     </nav>
 
     <div class="header-actions">
       <a class="icon-link" href="{{ routes.search_url }}" aria-label="Search">
         {% render 'icon-search' %}
       </a>
-      <a class="cart-link" href="{{ routes.cart_url }}" aria-label="Cart">
+      <a class="cart-link" href="{{ routes.cart_url }}" aria-label="Open cart" aria-controls="CartDrawer" data-cart-open>
         {% render 'icon-bag' %}
         <span>Cart</span>
-        {% if cart.item_count > 0 %}
-          <b>{{ cart.item_count }}</b>
-        {% endif %}
+        <b data-cart-count {% if cart.item_count == 0 %}hidden{% endif %}>{{ cart.item_count }}</b>
       </a>
       <button class="menu-toggle" type="button" data-menu-toggle aria-label="Open menu">
         <span></span><span></span>
@@ -40,13 +44,19 @@
   </div>
 
   <div class="mobile-nav" data-mobile-nav>
-    <a href="{{ routes.collections_url }}">Shop</a>
-    <a href="/collections/hoodies">Hoodies</a>
-    <a href="/collections/tees">Tees</a>
-    <a href="/collections/pants">Pants</a>
-    <a href="/collections/hats-caps">Hats & Caps</a>
-    <a href="/pages/lookbook">Lookbook</a>
-    <a href="/pages/about">About</a>
+    {% if section.settings.menu != blank %}
+      {% for link in section.settings.menu.links %}
+        <a href="{{ link.url }}" {% if link.current %}aria-current="page"{% endif %}>{{ link.title }}</a>
+      {% endfor %}
+    {% else %}
+      <a href="{{ routes.collections_url }}">Shop</a>
+      <a href="/collections/hoodies">Hoodies</a>
+      <a href="/collections/tees">Tees</a>
+      <a href="/collections/pants">Pants</a>
+      <a href="/collections/hats-caps">Hats & Caps</a>
+      <a href="/pages/lookbook">Editorial</a>
+      <a href="/pages/about">About</a>
+    {% endif %}
   </div>
 </header>
 
@@ -54,6 +64,11 @@
 {
   "name": "Site header",
   "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Main menu"
+    },
     {
       "type": "checkbox",
       "id": "show_announcement",

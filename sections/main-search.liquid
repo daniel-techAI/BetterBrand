@@ -1,0 +1,45 @@
+<section class="search-page commerce-page">
+  <header class="search-header">
+    <h1>Search</h1>
+    <form action="{{ routes.search_url }}" method="get" role="search" class="search-form">
+      <label for="SearchInput-{{ section.id }}" class="visually-hidden">Search the store</label>
+      <input id="SearchInput-{{ section.id }}" type="search" name="q" value="{{ search.terms | escape }}" placeholder="What are you looking for?" autocomplete="off">
+      <input type="hidden" name="type" value="product">
+      <input type="hidden" name="options[prefix]" value="last">
+      <button type="submit" aria-label="Search">{% render 'icon-search' %}</button>
+    </form>
+  </header>
+
+  {% if search.performed %}
+    <div class="search-meta">
+      <p>{{ search.results_count }} results for "{{ search.terms }}"</p>
+      {% if search.results_count > 0 %}<a href="{{ routes.search_url }}">Clear search</a>{% endif %}
+    </div>
+
+    {% paginate search.results by 24 %}
+      <div class="product-grid collection-grid search-grid">
+        {% for item in search.results %}
+          {% if item.object_type == 'product' %}{% render 'product-card', product: item %}{% endif %}
+        {% endfor %}
+      </div>
+      {% if paginate.pages > 1 %}<nav class="pagination" aria-label="Pagination">{{ paginate | default_pagination }}</nav>{% endif %}
+    {% endpaginate %}
+  {% else %}
+    <div class="search-suggestions">
+      <p>Start with a category.</p>
+      <nav aria-label="Suggested searches">
+        <a href="/collections/hoodies">Hoodies</a>
+        <a href="/collections/tees">Tees</a>
+        <a href="/collections/pants">Pants</a>
+        <a href="/collections/hats-caps">Hats & Caps</a>
+      </nav>
+    </div>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Main search",
+  "settings": []
+}
+{% endschema %}

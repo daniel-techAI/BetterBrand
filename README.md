@@ -10,15 +10,26 @@ Working tagline: `You wear what you are.`
 - Luxury streetwear with a product-led tech-site feel.
 - Palette: black, white, warm beige, champagne gold, charcoal, muted brown.
 - Built for Shopify products, checkout, payments, orders, and Printify fulfillment.
-- Local static preview included at `preview/index.html` for design review before Shopify is connected.
+- Editorial product layouts with slower, restrained motion and minimal card framing.
+- Local static commerce previews for design and interaction review without Shopify data.
 
-## Shopify Setup Later
+## Commerce Features
 
-1. Create or reopen the Shopify store.
-2. Add products and Printify integration.
-3. Push this repo to GitHub.
-4. In Shopify admin, connect the GitHub branch as a theme.
-5. Preview, test cart/checkout, then publish.
+- Configurable Shopify navigation with apparel collection fallbacks.
+- Collection index, category navigation, sorting, native storefront filters, and active-filter removal.
+- Responsive product galleries, color/size variants, variant pricing, availability, and quantity controls.
+- Locale-aware Shopify Ajax cart drawer with add, remove, and quantity updates.
+- Full cart page with notes, policy acknowledgement, shipping progress, and checkout fallback.
+- Product-only storefront search and responsive desktop/mobile layouts.
+
+## Connected Workflow
+
+The Shopify theme is connected to the `main` branch of this repository. Commits pushed to `main` update the connected theme automatically.
+
+1. Add products and collections in Shopify using the handles in `docs/product-catalog-plan.md`.
+2. Configure storefront filters through Shopify Search & Discovery.
+3. Connect Printify products and fulfillment inside Shopify.
+4. Preview and test product, cart, payment, shipping, and policy behavior before publishing.
 
 Launch prep docs:
 
@@ -34,4 +45,7 @@ Launch prep docs:
 - `snippets/*.liquid` - reusable Liquid pieces
 - `assets/theme.css` - theme styling
 - `assets/theme.js` - interactions
-- `preview/index.html` - browser preview without Shopify
+- `preview/index.html` - storefront homepage preview
+- `preview/collection.html` - collection and filter preview
+- `preview/product.html` - product, variant, and cart-drawer preview
+- `preview/cart.html` - full cart preview

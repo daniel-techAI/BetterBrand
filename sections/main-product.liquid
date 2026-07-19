@@ -1,42 +1,74 @@
-<section class="product-page">
-  <div class="product-gallery">
+{% assign current_variant = product.selected_or_first_available_variant %}
+
+<section class="product-page commerce-page" data-product-root data-money-format="{{ shop.money_format | escape }}">
+  <div class="product-gallery" aria-label="Product media">
     {% if product.media.size > 0 %}
-      {% for media in product.media limit: 4 %}
-        <div class="product-media">
-          {{ media | image_url: width: 1200 | image_tag: loading: 'lazy', sizes: '(min-width: 900px) 50vw, 100vw' }}
+      {% for media in product.media limit: 6 %}
+        <div class="product-media {% if forloop.first %}is-featured{% endif %}" data-media-id="{{ media.id }}">
+          {% case media.media_type %}
+            {% when 'image' %}
+              {{ media | image_url: width: 1600 | image_tag: loading: 'lazy', sizes: '(min-width: 900px) 55vw, 100vw', alt: media.alt }}
+            {% when 'video' %}
+              {{ media | video_tag: controls: true, image_size: '1200x' }}
+            {% when 'external_video' %}
+              {{ media | external_video_tag }}
+            {% when 'model' %}
+              {{ media | model_viewer_tag }}
+          {% endcase %}
         </div>
       {% endfor %}
     {% else %}
-      <div class="product-media"><img src="{{ 'product-core-hoodie-v2.png' | asset_url }}" alt="Core Hoodie concept" width="1024" height="1280"></div>
+      <div class="product-media is-featured"><img src="{{ 'product-core-hoodie-v2.png' | asset_url }}" alt="Core Hoodie concept" width="1024" height="1280"></div>
       <div class="product-media"><img src="{{ 'product-weight-tee-v2.png' | asset_url }}" alt="Weight Tee concept" width="1024" height="1280"></div>
       <div class="product-media"><img src="{{ 'product-intent-pant-v2.png' | asset_url }}" alt="Intent Pant concept" width="1024" height="1280"></div>
-      <div class="product-media"><img src="{{ 'product-rc-cap-v2.png' | asset_url }}" alt="R/ Cap concept" width="1024" height="1280"></div>
     {% endif %}
   </div>
 
   <div class="product-info">
-    <p class="product-vendor">{{ product.vendor | default: 'R/CREATION' }}</p>
-    <h1>{{ product.title | default: 'Core Hoodie' }}</h1>
-    <p class="product-price">{{ product.selected_or_first_available_variant.price | money | default: 'EUR 119.00' }}</p>
-    <p class="product-description">
-      {{ product.description | strip_html | default: 'Made for weight, movement, and intention.' }}
-    </p>
+    <nav class="product-breadcrumb" aria-label="Breadcrumb">
+      {% if product.collections.first %}
+        <a href="{{ product.collections.first.url }}">{{ product.collections.first.title }}</a>
+        <span aria-hidden="true">/</span>
+      {% endif %}
+      <span>{{ product.title | default: 'Core Hoodie' }}</span>
+    </nav>
 
-    {% form 'product', product, class: 'product-form' %}
+    <h1>{{ product.title | default: 'Core Hoodie' }}</h1>
+    <div class="product-price" data-product-price>
+      <span>{{ current_variant.price | money | default: 'EUR 119.00' }}</span>
+      {% if current_variant.compare_at_price > current_variant.price %}
+        <s>{{ current_variant.compare_at_price | money }}</s>
+      {% endif %}
+    </div>
+    <div class="product-description">
+      {% if product.description != blank %}
+        {{ product.description }}
+      {% else %}
+        <p>Made for weight, movement, and intention.</p>
+      {% endif %}
+    </div>
+
+    {% form 'product', product, class: 'product-form', data-product-form: '' %}
       {% unless product.has_only_default_variant %}
         {% for option in product.options_with_values %}
-          <fieldset class="variant-field">
-            <legend>{{ option.name }}</legend>
+          {% assign option_name = option.name | downcase %}
+          {% assign is_color = false %}
+          {% if option_name == 'color' or option_name == 'colour' %}{% assign is_color = true %}{% endif %}
+          <fieldset class="variant-field {% if is_color %}is-color{% endif %}" data-option-position="{{ option.position }}">
+            <legend>{{ option.name }} <span data-option-label>{{ option.selected_value }}</span></legend>
             <div class="variant-options">
               {% for value in option.values %}
-                <label>
+                <label class="variant-option">
                   <input
                     type="radio"
                     name="options[{{ option.name | escape }}]"
                     value="{{ value | escape }}"
                     {% if option.selected_value == value %}checked{% endif %}
                   >
-                  <span>{{ value }}</span>
+                  <span>
+                    {% if is_color %}<i class="swatch swatch-{{ value | handleize }}" aria-hidden="true"></i>{% endif %}
+                    <b>{{ value }}</b>
+                  </span>
                 </label>
               {% endfor %}
             </div>
@@ -44,35 +76,75 @@
         {% endfor %}
       {% endunless %}
 
-      <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+      <input type="hidden" name="id" value="{{ current_variant.id }}" data-variant-id>
+
       <div class="quantity-row">
-        <label for="Quantity-{{ section.id }}">Quantity</label>
-        <input id="Quantity-{{ section.id }}" type="number" name="quantity" value="1" min="1">
+        <span>Quantity</span>
+        <div class="quantity-stepper" data-quantity-stepper>
+          <button type="button" data-quantity-minus aria-label="Decrease quantity">{% render 'icon-minus' %}</button>
+          <input id="Quantity-{{ section.id }}" type="number" name="quantity" value="1" min="1" aria-label="Quantity">
+          <button type="button" data-quantity-plus aria-label="Increase quantity">{% render 'icon-plus' %}</button>
+        </div>
       </div>
-      <button class="button button-primary product-submit" type="submit">Add to Cart</button>
+
+      <p class="product-form-error" data-product-error role="alert" hidden></p>
+      <button
+        class="button button-primary product-submit"
+        type="submit"
+        data-add-to-cart
+        data-available-label="Add to bag"
+        data-sold-out-label="Sold out"
+        {% unless current_variant.available %}disabled{% endunless %}
+      >{% if current_variant.available %}Add to bag{% else %}Sold out{% endif %}</button>
       {{ form | payment_button }}
     {% endform %}
 
     <div class="product-accordions">
-      <details open>
-        <summary>Details</summary>
-        <p>Heavy cotton feel, neutral styling, and a clean silhouette made for everyday layering.</p>
+      <details>
+        <summary><span>Details</span><span aria-hidden="true"></span></summary>
+        <div>{{ section.settings.details_text }}</div>
       </details>
       <details>
-        <summary>Shipping</summary>
-        <p>Shipping rates and delivery windows are calculated at checkout.</p>
+        <summary><span>Fit & care</span><span aria-hidden="true"></span></summary>
+        <div>{{ section.settings.care_text }}</div>
       </details>
       <details>
-        <summary>Returns</summary>
-        <p>Returns follow the policy configured in your Shopify store.</p>
+        <summary><span>Shipping & returns</span><span aria-hidden="true"></span></summary>
+        <div>{{ section.settings.shipping_text }}</div>
       </details>
     </div>
+
+    <p class="product-trust">
+      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M7 10V8a5 5 0 0 1 10 0v2m-11 0h12v10H6V10Z" stroke="currentColor" stroke-width="1.4"/><path d="M12 14v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+      Secure checkout <span aria-hidden="true">&middot;</span> Worldwide delivery
+    </p>
   </div>
+
+  <script type="application/json" data-product-variants>{{ product.variants | json }}</script>
 </section>
 
 {% schema %}
 {
   "name": "Main product",
-  "settings": []
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "details_text",
+      "label": "Details",
+      "default": "<p>Heavy cotton feel, considered construction, and a clean silhouette for everyday layering.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "care_text",
+      "label": "Fit and care",
+      "default": "<p>Relaxed fit. Wash cold with similar colors and air dry to preserve the shape.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "shipping_text",
+      "label": "Shipping and returns",
+      "default": "<p>Shipping rates and delivery windows are calculated at checkout. Returns follow your store policy.</p>"
+    }
+  ]
 }
 {% endschema %}

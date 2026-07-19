@@ -1,16 +1,19 @@
 <article class="product-card">
   <a href="{{ product.url }}" class="product-card-media">
     {% if product.featured_image %}
-      {{ product.featured_image | image_url: width: 900 | image_tag: loading: 'lazy', sizes: '(min-width: 900px) 25vw, 50vw' }}
+      {{ product.featured_image | image_url: width: 1000 | image_tag: loading: 'lazy', sizes: '(min-width: 900px) 25vw, 50vw', class: 'product-card-primary-image' }}
+      {% if product.images[1] %}
+        {{ product.images[1] | image_url: width: 1000 | image_tag: loading: 'lazy', sizes: '(min-width: 900px) 25vw, 50vw', class: 'product-card-secondary-image' }}
+      {% endif %}
     {% else %}
       <img src="{{ 'product-core-hoodie-v2.png' | asset_url }}" alt="{{ product.title | escape }}" width="1024" height="1280" loading="lazy">
     {% endif %}
-    <span class="product-card-action" aria-hidden="true">{% render 'icon-plus' %}</span>
+    <span class="product-card-action" aria-hidden="true">{% render 'icon-arrow' %}</span>
   </a>
   <div class="product-card-info">
     <div>
       <h3><a href="{{ product.url }}">{{ product.title }}</a></h3>
-      <p>{{ product.price | money }}</p>
+      <p>{% if product.price_varies %}From {% endif %}{{ product.price | money }}</p>
       {% for option in product.options_with_values %}
         {% assign option_name = option.name | downcase %}
         {% if option_name == 'color' or option_name == 'colour' %}

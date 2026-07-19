@@ -1,0 +1,40 @@
+{% assign category_titles = 'Tees,Hoodies,Pants,Shorts,Socks,Hats & Caps,Accessories' | split: ',' %}
+{% assign category_handles = 'tees,hoodies,pants,shorts,socks,hats-caps,accessories' | split: ',' %}
+{% assign fallback_assets = 'product-weight-tee-v2.png,product-core-hoodie-v2.png,product-intent-pant-v2.png,product-utility-short-v2.png,product-core-socks-v2.png,product-rc-cap-v2.png,product-rc-cap-v2.png' | split: ',' %}
+
+<section class="collections-page commerce-page">
+  <header class="collections-intro">
+    <h1>{{ section.settings.heading }}</h1>
+    <p>{{ section.settings.copy }}</p>
+  </header>
+
+  <div class="collections-index">
+    {% for title in category_titles %}
+      {% assign handle = category_handles[forloop.index0] %}
+      {% assign category_collection = collections[handle] %}
+      {% assign fallback_asset = fallback_assets[forloop.index0] %}
+      <a class="collection-index-item" href="{% if category_collection != blank %}{{ category_collection.url }}{% else %}/collections/{{ handle }}{% endif %}">
+        <span class="collection-index-number">0{{ forloop.index }}</span>
+        <span class="collection-index-media">
+          {% if category_collection.featured_image %}
+            {{ category_collection.featured_image | image_url: width: 1200 | image_tag: loading: 'lazy', alt: title }}
+          {% else %}
+            <img src="{{ fallback_asset | asset_url }}" alt="{{ title }} collection" width="1024" height="1280" loading="lazy">
+          {% endif %}
+        </span>
+        <span class="collection-index-title">{{ title }}</span>
+        <span class="collection-index-arrow">{% render 'icon-arrow' %}</span>
+      </a>
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collections index",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "The collection" },
+    { "type": "textarea", "id": "copy", "label": "Copy", "default": "Seasonless pieces built around weight, movement, and a controlled palette." }
+  ]
+}
+{% endschema %}

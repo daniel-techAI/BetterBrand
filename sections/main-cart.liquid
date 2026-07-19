@@ -1,51 +1,99 @@
-<section class="cart-page">
-  <h1>Cart</h1>
+{% liquid
+  assign threshold_cents = section.settings.free_shipping_threshold | times: 100
+  assign remaining = threshold_cents | minus: cart.total_price
+  assign progress = 0
+  if threshold_cents > 0
+    assign progress = cart.total_price | times: 100 | divided_by: threshold_cents
+  endif
+  if progress > 100
+    assign progress = 100
+  endif
+%}
+
+<section class="cart-page commerce-page">
+  <header class="cart-page-header">
+    <h1>Your bag</h1>
+    <a class="text-link" href="{{ routes.collections_url }}">Continue shopping {% render 'icon-arrow' %}</a>
+  </header>
+
   {% if cart.item_count > 0 %}
-    <form action="{{ routes.cart_url }}" method="post" class="cart-form">
-      {% for item in cart.items %}
-        <div class="cart-row">
-          <a href="{{ item.url }}" class="cart-image">
-            {% if item.image %}
-              {{ item.image | image_url: width: 240 | image_tag: loading: 'lazy' }}
-            {% endif %}
-          </a>
-          <div>
-            <h2>{{ item.product.title }}</h2>
-            {% unless item.product.has_only_default_variant %}
-              <p>{{ item.variant.title }}</p>
-            {% endunless %}
-            <p>{{ item.final_line_price | money }}</p>
-            <a class="remove-link" href="{{ routes.cart_change_url }}?line={{ forloop.index }}&quantity=0">Remove</a>
-          </div>
-          <div class="cart-quantity">
-            <label for="Quantity-{{ forloop.index }}">Qty</label>
-            <input id="Quantity-{{ forloop.index }}" type="number" name="updates[]" value="{{ item.quantity }}" min="0" aria-label="Quantity for {{ item.product.title | escape }}">
-          </div>
-        </div>
-      {% endfor %}
-      <div class="cart-summary">
-        <div class="cart-notes">
-          <label for="Cart-note">Order note</label>
+    <form action="{{ routes.cart_url }}" method="post" class="cart-form" data-cart-page-form>
+      <div class="cart-lines">
+        {% for item in cart.items %}
+          <article class="cart-row">
+            <a href="{{ item.url }}" class="cart-image">
+              {% if item.image %}
+                {{ item.image | image_url: width: 480 | image_tag: loading: 'lazy', alt: item.product.title }}
+              {% endif %}
+            </a>
+
+            <div class="cart-line-info">
+              <div>
+                <h2><a href="{{ item.url }}">{{ item.product.title }}</a></h2>
+                {% unless item.product.has_only_default_variant %}<p>{{ item.variant.title }}</p>{% endunless %}
+                {% for property in item.properties %}
+                  {% assign first_character = property.first | slice: 0 %}
+                  {% unless first_character == '_' or property.last == blank %}
+                    <p>{{ property.first }}: {{ property.last }}</p>
+                  {% endunless %}
+                {% endfor %}
+              </div>
+              <a class="remove-link" href="{{ routes.cart_change_url }}?line={{ forloop.index }}&quantity=0">Remove</a>
+            </div>
+
+            <div class="quantity-stepper cart-line-quantity" data-quantity-stepper>
+              <button type="button" data-quantity-minus aria-label="Decrease {{ item.product.title | escape }} quantity">{% render 'icon-minus' %}</button>
+              <input id="Quantity-{{ forloop.index }}" type="number" name="updates[]" value="{{ item.quantity }}" min="0" aria-label="Quantity for {{ item.product.title | escape }}">
+              <button type="button" data-quantity-plus aria-label="Increase {{ item.product.title | escape }} quantity">{% render 'icon-plus' %}</button>
+            </div>
+
+            <p class="cart-line-price">{{ item.final_line_price | money }}</p>
+          </article>
+        {% endfor %}
+
+        <details class="cart-notes">
+          <summary><span>Add an order note</span><span aria-hidden="true"></span></summary>
           <textarea id="Cart-note" name="note" rows="4" placeholder="Sizing notes, delivery details, or anything we should know.">{{ cart.note }}</textarea>
-        </div>
-        <div class="cart-checkout">
-          <div class="cart-policy-note">
-            <p>Subtotal {{ cart.total_price | money }}</p>
-            <small>Shipping, taxes, and delivery windows are calculated at checkout.</small>
-          </div>
-          <label class="terms-check">
-            <input type="checkbox" required>
-            <span>I agree to the Terms, Privacy Policy, and Return Policy.</span>
-          </label>
-          <button class="button button-quiet" type="submit" name="update">Update Cart</button>
-          <button class="button button-primary" type="submit" name="checkout">Checkout</button>
-        </div>
+        </details>
       </div>
+
+      <aside class="cart-checkout">
+        {% if threshold_cents > 0 %}
+          <div class="shipping-progress">
+            {% if remaining > 0 %}
+              <p>{{ remaining | money }} away from complimentary shipping</p>
+            {% else %}
+              <p>Complimentary shipping unlocked</p>
+            {% endif %}
+            <span aria-hidden="true"><i style="--cart-progress: {{ progress }}%;"></i></span>
+          </div>
+        {% endif %}
+
+        <div class="cart-totals">
+          <div><span>Subtotal</span><strong>{{ cart.total_price | money }}</strong></div>
+          {% if cart.total_discounts > 0 %}<div><span>Discounts</span><strong>-{{ cart.total_discounts | money }}</strong></div>{% endif %}
+        </div>
+        <p class="cart-policy-note">Taxes, shipping, and delivery windows are calculated at checkout.</p>
+
+        <label class="terms-check">
+          <input type="checkbox" required>
+          <span>
+            I agree to the
+            {% if shop.terms_of_service.url %}<a href="{{ shop.terms_of_service.url }}">Terms</a>{% else %}Terms{% endif %},
+            {% if shop.privacy_policy.url %}<a href="{{ shop.privacy_policy.url }}">Privacy Policy</a>{% else %}Privacy Policy{% endif %}, and
+            {% if shop.refund_policy.url %}<a href="{{ shop.refund_policy.url }}">Return Policy</a>{% else %}Return Policy{% endif %}.
+          </span>
+        </label>
+
+        <button class="button button-primary" type="submit" name="checkout">Checkout</button>
+        <button class="cart-update-link" type="submit" name="update">Update bag</button>
+      </aside>
     </form>
   {% else %}
-    <div class="empty-state">
-      <p>Your cart is empty.</p>
-      <a class="button button-primary" href="{{ routes.collections_url }}">Shop the Drop</a>
+    <div class="empty-state cart-empty">
+      <p>Your bag is empty.</p>
+      <h2>Start with the piece you will wear most.</h2>
+      <a class="button button-primary" href="{{ routes.collections_url }}">Discover the collection</a>
     </div>
   {% endif %}
 </section>
@@ -53,6 +101,16 @@
 {% schema %}
 {
   "name": "Main cart",
-  "settings": []
+  "settings": [
+    {
+      "type": "range",
+      "id": "free_shipping_threshold",
+      "label": "Free shipping threshold",
+      "min": 0,
+      "max": 500,
+      "step": 10,
+      "default": 150
+    }
+  ]
 }
 {% endschema %}
