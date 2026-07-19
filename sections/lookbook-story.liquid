@@ -1,19 +1,42 @@
 <section class="lookbook-story">
   <div class="lookbook-media">
-    <div class="lookbook-frame frame-one"></div>
-    <div class="lookbook-frame frame-two"></div>
+    {% if section.settings.image %}
+      {{ section.settings.image | image_url: width: 2200 | image_tag: loading: 'lazy', sizes: '(min-width: 900px) 68vw, 100vw', alt: section.settings.image.alt }}
+    {% else %}
+      <img src="{{ 'lookbook-concrete-v2.png' | asset_url }}" alt="R/CREATION black and bone streetwear lookbook" width="1536" height="1024" loading="lazy">
+    {% endif %}
+    <span class="lookbook-credit">R/C Editorial 001</span>
   </div>
   <div class="lookbook-copy">
-    <h2>Built around the quiet parts.</h2>
-    <p>Pieces that work across summer nights, colder mornings, and the days where you need the outfit to speak before you do.</p>
-    <a class="button button-primary" href="/pages/lookbook">Explore Lookbook</a>
+    <span class="section-index">03 / Editorial</span>
+    <h2>{{ section.settings.heading }}</h2>
+    <p>{{ section.settings.copy }}</p>
+    <a class="button button-gold" href="/pages/lookbook">Explore editorial {% render 'icon-arrow' %}</a>
   </div>
 </section>
 
 {% schema %}
 {
   "name": "Lookbook story",
-  "settings": [],
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Editorial image"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Built around the quiet parts."
+    },
+    {
+      "type": "textarea",
+      "id": "copy",
+      "label": "Copy",
+      "default": "Pieces that move between summer nights, colder mornings, and the days where you need the outfit to speak before you do."
+    }
+  ],
   "presets": [
     {
       "name": "Lookbook story"
@@ -21,4 +44,3 @@
   ]
 }
 {% endschema %}
-

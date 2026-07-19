@@ -153,12 +153,12 @@
               {% render 'product-card', product: product %}
             {% endfor %}
           {% else %}
-            {% render 'product-card-placeholder', title: 'Core Hoodie', price: 'EUR 119.00', tone: 'dark' %}
-            {% render 'product-card-placeholder', title: 'Weight Tee', price: 'EUR 59.00', tone: 'light' %}
-            {% render 'product-card-placeholder', title: 'Intent Pant', price: 'EUR 94.00', tone: 'stone' %}
-            {% render 'product-card-placeholder', title: 'Drift Short', price: 'EUR 54.00', tone: 'beige' %}
-            {% render 'product-card-placeholder', title: 'R/ Cap', price: 'EUR 39.00', tone: 'brown' %}
-            {% render 'product-card-placeholder', title: 'Everyday Sock', price: 'EUR 18.00', tone: 'white' %}
+            {% render 'product-card-placeholder', title: 'Core Hoodie', price: 'EUR 119.00', image_asset: 'product-core-hoodie-v2.png', colors: 'black,bone,stone' %}
+            {% render 'product-card-placeholder', title: 'Weight Tee', price: 'EUR 59.00', image_asset: 'product-weight-tee-v2.png', colors: 'bone,black,stone' %}
+            {% render 'product-card-placeholder', title: 'Intent Pant', price: 'EUR 94.00', image_asset: 'product-intent-pant-v2.png', colors: 'black,charcoal,stone' %}
+            {% render 'product-card-placeholder', title: 'Drift Short', price: 'EUR 54.00', image_asset: 'product-utility-short-v2.png', colors: 'stone,black,bone' %}
+            {% render 'product-card-placeholder', title: 'R/ Cap', price: 'EUR 39.00', image_asset: 'product-rc-cap-v2.png', colors: 'stone,black,brown' %}
+            {% render 'product-card-placeholder', title: 'Everyday Sock', price: 'EUR 18.00', image_asset: 'product-core-socks-v2.png', colors: 'bone,black' %}
           {% endif %}
         </div>
 

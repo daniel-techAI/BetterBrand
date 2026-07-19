@@ -4,7 +4,24 @@
     "settings": [
       {
         "type": "paragraph",
-        "content": "R/CREATION custom Shopify theme."
+        "content": "R/CREATION custom Shopify theme. Replace the built-in concept photography with final campaign and product images before launch."
+      }
+    ]
+  },
+  {
+    "name": "Brand",
+    "settings": [
+      {
+        "type": "text",
+        "id": "brand_name",
+        "label": "Brand name",
+        "default": "R/CREATION"
+      },
+      {
+        "type": "text",
+        "id": "tagline",
+        "label": "Tagline",
+        "default": "You wear what you are."
       }
     ]
   },
@@ -14,16 +31,21 @@
       {
         "type": "color",
         "id": "background",
-        "label": "Background",
-        "default": "#080706"
+        "label": "Light background",
+        "default": "#f4f2ed"
+      },
+      {
+        "type": "color",
+        "id": "ink",
+        "label": "Text and dark background",
+        "default": "#090909"
       },
       {
         "type": "color",
         "id": "accent",
-        "label": "Accent",
-        "default": "#d6bd7a"
+        "label": "Gold accent",
+        "default": "#c8aa68"
       }
     ]
   }
 ]
-

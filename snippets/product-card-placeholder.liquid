@@ -1,15 +1,18 @@
 <article class="product-card">
   <a href="{{ routes.collections_url }}" class="product-card-media" aria-label="{{ title }}">
-    <div class="placeholder-product {{ tone }}">
-      <span>R/C</span>
-    </div>
+    <img src="{{ image_asset | asset_url }}" alt="{{ title }}" width="1024" height="1280" loading="lazy">
+    <span class="product-card-action" aria-hidden="true">{% render 'icon-plus' %}</span>
   </a>
   <div class="product-card-info">
     <div>
       <h3><a href="{{ routes.collections_url }}">{{ title }}</a></h3>
       <p>{{ price }}</p>
+      <div class="product-card-swatches" aria-label="Available color concepts">
+        {% assign color_list = colors | split: ',' %}
+        {% for color in color_list %}
+          <span class="swatch swatch-{{ color | strip | handleize }}" title="{{ color | strip | capitalize }}"></span>
+        {% endfor %}
+      </div>
     </div>
-    <button type="button" aria-label="Quick view {{ title }}">{% render 'icon-plus' %}</button>
   </div>
 </article>
-

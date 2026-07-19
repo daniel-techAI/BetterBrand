@@ -1,8 +1,12 @@
 <footer class="site-footer">
+  <div class="footer-statement">
+    <p>{{ settings.tagline | default: 'You wear what you are.' }}</p>
+    <strong>{{ settings.brand_name | default: 'R/CREATION' }}</strong>
+  </div>
   <div class="footer-grid">
     <div>
-      <a class="brand-mark footer-brand" href="{{ routes.root_url }}">R/CREATION</a>
-      <p>You wear what you are.</p>
+      <a class="brand-mark footer-brand" href="{{ routes.root_url }}">{{ settings.brand_name | default: 'R/CREATION' }}</a>
+      <p>Independent apparel for every season.</p>
     </div>
     <div>
       <h2>Shop</h2>

@@ -9,6 +9,12 @@
     });
   }
 
+  if (header) {
+    const updateHeader = () => header.classList.toggle("is-scrolled", window.scrollY > 12);
+    updateHeader();
+    window.addEventListener("scroll", updateHeader, { passive: true });
+  }
+
   const filterToggle = document.querySelector("[data-filter-toggle]");
   const facetsPanel = document.querySelector("[data-facets-panel]");
 
@@ -19,18 +25,21 @@
     });
   }
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-        }
-      });
-    },
-    { threshold: 0.12 }
-  );
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: "0px 0px -36px" }
+    );
 
-  document
-    .querySelectorAll(".category-tile, .product-card, .lookbook-frame, .lookbook-shot")
-    .forEach((node) => observer.observe(node));
+    document
+      .querySelectorAll(".category-tile, .product-card, .lookbook-media, .lookbook-copy")
+      .forEach((node) => observer.observe(node));
+  }
 })();

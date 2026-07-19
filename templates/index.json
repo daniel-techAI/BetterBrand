@@ -7,14 +7,14 @@
     "drop": {
       "type": "collection-strip",
       "settings": {
-        "heading": "The first layer of intention",
-        "copy": "Quiet cuts, heavy fabric, and neutral tones made to move between seasons."
+        "heading": "Built for every season.",
+        "copy": "A controlled palette, clean weight, and silhouettes designed to work together."
       }
     },
     "featured": {
       "type": "featured-products",
       "settings": {
-        "heading": "Shop the drop"
+        "heading": "The first drop"
       }
     },
     "lookbook": {
@@ -24,4 +24,3 @@
   },
   "order": ["hero", "drop", "featured", "lookbook"]
 }
-

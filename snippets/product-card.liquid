@@ -3,15 +3,24 @@
     {% if product.featured_image %}
       {{ product.featured_image | image_url: width: 900 | image_tag: loading: 'lazy', sizes: '(min-width: 900px) 25vw, 50vw' }}
     {% else %}
-      <div class="placeholder-product dark"></div>
+      <img src="{{ 'product-core-hoodie-v2.png' | asset_url }}" alt="{{ product.title | escape }}" width="1024" height="1280" loading="lazy">
     {% endif %}
+    <span class="product-card-action" aria-hidden="true">{% render 'icon-plus' %}</span>
   </a>
   <div class="product-card-info">
     <div>
       <h3><a href="{{ product.url }}">{{ product.title }}</a></h3>
       <p>{{ product.price | money }}</p>
+      {% for option in product.options_with_values %}
+        {% assign option_name = option.name | downcase %}
+        {% if option_name == 'color' or option_name == 'colour' %}
+          <div class="product-card-swatches" aria-label="Available colors">
+            {% for value in option.values limit: 4 %}
+              <span class="swatch swatch-{{ value | handleize }}" title="{{ value | escape }}"></span>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endfor %}
     </div>
-    <button type="button" aria-label="Quick view {{ product.title | escape }}">{% render 'icon-plus' %}</button>
   </div>
 </article>
-

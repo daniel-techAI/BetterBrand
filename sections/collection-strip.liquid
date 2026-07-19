@@ -1,14 +1,48 @@
-<section class="collection-strip">
+<section class="collection-strip section-light">
   <div class="section-heading">
-    <h2>{{ section.settings.heading }}</h2>
+    <div>
+      <span class="section-index">01 / Categories</span>
+      <h2>{{ section.settings.heading }}</h2>
+    </div>
     <p>{{ section.settings.copy }}</p>
   </div>
 
   <div class="category-rail">
     {% assign categories = "Tees,Hoodies,Pants,Shorts,Socks,Hats & Caps" | split: "," %}
     {% for category in categories %}
+      {% case category %}
+        {% when 'Tees' %}
+          {% assign category_image = section.settings.tees_image %}
+          {% assign fallback_asset = 'product-weight-tee-v2.png' %}
+        {% when 'Hoodies' %}
+          {% assign category_image = section.settings.hoodies_image %}
+          {% assign fallback_asset = 'product-core-hoodie-v2.png' %}
+        {% when 'Pants' %}
+          {% assign category_image = section.settings.pants_image %}
+          {% assign fallback_asset = 'product-intent-pant-v2.png' %}
+        {% when 'Shorts' %}
+          {% assign category_image = section.settings.shorts_image %}
+          {% assign fallback_asset = 'product-utility-short-v2.png' %}
+        {% when 'Socks' %}
+          {% assign category_image = section.settings.socks_image %}
+          {% assign fallback_asset = 'product-core-socks-v2.png' %}
+        {% else %}
+          {% assign category_image = section.settings.caps_image %}
+          {% assign fallback_asset = 'product-rc-cap-v2.png' %}
+      {% endcase %}
+
       <a class="category-tile" href="/collections/{{ category | handleize }}">
-        <span>{{ category }}</span>
+        <span class="category-media">
+          {% if category_image %}
+            {{ category_image | image_url: width: 900 | image_tag: loading: 'lazy', sizes: '(min-width: 1000px) 17vw, 72vw', alt: category }}
+          {% else %}
+            <img src="{{ fallback_asset | asset_url }}" alt="{{ category }} collection" width="1024" height="1280" loading="lazy">
+          {% endif %}
+        </span>
+        <span class="category-label">
+          <b>{{ category }}</b>
+          {% render 'icon-arrow' %}
+        </span>
       </a>
     {% endfor %}
   </div>
@@ -22,13 +56,43 @@
       "type": "text",
       "id": "heading",
       "label": "Heading",
-      "default": "The first layer of intention"
+      "default": "Built for every season."
     },
     {
       "type": "textarea",
       "id": "copy",
       "label": "Copy",
-      "default": "Quiet cuts, heavy fabric, and neutral tones made to move between seasons."
+      "default": "A controlled palette, clean weight, and silhouettes designed to work together."
+    },
+    {
+      "type": "image_picker",
+      "id": "tees_image",
+      "label": "Tees image"
+    },
+    {
+      "type": "image_picker",
+      "id": "hoodies_image",
+      "label": "Hoodies image"
+    },
+    {
+      "type": "image_picker",
+      "id": "pants_image",
+      "label": "Pants image"
+    },
+    {
+      "type": "image_picker",
+      "id": "shorts_image",
+      "label": "Shorts image"
+    },
+    {
+      "type": "image_picker",
+      "id": "socks_image",
+      "label": "Socks image"
+    },
+    {
+      "type": "image_picker",
+      "id": "caps_image",
+      "label": "Hats and caps image"
     }
   ],
   "presets": [
@@ -38,4 +102,3 @@
   ]
 }
 {% endschema %}
-

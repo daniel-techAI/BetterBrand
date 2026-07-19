@@ -7,17 +7,17 @@
         </div>
       {% endfor %}
     {% else %}
-      <div class="product-media"><div class="placeholder-product dark"></div></div>
-      <div class="product-media"><div class="placeholder-product light"></div></div>
-      <div class="product-media"><div class="placeholder-product stone"></div></div>
-      <div class="product-media"><div class="placeholder-product brown"></div></div>
+      <div class="product-media"><img src="{{ 'product-core-hoodie-v2.png' | asset_url }}" alt="Core Hoodie concept" width="1024" height="1280"></div>
+      <div class="product-media"><img src="{{ 'product-weight-tee-v2.png' | asset_url }}" alt="Weight Tee concept" width="1024" height="1280"></div>
+      <div class="product-media"><img src="{{ 'product-intent-pant-v2.png' | asset_url }}" alt="Intent Pant concept" width="1024" height="1280"></div>
+      <div class="product-media"><img src="{{ 'product-rc-cap-v2.png' | asset_url }}" alt="R/ Cap concept" width="1024" height="1280"></div>
     {% endif %}
   </div>
 
   <div class="product-info">
     <p class="product-vendor">{{ product.vendor | default: 'R/CREATION' }}</p>
     <h1>{{ product.title | default: 'Core Hoodie' }}</h1>
-    <p class="product-price">{{ product.selected_or_first_available_variant.price | money | default: '€119.00' }}</p>
+    <p class="product-price">{{ product.selected_or_first_available_variant.price | money | default: 'EUR 119.00' }}</p>
     <p class="product-description">
       {{ product.description | strip_html | default: 'Made for weight, movement, and intention.' }}
     </p>

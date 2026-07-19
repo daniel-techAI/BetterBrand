@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="theme-color" content="#080706">
+    <meta name="theme-color" content="{{ settings.ink | default: '#090909' }}">
     <link rel="canonical" href="{{ canonical_url }}">
 
     <title>
@@ -19,6 +19,13 @@
 
     {{ content_for_header }}
     {{ 'theme.css' | asset_url | stylesheet_tag }}
+    <style>
+      :root {
+        --paper: {{ settings.background | default: '#f4f2ed' }};
+        --ink: {{ settings.ink | default: '#090909' }};
+        --gold: {{ settings.accent | default: '#c8aa68' }};
+      }
+    </style>
   </head>
 
   <body class="template-{{ template.name | handle }}">
@@ -33,4 +40,3 @@
     <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
   </body>
 </html>
-
