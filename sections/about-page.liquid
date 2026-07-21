@@ -1,16 +1,251 @@
-<section class="content-page split-page">
-  <div>
-    <h1>About R/CREATION</h1>
-    <p>R/CREATION is apparel for what already lives under the surface. The first direction is simple: black, stone, bone, charcoal, and muted earth tones across pieces made for the full year.</p>
-    <p>The brand starts with essentials: tees, hoodies, pants, shorts, socks, hats, and caps. Accessories come later when the system is ready.</p>
-  </div>
-  <div class="editorial-panel"></div>
-</section>
+{% liquid
+  assign hero_link = section.settings.hero_button_link
+  if hero_link == blank
+    assign hero_link = routes.collections_url
+  endif
+
+  assign apparel_link = section.settings.apparel_link
+  if apparel_link == blank
+    assign apparel_link = routes.collections_url
+  endif
+
+  assign apparel_instagram_url = section.settings.apparel_instagram_url
+  if apparel_instagram_url == blank
+    assign apparel_instagram_url = 'https://www.instagram.com/r_creationapparel/'
+  endif
+%}
+
+<div class="about-page-shell">
+  <section class="about-hero" aria-labelledby="AboutHeroHeading">
+    <div class="about-hero-media">
+      {% if section.settings.hero_image %}
+        {{ section.settings.hero_image | image_url: width: 2600 | image_tag: loading: 'eager', fetchpriority: 'high', sizes: '100vw', alt: section.settings.hero_image.alt }}
+      {% else %}
+        <img src="{{ 'about-hero-world-v1.png' | asset_url }}" alt="R/CREATION hoodie, washed caps, handcrafted footwear and sculptural artwork" width="1680" height="945" loading="eager" fetchpriority="high">
+      {% endif %}
+    </div>
+    <div class="about-hero-inner">
+      <div class="about-hero-copy" data-about-reveal>
+        <h1 id="AboutHeroHeading">{{ section.settings.hero_heading | replace: ' you ', '<br>you ' }}</h1>
+        <p>{{ section.settings.hero_copy }}</p>
+        <a class="about-outline-link" href="{{ hero_link }}">
+          {{ section.settings.hero_button_label }}
+          {% render 'icon-arrow' %}
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="about-manifesto" aria-labelledby="AboutManifestoHeading">
+    <div class="about-manifesto-inner">
+      <div class="about-manifesto-title" data-about-reveal>
+        <h2 id="AboutManifestoHeading">{{ section.settings.manifesto_heading }}</h2>
+      </div>
+      <div class="about-manifesto-copy" data-about-reveal>
+        <p>{{ section.settings.manifesto_copy_one }}</p>
+        <p>{{ section.settings.manifesto_copy_two }}</p>
+      </div>
+      <div class="about-manifesto-media" data-about-reveal>
+        {% if section.settings.manifesto_image %}
+          {{ section.settings.manifesto_image | image_url: width: 1200 | image_tag: loading: 'lazy', sizes: '(min-width: 990px) 34vw, 100vw', alt: section.settings.manifesto_image.alt }}
+        {% else %}
+          <img src="{{ 'about-manifesto-v1.png' | asset_url }}" alt="Reconstructed classical face drawn in graphite with a halo and serpent" width="1005" height="1536" loading="lazy">
+        {% endif %}
+      </div>
+    </div>
+  </section>
+
+  <section class="about-pillars" aria-labelledby="AboutPillarsHeading">
+    <div class="about-section-inner">
+      <header class="about-section-heading" data-about-reveal>
+        <h2 id="AboutPillarsHeading">{{ section.settings.pillars_heading }}</h2>
+        <p>{{ section.settings.pillars_copy }}</p>
+      </header>
+
+      <div class="about-pillar-grid">
+        <article class="about-pillar" data-about-reveal>
+          <a class="about-pillar-media" href="{{ apparel_link }}" aria-label="Explore {{ section.settings.apparel_title | escape }}">
+            {% if section.settings.apparel_image %}
+              {{ section.settings.apparel_image | image_url: width: 1200 | image_tag: loading: 'lazy', sizes: '(min-width: 990px) 33vw, 100vw', alt: section.settings.apparel_image.alt }}
+            {% else %}
+              <img src="{{ 'product-core-hoodie-v2.png' | asset_url }}" alt="Black R/CREATION heavyweight hoodie" width="1098" height="1372" loading="lazy">
+            {% endif %}
+          </a>
+          <div class="about-pillar-copy">
+            <span>01</span>
+            <h3>{{ section.settings.apparel_title }}</h3>
+            <p>{{ section.settings.apparel_copy }}</p>
+          </div>
+        </article>
+
+        <article class="about-pillar" data-about-reveal>
+          <div class="about-pillar-media">
+            {% if section.settings.footwear_image %}
+              {{ section.settings.footwear_image | image_url: width: 1200 | image_tag: loading: 'lazy', sizes: '(min-width: 990px) 33vw, 100vw', alt: section.settings.footwear_image.alt }}
+            {% else %}
+              <img src="{{ 'about-footwear-craft-v1.png' | asset_url }}" alt="Hands stitching a black leather high-top shoe" width="1024" height="1536" loading="lazy">
+            {% endif %}
+          </div>
+          <div class="about-pillar-copy">
+            <span>02</span>
+            <h3>{{ section.settings.footwear_title }}</h3>
+            <p>{{ section.settings.footwear_copy }}</p>
+          </div>
+        </article>
+
+        <article class="about-pillar" data-about-reveal>
+          <div class="about-pillar-media">
+            {% if section.settings.hades_image %}
+              {{ section.settings.hades_image | image_url: width: 1200 | image_tag: loading: 'lazy', sizes: '(min-width: 990px) 33vw, 100vw', alt: section.settings.hades_image.alt }}
+            {% else %}
+              <img src="{{ 'about-hades-study-v1.png' | asset_url }}" alt="Hades Theory sketchbook study of a reconstructed classical face" width="1005" height="1536" loading="lazy">
+            {% endif %}
+          </div>
+          <div class="about-pillar-copy">
+            <span>03</span>
+            <h3>{{ section.settings.hades_title }}</h3>
+            <p>{{ section.settings.hades_copy }}</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  {% if section.settings.show_roadmap %}
+    <section class="about-roadmap" aria-labelledby="AboutRoadmapHeading">
+      <div class="about-section-inner">
+        <header class="about-roadmap-heading" data-about-reveal>
+          <h2 id="AboutRoadmapHeading">{{ section.settings.roadmap_heading }}</h2>
+          <p>{{ section.settings.roadmap_copy }}</p>
+        </header>
+        <ol class="about-roadmap-list">
+          <li data-about-reveal>
+            <span>01</span>
+            <h3>{{ section.settings.step_one_title }}</h3>
+            <p>{{ section.settings.step_one_copy }}</p>
+          </li>
+          <li data-about-reveal>
+            <span>02</span>
+            <h3>{{ section.settings.step_two_title }}</h3>
+            <p>{{ section.settings.step_two_copy }}</p>
+          </li>
+          <li data-about-reveal>
+            <span>03</span>
+            <h3>{{ section.settings.step_three_title }}</h3>
+            <p>{{ section.settings.step_three_copy }}</p>
+          </li>
+          <li data-about-reveal>
+            <span>04</span>
+            <h3>{{ section.settings.step_four_title }}</h3>
+            <p>{{ section.settings.step_four_copy }}</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+  {% endif %}
+
+  <section class="about-social" aria-labelledby="AboutSocialHeading">
+    <div class="about-social-inner">
+      <div class="about-social-media" aria-hidden="true" data-about-reveal>
+        <div><img src="{{ 'product-core-hoodie-v2.png' | asset_url }}" alt="" width="1098" height="1372" loading="lazy"></div>
+        <div><img src="{{ 'about-footwear-craft-v1.png' | asset_url }}" alt="" width="1024" height="1536" loading="lazy"></div>
+        <div><img src="{{ 'about-hades-study-v1.png' | asset_url }}" alt="" width="1005" height="1536" loading="lazy"></div>
+      </div>
+      <div class="about-social-copy" data-about-reveal>
+        <h2 id="AboutSocialHeading">{{ section.settings.social_heading }}</h2>
+        <p>{{ section.settings.social_copy }}</p>
+
+        <div class="about-social-links">
+          <a class="about-social-link" href="{{ apparel_instagram_url }}" target="_blank" rel="noopener">
+            {% render 'icon-instagram' %}
+            <span><b>Apparel</b><small>{{ section.settings.apparel_instagram_handle }}</small></span>
+            {% render 'icon-arrow' %}
+          </a>
+
+          {% if section.settings.footwear_instagram_url != blank %}
+            <a class="about-social-link" href="{{ section.settings.footwear_instagram_url }}" target="_blank" rel="noopener">
+              {% render 'icon-instagram' %}
+              <span><b>Footwear</b><small>{{ section.settings.footwear_instagram_handle }}</small></span>
+              {% render 'icon-arrow' %}
+            </a>
+          {% else %}
+            <div class="about-social-link is-pending">
+              {% render 'icon-instagram' %}
+              <span><b>Footwear</b><small>{{ section.settings.footwear_instagram_handle }}</small></span>
+              <em>Link pending</em>
+            </div>
+          {% endif %}
+
+          {% if section.settings.hades_instagram_url != blank %}
+            <a class="about-social-link" href="{{ section.settings.hades_instagram_url }}" target="_blank" rel="noopener">
+              {% render 'icon-instagram' %}
+              <span><b>Hades Theory</b><small>{{ section.settings.hades_instagram_handle }}</small></span>
+              {% render 'icon-arrow' %}
+            </a>
+          {% else %}
+            <div class="about-social-link is-pending">
+              {% render 'icon-instagram' %}
+              <span><b>Hades Theory</b><small>{{ section.settings.hades_instagram_handle }}</small></span>
+              <em>Link pending</em>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
 
 {% schema %}
 {
-  "name": "About page",
-  "settings": []
+  "name": "About brand world",
+  "settings": [
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image" },
+    { "type": "text", "id": "hero_heading", "label": "Hero heading", "default": "Wear what you survived." },
+    { "type": "textarea", "id": "hero_copy", "label": "Hero copy", "default": "R/CREATION turns the inner life into objects you can carry: apparel for the everyday, footwear shaped by hand, and Hades Theory as the world beneath both." },
+    { "type": "text", "id": "hero_button_label", "label": "Hero button", "default": "Explore the first chapter" },
+    { "type": "url", "id": "hero_button_link", "label": "Hero button link" },
+
+    { "type": "image_picker", "id": "manifesto_image", "label": "Manifesto image" },
+    { "type": "text", "id": "manifesto_heading", "label": "Manifesto heading", "default": "Not built to hide you." },
+    { "type": "textarea", "id": "manifesto_copy_one", "label": "Manifesto first paragraph", "default": "Clothing can cover the body without concealing the person." },
+    { "type": "textarea", "id": "manifesto_copy_two", "label": "Manifesto second paragraph", "default": "We design around contradiction: restraint and chaos, armor and vulnerability, the face shown and the face protected." },
+
+    { "type": "text", "id": "pillars_heading", "label": "Pillars heading", "default": "One inner world. Three expressions." },
+    { "type": "textarea", "id": "pillars_copy", "label": "Pillars introduction", "default": "The medium changes. The source does not." },
+
+    { "type": "image_picker", "id": "apparel_image", "label": "Apparel image" },
+    { "type": "text", "id": "apparel_title", "label": "Apparel title", "default": "R/CREATION" },
+    { "type": "textarea", "id": "apparel_copy", "label": "Apparel copy", "default": "Emotion translated into wearable daily pieces: direct enough to live in, considered enough to hold meaning." },
+    { "type": "url", "id": "apparel_link", "label": "Apparel link" },
+
+    { "type": "image_picker", "id": "footwear_image", "label": "Footwear image" },
+    { "type": "text", "id": "footwear_title", "label": "Footwear title", "default": "Footwear" },
+    { "type": "textarea", "id": "footwear_copy", "label": "Footwear copy", "default": "The same emotional language shaped by hand into limited, numbered objects where construction becomes part of the story." },
+
+    { "type": "image_picker", "id": "hades_image", "label": "Hades Theory image" },
+    { "type": "text", "id": "hades_title", "label": "Hades Theory title", "default": "Hades Theory" },
+    { "type": "textarea", "id": "hades_copy", "label": "Hades Theory copy", "default": "The mythology, writing, symbols and chapters beneath both: a study of what pressure reveals and what reconstruction can become." },
+
+    { "type": "checkbox", "id": "show_roadmap", "label": "Show the road", "default": true },
+    { "type": "text", "id": "roadmap_heading", "label": "Road heading", "default": "The road, not the rush." },
+    { "type": "textarea", "id": "roadmap_copy", "label": "Road introduction", "default": "Every chapter earns its release through the same four movements." },
+    { "type": "text", "id": "step_one_title", "label": "Step one title", "default": "Decode" },
+    { "type": "text", "id": "step_one_copy", "label": "Step one copy", "default": "Emotion becomes language." },
+    { "type": "text", "id": "step_two_title", "label": "Step two title", "default": "Construct" },
+    { "type": "text", "id": "step_two_copy", "label": "Step two copy", "default": "Language becomes garment and form." },
+    { "type": "text", "id": "step_three_title", "label": "Step three title", "default": "Test" },
+    { "type": "text", "id": "step_three_copy", "label": "Step three copy", "default": "Samples are worn, revised and earned." },
+    { "type": "text", "id": "step_four_title", "label": "Step four title", "default": "Release" },
+    { "type": "text", "id": "step_four_copy", "label": "Step four copy", "default": "Only finished chapters enter the world." },
+
+    { "type": "text", "id": "social_heading", "label": "Social heading", "default": "Follow the whole story." },
+    { "type": "textarea", "id": "social_copy", "label": "Social introduction", "default": "One world, documented from three angles." },
+    { "type": "text", "id": "apparel_instagram_handle", "label": "Apparel Instagram handle", "default": "@r_creationapparel" },
+    { "type": "url", "id": "apparel_instagram_url", "label": "Apparel Instagram link" },
+    { "type": "text", "id": "footwear_instagram_handle", "label": "Footwear Instagram handle", "default": "Footwear journal" },
+    { "type": "url", "id": "footwear_instagram_url", "label": "Footwear Instagram link" },
+    { "type": "text", "id": "hades_instagram_handle", "label": "Hades Instagram handle", "default": "Hades Theory journal" },
+    { "type": "url", "id": "hades_instagram_url", "label": "Hades Instagram link" }
+  ]
 }
 {% endschema %}
-

@@ -285,7 +285,7 @@
 
   if ("IntersectionObserver" in window) {
     const revealNodes = document.querySelectorAll(
-      ".category-tile, .product-card, .lookbook-media, .lookbook-copy, .collection-index-item, .product-media"
+      ".category-tile, .product-card, .lookbook-media, .lookbook-copy, .collection-index-item, .product-media, [data-about-reveal]"
     );
     revealNodes.forEach((node, index) => node.style.setProperty("--reveal-delay", `${Math.min(index % 4, 3) * 110}ms`));
 

@@ -12,11 +12,14 @@
       <span>{{ settings.brand_name | default: 'R/CREATION' }}</span>
     </a>
 
+    {% assign has_about_link = false %}
     <nav class="main-nav" aria-label="Main navigation">
       {% if section.settings.menu != blank %}
         {% for link in section.settings.menu.links %}
+          {% if link.url == '/pages/about' %}{% assign has_about_link = true %}{% endif %}
           <a href="{{ link.url }}" {% if link.current %}aria-current="page"{% endif %}>{{ link.title }}</a>
         {% endfor %}
+        {% unless has_about_link %}<a href="/pages/about">About</a>{% endunless %}
       {% else %}
         <a href="{{ routes.collections_url }}">Shop</a>
         <a href="/collections/tees">Tees</a>
@@ -25,6 +28,7 @@
         <a href="/collections/shorts">Shorts</a>
         <a href="/collections/hats-caps">Hats & Caps</a>
         <a href="/pages/lookbook">Editorial</a>
+        <a href="/pages/about">About</a>
       {% endif %}
     </nav>
 
@@ -48,6 +52,7 @@
       {% for link in section.settings.menu.links %}
         <a href="{{ link.url }}" {% if link.current %}aria-current="page"{% endif %}>{{ link.title }}</a>
       {% endfor %}
+      {% unless has_about_link %}<a href="/pages/about">About</a>{% endunless %}
     {% else %}
       <a href="{{ routes.collections_url }}">Shop</a>
       <a href="/collections/hoodies">Hoodies</a>
