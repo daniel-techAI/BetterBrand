@@ -16,7 +16,7 @@
 <section class="collection-page commerce-page">
   <header class="collection-hero">
     <h1>{{ collection.title | default: 'Shop' }}</h1>
-    <p>{{ collection.description | strip_html | default: 'Weight, structure, and quiet detail.' }}</p>
+    <p>{{ collection.description | strip_html | default: 'Emotional artifacts built from fracture, discipline, reconstruction, and release.' }}</p>
   </header>
 
   <nav class="category-tabs" aria-label="Shop by category">
@@ -89,12 +89,12 @@
           {% render 'product-card', product: product %}
         {% endfor %}
       {% else %}
-        {% render 'product-card-placeholder', title: 'Core Hoodie', price: 'EUR 119.00', image_asset: 'product-core-hoodie-v2.png', colors: 'black,bone,stone' %}
-        {% render 'product-card-placeholder', title: 'Weight Tee', price: 'EUR 59.00', image_asset: 'product-weight-tee-v2.png', colors: 'bone,black,stone' %}
-        {% render 'product-card-placeholder', title: 'Intent Pant', price: 'EUR 94.00', image_asset: 'product-intent-pant-v2.png', colors: 'black,charcoal,stone' %}
-        {% render 'product-card-placeholder', title: 'Drift Short', price: 'EUR 54.00', image_asset: 'product-utility-short-v2.png', colors: 'stone,black,bone' %}
-        {% render 'product-card-placeholder', title: 'R/ Cap', price: 'EUR 39.00', image_asset: 'product-rc-cap-v2.png', colors: 'stone,black,brown' %}
-        {% render 'product-card-placeholder', title: 'Everyday Sock', price: 'EUR 18.00', image_asset: 'product-core-socks-v2.png', colors: 'bone,black' %}
+        {% render 'product-card-placeholder', title: 'Rebuild Yourself Crop Hoodie', price: 'EUR 89.00', image_asset: 'product-rebuild-hoodie-v1.jpg', secondary_asset: 'editorial-emotional-system-v1.jpg', colors: 'black,deep-heather,mauve', eyebrow: 'Women / Reconstruction', badge: 'Drop 001', url: '/collections/hoodies' %}
+        {% render 'product-card-placeholder', title: 'Face What You Hide Hoodie', price: 'EUR 94.00', image_asset: 'product-face-hide-hoodie-v1.jpg', secondary_asset: 'editorial-emotional-lineup-v1.jpg', colors: 'black,charcoal,bone', eyebrow: 'Men / Confrontation', badge: 'Drop 001', url: '/collections/hoodies' %}
+        {% render 'product-card-placeholder', title: 'Embrace The Chaos Crop Tee', price: 'EUR 42.00', image_asset: 'product-embrace-tee-v1.jpg', secondary_asset: 'art-emotional-architecture-v1.jpg', colors: 'black,bone,dusty-rose', eyebrow: 'Women / First layer', badge: 'Concept', url: '/collections/tees' %}
+        {% render 'product-card-placeholder', title: 'Unavailable Edition Cap', price: 'EUR 36.00', image_asset: 'product-emotional-caps-v1.jpg', secondary_asset: 'sticker-concepts-v1.jpg', colors: 'black,washed-black', eyebrow: 'Objects / Guarded vulnerability', badge: 'Drop 001', url: '/collections/hats-caps' %}
+        {% render 'product-card-placeholder', title: 'Architecture Socks', price: 'EUR 22.00', image_asset: 'product-emotional-socks-v1.jpg', secondary_asset: 'art-emotional-duality-v1.jpg', colors: 'black,bone', eyebrow: 'Objects / Everyday', badge: 'New concept', url: '/collections/socks' %}
+        {% render 'product-card-placeholder', title: 'Emotional Sticker Set', price: 'EUR 12.00', image_asset: 'sticker-concepts-v1.jpg', secondary_asset: 'accessory-cases-v1.jpg', colors: 'black,bone', eyebrow: 'Objects / Symbols', badge: 'Concept', url: '/collections/accessories' %}
       {% endif %}
     </div>
 

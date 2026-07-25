@@ -1,0 +1,144 @@
+<section class="emotion-chapters" aria-labelledby="EmotionChaptersHeading">
+  <header class="emotion-section-intro" data-emotion-reveal>
+    <p class="emotion-eyebrow">{{ section.settings.eyebrow }}</p>
+    <h2 id="EmotionChaptersHeading">{{ section.settings.heading }}</h2>
+    <p>{{ section.settings.copy }}</p>
+  </header>
+
+  <article class="emotion-chapter emotion-chapter-women" id="women" data-emotion-reveal>
+    <div class="emotion-chapter-media">
+      {% if section.settings.women_image %}
+        {{ section.settings.women_image | image_url: width: 1800 | image_tag: loading: 'lazy', sizes: '(min-width: 900px) 55vw, 100vw', alt: section.settings.women_image.alt }}
+      {% else %}
+        <img src="{{ 'product-rebuild-hoodie-v1.jpg' | asset_url }}" alt="Rebuild Yourself cropped hoodie from the women's Emotional Collection" width="1024" height="1536" loading="lazy">
+      {% endif %}
+    </div>
+    <div class="emotion-chapter-copy">
+      <span class="emotion-chapter-number">01</span>
+      <p class="emotion-eyebrow">Women / Reconstruction</p>
+      <h3>{{ section.settings.women_heading }}</h3>
+      <p>{{ section.settings.women_copy }}</p>
+      <ul>
+        <li>Feminine + dark</li>
+        <li>Power + vulnerability</li>
+        <li>Chaos becomes growth</li>
+      </ul>
+      <a class="button button-ink" href="{{ section.settings.women_link | default: '/collections/hoodies' }}">
+        {{ section.settings.women_link_label }}
+        {% render 'icon-arrow' %}
+      </a>
+    </div>
+  </article>
+
+  <article class="emotion-chapter emotion-chapter-men" id="men" data-emotion-reveal>
+    <div class="emotion-chapter-copy">
+      <span class="emotion-chapter-number">02</span>
+      <p class="emotion-eyebrow">Men / Confrontation</p>
+      <h3>{{ section.settings.men_heading }}</h3>
+      <p>{{ section.settings.men_copy }}</p>
+      <ul>
+        <li>Discipline + truth</li>
+        <li>Mental war + resilience</li>
+        <li>No excuses, only growth</li>
+      </ul>
+      <a class="button button-gold" href="{{ section.settings.men_link | default: '/collections/hoodies' }}">
+        {{ section.settings.men_link_label }}
+        {% render 'icon-arrow' %}
+      </a>
+    </div>
+    <div class="emotion-chapter-media">
+      {% if section.settings.men_image %}
+        {{ section.settings.men_image | image_url: width: 1800 | image_tag: loading: 'lazy', sizes: '(min-width: 900px) 55vw, 100vw', alt: section.settings.men_image.alt }}
+      {% else %}
+        <img src="{{ 'product-face-hide-hoodie-v1.jpg' | asset_url }}" alt="Face What You Hide oversized hoodie from the men's Emotional Collection" width="1024" height="1536" loading="lazy">
+      {% endif %}
+    </div>
+  </article>
+</section>
+
+{% schema %}
+{
+  "name": "Emotional chapters",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "02 / Two sides / The same war"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The collection has two voices."
+    },
+    {
+      "type": "textarea",
+      "id": "copy",
+      "label": "Introduction",
+      "default": "One rebuilds through vulnerability. One confronts through discipline. Both begin by refusing the version of yourself that no longer fits."
+    },
+    {
+      "type": "image_picker",
+      "id": "women_image",
+      "label": "Women's chapter image"
+    },
+    {
+      "type": "text",
+      "id": "women_heading",
+      "label": "Women's heading",
+      "default": "Rebuild yourself."
+    },
+    {
+      "type": "textarea",
+      "id": "women_copy",
+      "label": "Women's copy",
+      "default": "A halo does not erase the fracture. The women's chapter treats softness as strength and reconstruction as an act of control."
+    },
+    {
+      "type": "text",
+      "id": "women_link_label",
+      "label": "Women's link label",
+      "default": "Shop the chapter"
+    },
+    {
+      "type": "url",
+      "id": "women_link",
+      "label": "Women's link"
+    },
+    {
+      "type": "image_picker",
+      "id": "men_image",
+      "label": "Men's chapter image"
+    },
+    {
+      "type": "text",
+      "id": "men_heading",
+      "label": "Men's heading",
+      "default": "Face what you hide."
+    },
+    {
+      "type": "textarea",
+      "id": "men_copy",
+      "label": "Men's copy",
+      "default": "The mask protects you until it becomes the prison. The men's chapter is built around truth, repetition, and the decision to break the loop."
+    },
+    {
+      "type": "text",
+      "id": "men_link_label",
+      "label": "Men's link label",
+      "default": "Shop the chapter"
+    },
+    {
+      "type": "url",
+      "id": "men_link",
+      "label": "Men's link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Emotional chapters"
+    }
+  ]
+}
+{% endschema %}

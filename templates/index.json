@@ -4,23 +4,39 @@
       "type": "hero-creation",
       "settings": {}
     },
-    "drop": {
-      "type": "collection-strip",
-      "settings": {
-        "heading": "Built for every season.",
-        "copy": "A controlled palette, clean weight, and silhouettes designed to work together."
-      }
+    "manifesto": {
+      "type": "emotional-manifesto",
+      "settings": {}
+    },
+    "chapters": {
+      "type": "emotional-chapters",
+      "settings": {}
     },
     "featured": {
       "type": "featured-products",
       "settings": {
-        "heading": "The first drop"
+        "heading": "The Emotional Collection"
       }
     },
-    "lookbook": {
+    "accessories": {
+      "type": "emotional-accessories",
+      "settings": {}
+    },
+    "forms": {
+      "type": "collection-strip",
+      "settings": {
+        "heading": "Choose what carries the message.",
+        "copy": "The collection begins with four forms: heavyweight layers, first layers, washed headwear, and smaller objects built from the same emotional language."
+      }
+    },
+    "access": {
+      "type": "emotional-access",
+      "settings": {}
+    },
+    "theory": {
       "type": "lookbook-story",
       "settings": {}
     }
   },
-  "order": ["hero", "drop", "featured", "lookbook"]
+  "order": ["hero", "manifesto", "chapters", "featured", "accessories", "forms", "access", "theory"]
 }

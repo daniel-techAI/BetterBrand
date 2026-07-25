@@ -7,38 +7,40 @@ Use this when recreating products in Shopify and Printify.
 Create these Shopify collections first:
 
 - `All` - every live product
-- `New Drop` - current release
-- `Tees`
+- `Drop 001` - the Emotional Collection
+- `Women` - reconstruction chapter
+- `Men` - confrontation chapter
 - `Hoodies`
-- `Pants`
-- `Shorts`
+- `First Layers` - tees and cropped tees
 - `Socks`
-- `Hats & Caps`
-- `Accessories` - phone cases, stickers, small items later
-- `Lookbook` - optional editorial collection for featured pieces
+- `Headwear`
+- `Objects` - socks, cases, stickers, and small editions
+
+Create pants, shorts, and broader seasonal collections only after Drop 001 proves demand.
 
 Recommended handles:
 
-- `/collections/tees`
+- `/collections/drop-001`
+- `/collections/women`
+- `/collections/men`
 - `/collections/hoodies`
-- `/collections/pants`
-- `/collections/shorts`
+- `/collections/tees`
 - `/collections/socks`
 - `/collections/hats-caps`
 - `/collections/accessories`
 
 ## Product Naming
 
-Keep names short and brandable:
+Use these names for the first capsule:
 
-- `Core Hoodie`
-- `Weight Tee`
-- `Intent Pant`
-- `Drift Short`
-- `Everyday Sock`
-- `R/ Cap`
-- `Signal Phone Case`
-- `Mark Sticker Set`
+- `Face What You Hide Hoodie`
+- `Rebuild Yourself Crop Hoodie`
+- `Embrace The Chaos Crop Tee`
+- `Architecture Socks`
+- `Unavailable Edition Cap`
+- `Prison Edition Cap`
+
+The full phrase printed on the recovered Unavailable cap needs trade mark clearance before sale. Do not use it as the product title.
 
 ## Product Types
 
@@ -64,11 +66,11 @@ Use exactly these option names so filters stay clean:
 Color values:
 
 - `Black`
-- `Stone`
 - `Bone`
 - `Charcoal`
-- `Brown`
-- `White`
+- `Deep Heather`
+- `Mauve`
+- `Washed Black`
 
 Apparel sizes:
 
@@ -90,18 +92,20 @@ Hat/cap sizes:
 Use tags as operational helpers, not messy public labels:
 
 - `drop-001`
-- `season-summer`
-- `season-winter`
 - `season-year-round`
+- `chapter-reconstruction`
+- `chapter-confrontation`
+- `chapter-objects`
 - `fit-oversized`
+- `fit-cropped`
 - `fit-regular`
 - `weight-light`
 - `weight-heavy`
 - `color-black`
-- `color-stone`
 - `color-bone`
 - `color-charcoal`
-- `color-brown`
+- `color-mauve`
+- `color-washed-black`
 
 ## Metafields
 
@@ -112,6 +116,8 @@ Create these Shopify product metafields when the store is ready:
 - `custom.fabric_weight` - single line text, example `420 GSM`
 - `custom.season` - single line text, example `Year-round`
 - `custom.drop` - single line text, example `Drop 001`
+- `custom.chapter` - single line text, example `Confrontation`
+- `custom.production` - multi-line text for made-to-order expectations
 - `custom.care` - multi-line text
 
 ## Filters To Enable
@@ -135,4 +141,3 @@ The theme now renders Shopify native `collection.filters`, so the filters appear
 - Do not rename synced variants randomly after publishing; it can make fulfillment confusing.
 - Make each product description include fit, material, care, and production/shipping expectations.
 - Price products with returns/reprints in mind because print-on-demand returns can become your responsibility.
-

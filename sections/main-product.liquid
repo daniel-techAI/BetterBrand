@@ -18,9 +18,9 @@
         </div>
       {% endfor %}
     {% else %}
-      <div class="product-media is-featured"><img src="{{ 'product-core-hoodie-v2.png' | asset_url }}" alt="Core Hoodie concept" width="1024" height="1280"></div>
-      <div class="product-media"><img src="{{ 'product-weight-tee-v2.png' | asset_url }}" alt="Weight Tee concept" width="1024" height="1280"></div>
-      <div class="product-media"><img src="{{ 'product-intent-pant-v2.png' | asset_url }}" alt="Intent Pant concept" width="1024" height="1280"></div>
+      <div class="product-media is-featured"><img src="{{ 'product-rebuild-hoodie-v1.jpg' | asset_url }}" alt="Rebuild Yourself hoodie concept" width="1024" height="1536"></div>
+      <div class="product-media"><img src="{{ 'editorial-emotional-system-v1.jpg' | asset_url }}" alt="Emotional Collection hoodie design system" width="1280" height="853"></div>
+      <div class="product-media"><img src="{{ 'art-emotional-duality-v1.jpg' | asset_url }}" alt="Emotional duality artwork" width="1280" height="853"></div>
     {% endif %}
   </div>
 
@@ -30,12 +30,13 @@
         <a href="{{ product.collections.first.url }}">{{ product.collections.first.title }}</a>
         <span aria-hidden="true">/</span>
       {% endif %}
-      <span>{{ product.title | default: 'Core Hoodie' }}</span>
+      <span>{{ product.title | default: 'Rebuild Yourself Crop Hoodie' }}</span>
     </nav>
 
-    <h1>{{ product.title | default: 'Core Hoodie' }}</h1>
+    <span class="product-card-kicker">{{ product.type | default: 'Emotional Collection / Drop 001' }}</span>
+    <h1>{{ product.title | default: 'Rebuild Yourself Crop Hoodie' }}</h1>
     <div class="product-price" data-product-price>
-      <span>{{ current_variant.price | money | default: 'EUR 119.00' }}</span>
+      <span>{{ current_variant.price | money | default: 'EUR 89.00' }}</span>
       {% if current_variant.compare_at_price > current_variant.price %}
         <s>{{ current_variant.compare_at_price | money }}</s>
       {% endif %}
@@ -44,7 +45,7 @@
       {% if product.description != blank %}
         {{ product.description }}
       {% else %}
-        <p>Made for weight, movement, and intention.</p>
+        <p>A study in fracture and reconstruction. Heavy washed cotton carries the split classical figure, halo, serpent, and the instruction to rebuild yourself.</p>
       {% endif %}
     </div>
 
@@ -109,6 +110,10 @@
         <div>{{ section.settings.care_text }}</div>
       </details>
       <details>
+        <summary><span>Production</span><span aria-hidden="true"></span></summary>
+        <div>{{ section.settings.production_text }}</div>
+      </details>
+      <details>
         <summary><span>Shipping & returns</span><span aria-hidden="true"></span></summary>
         <div>{{ section.settings.shipping_text }}</div>
       </details>
@@ -131,13 +136,19 @@
       "type": "richtext",
       "id": "details_text",
       "label": "Details",
-      "default": "<p>Heavy cotton feel, considered construction, and a clean silhouette for everyday layering.</p>"
+      "default": "<p>Heavy washed cotton, relaxed construction, front statement treatment, and a large back artwork drawn from the Emotional Collection.</p>"
     },
     {
       "type": "richtext",
       "id": "care_text",
       "label": "Fit and care",
       "default": "<p>Relaxed fit. Wash cold with similar colors and air dry to preserve the shape.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "production_text",
+      "label": "Production",
+      "default": "<p>Drop 001 is planned as a small, produced-to-order release to reduce waste and avoid excess inventory.</p>"
     },
     {
       "type": "richtext",

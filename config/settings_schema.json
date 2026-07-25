@@ -4,7 +4,7 @@
     "settings": [
       {
         "type": "paragraph",
-        "content": "R/CREATION custom Shopify theme. Replace the built-in concept photography with final campaign and product images before launch."
+        "content": "R/CREATION Emotional Collection theme. Replace concept products with final Printify products and sampled campaign photography before launch."
       }
     ]
   },
@@ -21,7 +21,7 @@
         "type": "text",
         "id": "tagline",
         "label": "Tagline",
-        "default": "You wear what you are."
+        "default": "Emotions are architecture."
       }
     ]
   },

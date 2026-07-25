@@ -1,45 +1,57 @@
-<section class="lookbook-story">
-  <div class="lookbook-media">
+<section class="lookbook-story emotion-theory" id="theory">
+  <div class="lookbook-media" data-emotion-reveal>
     {% if section.settings.image %}
-      {{ section.settings.image | image_url: width: 2200 | image_tag: loading: 'lazy', sizes: '(min-width: 900px) 68vw, 100vw', alt: section.settings.image.alt }}
+      {{ section.settings.image | image_url: width: 2200 | image_tag: loading: 'lazy', sizes: '(min-width: 900px) 58vw, 100vw', alt: section.settings.image.alt }}
     {% else %}
-      <img src="{{ 'lookbook-concrete-v2.png' | asset_url }}" alt="R/CREATION black and bone streetwear lookbook" width="1536" height="1024" loading="lazy">
+      <img src="{{ 'art-emotional-architecture-v1.jpg' | asset_url }}" alt="Emotions Are Architecture artwork with a split classical face, halo and serpent" width="853" height="1280" loading="lazy">
     {% endif %}
-    <span class="lookbook-credit">R/C Editorial 001</span>
+    <span class="lookbook-credit">Hades Theory / Chapter 001</span>
   </div>
-  <div class="lookbook-copy">
-    <span class="section-index">03 / Editorial</span>
+  <div class="lookbook-copy" data-emotion-reveal>
+    <span class="section-index">07 / The world beneath the clothes</span>
     <h2>{{ section.settings.heading }}</h2>
     <p>{{ section.settings.copy }}</p>
-    <a class="button button-gold" href="/pages/lookbook">Explore editorial {% render 'icon-arrow' %}</a>
+    <blockquote>The clothes are evidence. The theory is what happened underneath.</blockquote>
+    <a class="button button-gold" href="{{ section.settings.link | default: '/pages/about' }}">{{ section.settings.link_label }} {% render 'icon-arrow' %}</a>
   </div>
 </section>
 
 {% schema %}
 {
-  "name": "Lookbook story",
+  "name": "Hades Theory story",
   "settings": [
     {
       "type": "image_picker",
       "id": "image",
-      "label": "Editorial image"
+      "label": "Theory image"
     },
     {
       "type": "text",
       "id": "heading",
       "label": "Heading",
-      "default": "Built around the quiet parts."
+      "default": "Clothing is one layer of the theory."
     },
     {
       "type": "textarea",
       "id": "copy",
       "label": "Copy",
-      "default": "Pieces that move between summer nights, colder mornings, and the days where you need the outfit to speak before you do."
+      "default": "Hades Theory is where the emotional system begins: the mask, the loop, the prison, the reconstruction. R/CREATION turns those ideas into objects you can carry into the world."
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "Link label",
+      "default": "Read our story"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link"
     }
   ],
   "presets": [
     {
-      "name": "Lookbook story"
+      "name": "Hades Theory story"
     }
   ]
 }

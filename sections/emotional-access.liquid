@@ -1,0 +1,84 @@
+<section class="emotion-access" id="access" data-emotion-reveal>
+  <div class="emotion-access-index" aria-hidden="true">
+    <span>06</span>
+    <span>Private access</span>
+  </div>
+
+  <div class="emotion-access-copy">
+    <p class="emotion-eyebrow">{{ section.settings.eyebrow }}</p>
+    <h2>{{ section.settings.heading }}</h2>
+    <p>{{ section.settings.copy }}</p>
+
+    {% form 'customer', class: 'emotion-access-form newsletter-form' %}
+      <input type="hidden" name="contact[tags]" value="newsletter,drop-001">
+      <label class="visually-hidden" for="EmotionAccessEmail-{{ section.id }}">Email address</label>
+      <input
+        id="EmotionAccessEmail-{{ section.id }}"
+        type="email"
+        name="contact[email]"
+        value="{% if customer %}{{ customer.email }}{% endif %}"
+        placeholder="Email address"
+        autocomplete="email"
+        required
+      >
+      <button type="submit" aria-label="Request private access">{% render 'icon-arrow' %}</button>
+      <p class="newsletter-status" aria-live="polite">
+        {% if form.posted_successfully? %}
+          You are on the list.
+        {% elsif form.errors %}
+          {{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}
+        {% endif %}
+      </p>
+      <small class="emotion-access-legal">By joining, you agree to receive email updates. Unsubscribe anytime. <a href="/policies/privacy-policy">Privacy</a>.</small>
+    {% endform %}
+  </div>
+
+  <div class="emotion-access-principles" aria-label="Private access benefits">
+    <div>
+      <span>01</span>
+      <strong>See the work</strong>
+      <p>Samples, materials, and the decisions behind each release.</p>
+    </div>
+    <div>
+      <span>02</span>
+      <strong>Shape the drop</strong>
+      <p>Private votes on color, placement, and the next object.</p>
+    </div>
+    <div>
+      <span>03</span>
+      <strong>Enter first</strong>
+      <p>Early access before every public release.</p>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Private drop access",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "The First 100"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Do not just watch the collection. Help shape it."
+    },
+    {
+      "type": "textarea",
+      "id": "copy",
+      "label": "Copy",
+      "default": "Private access is where unfinished ideas become real pieces. Join for sample decisions, studio notes, and first entry to Drop 001."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Private drop access"
+    }
+  ]
+}
+{% endschema %}

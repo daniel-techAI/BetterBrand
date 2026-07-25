@@ -1,0 +1,81 @@
+<section class="emotion-accessories" id="objects" data-emotion-reveal>
+  <div class="emotion-accessories-copy">
+    <p class="emotion-eyebrow">{{ section.settings.eyebrow }}</p>
+    <h2>{{ section.settings.heading }}</h2>
+    <p>{{ section.settings.copy }}</p>
+
+    <div class="emotion-accessory-editions">
+      <div>
+        <span>01</span>
+        <strong>Unavailable edition</strong>
+        <p>Guarded vulnerability. Distance as protection.</p>
+      </div>
+      <div>
+        <span>02</span>
+        <strong>Prison</strong>
+        <p>Captivity, release, and the mind that holds the key.</p>
+      </div>
+    </div>
+
+    <a class="button button-gold" href="{{ section.settings.link | default: '/collections/hats-caps' }}">
+      {{ section.settings.link_label }}
+      {% render 'icon-arrow' %}
+    </a>
+  </div>
+
+  <div class="emotion-accessories-media">
+    {% if section.settings.image %}
+      {{ section.settings.image | image_url: width: 1800 | image_tag: loading: 'lazy', sizes: '(min-width: 900px) 58vw, 100vw', alt: section.settings.image.alt }}
+    {% else %}
+      <img src="{{ 'product-emotional-caps-v1.jpg' | asset_url }}" alt="Two washed black caps from the Unavailable and Prison editions" width="1280" height="853" loading="lazy">
+    {% endif %}
+    <span>Objects / 001</span>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Emotional accessories",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "04 / Accessory edition"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Not every statement needs to be loud."
+    },
+    {
+      "type": "textarea",
+      "id": "copy",
+      "label": "Copy",
+      "default": "Two washed caps carry the quietest parts of the collection. Minimal from the front. A full emotional system underneath."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Accessories image"
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "Link label",
+      "default": "Explore headwear"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Emotional accessories"
+    }
+  ]
+}
+{% endschema %}

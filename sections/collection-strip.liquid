@@ -1,46 +1,45 @@
-<section class="collection-strip section-light">
+<section class="collection-strip emotion-form-index section-light" id="shop">
   <div class="section-heading">
     <div>
-      <span class="section-index">01 / Categories</span>
+      <span class="section-index">05 / Shop by form</span>
       <h2>{{ section.settings.heading }}</h2>
     </div>
     <p>{{ section.settings.copy }}</p>
   </div>
 
-  <div class="category-rail">
-    {% assign categories = "Tees,Hoodies,Pants,Shorts,Socks,Hats & Caps" | split: "," %}
-    {% for category in categories %}
-      {% case category %}
-        {% when 'Tees' %}
-          {% assign category_image = section.settings.tees_image %}
-          {% assign fallback_asset = 'product-weight-tee-v2.png' %}
-        {% when 'Hoodies' %}
+  <div class="category-rail emotion-category-rail">
+    {% assign category_titles = "Hoodies,Tees,Headwear,Objects" | split: "," %}
+    {% assign category_handles = "hoodies,tees,hats-caps,accessories" | split: "," %}
+    {% assign fallback_assets = "product-rebuild-hoodie-v1.jpg,product-embrace-tee-v1.jpg,product-emotional-caps-v1.jpg,product-emotional-socks-v1.jpg" | split: "," %}
+
+    {% for category in category_titles %}
+      {% assign category_handle = category_handles[forloop.index0] %}
+      {% assign fallback_asset = fallback_assets[forloop.index0] %}
+      {% case forloop.index %}
+        {% when 1 %}
           {% assign category_image = section.settings.hoodies_image %}
-          {% assign fallback_asset = 'product-core-hoodie-v2.png' %}
-        {% when 'Pants' %}
-          {% assign category_image = section.settings.pants_image %}
-          {% assign fallback_asset = 'product-intent-pant-v2.png' %}
-        {% when 'Shorts' %}
-          {% assign category_image = section.settings.shorts_image %}
-          {% assign fallback_asset = 'product-utility-short-v2.png' %}
-        {% when 'Socks' %}
-          {% assign category_image = section.settings.socks_image %}
-          {% assign fallback_asset = 'product-core-socks-v2.png' %}
-        {% else %}
+          {% assign category_note = 'Two chapters' %}
+        {% when 2 %}
+          {% assign category_image = section.settings.tees_image %}
+          {% assign category_note = 'First layer' %}
+        {% when 3 %}
           {% assign category_image = section.settings.caps_image %}
-          {% assign fallback_asset = 'product-rc-cap-v2.png' %}
+          {% assign category_note = 'Quiet statements' %}
+        {% else %}
+          {% assign category_image = section.settings.objects_image %}
+          {% assign category_note = 'Socks + editions' %}
       {% endcase %}
 
-      <a class="category-tile" href="/collections/{{ category | handleize }}">
+      <a class="category-tile" href="/collections/{{ category_handle }}">
         <span class="category-media">
           {% if category_image %}
-            {{ category_image | image_url: width: 900 | image_tag: loading: 'lazy', sizes: '(min-width: 1000px) 17vw, 72vw', alt: category }}
+            {{ category_image | image_url: width: 1200 | image_tag: loading: 'lazy', sizes: '(min-width: 1000px) 25vw, 76vw', alt: category }}
           {% else %}
-            <img src="{{ fallback_asset | asset_url }}" alt="{{ category }} collection" width="1024" height="1280" loading="lazy">
+            <img src="{{ fallback_asset | asset_url }}" alt="{{ category }} from the Emotional Collection" width="1024" height="1280" loading="lazy">
           {% endif %}
         </span>
         <span class="category-label">
-          <b>{{ category }}</b>
+          <span><small>{{ category_note }}</small><b>{{ category }}</b></span>
           {% render 'icon-arrow' %}
         </span>
       </a>
@@ -50,24 +49,19 @@
 
 {% schema %}
 {
-  "name": "Collection strip",
+  "name": "Collection forms",
   "settings": [
     {
       "type": "text",
       "id": "heading",
       "label": "Heading",
-      "default": "Built for every season."
+      "default": "Choose what carries the message."
     },
     {
       "type": "textarea",
       "id": "copy",
       "label": "Copy",
-      "default": "A controlled palette, clean weight, and silhouettes designed to work together."
-    },
-    {
-      "type": "image_picker",
-      "id": "tees_image",
-      "label": "Tees image"
+      "default": "The collection begins with four forms: heavyweight layers, first layers, washed headwear, and smaller objects built from the same emotional language."
     },
     {
       "type": "image_picker",
@@ -76,28 +70,23 @@
     },
     {
       "type": "image_picker",
-      "id": "pants_image",
-      "label": "Pants image"
-    },
-    {
-      "type": "image_picker",
-      "id": "shorts_image",
-      "label": "Shorts image"
-    },
-    {
-      "type": "image_picker",
-      "id": "socks_image",
-      "label": "Socks image"
+      "id": "tees_image",
+      "label": "Tees image"
     },
     {
       "type": "image_picker",
       "id": "caps_image",
-      "label": "Hats and caps image"
+      "label": "Headwear image"
+    },
+    {
+      "type": "image_picker",
+      "id": "objects_image",
+      "label": "Objects image"
     }
   ],
   "presets": [
     {
-      "name": "Collection strip"
+      "name": "Collection forms"
     }
   ]
 }

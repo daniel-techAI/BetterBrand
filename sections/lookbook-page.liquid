@@ -1,17 +1,49 @@
-<section class="lookbook-page">
-  <h1>Lookbook</h1>
-  <div class="lookbook-grid">
-    <div class="lookbook-shot tall"></div>
-    <div class="lookbook-shot"></div>
-    <div class="lookbook-shot warm"></div>
-    <div class="lookbook-shot dark"></div>
+<section class="emotional-lookbook">
+  <header class="emotional-lookbook-hero">
+    <div>
+      <p class="emotion-eyebrow">Editorial 001 / Emotional Collection</p>
+      <h1>Two sides.<br>Same war.</h1>
+    </div>
+    <p>The recovered collection study: reconstruction, confrontation, and the emotional system that connects both.</p>
+  </header>
+
+  <div class="emotional-lookbook-lineup">
+    <img src="{{ 'editorial-emotional-lineup-v1.jpg' | asset_url }}" alt="Women's and men's Emotional Collection front and back looks" width="1280" height="853" loading="eager">
   </div>
+
+  <div class="emotional-lookbook-statement">
+    <p>Emotions are architecture.</p>
+    <span>What you repeat becomes structure. What you confront becomes material. What you rebuild becomes yours.</span>
+  </div>
+
+  <div class="emotional-lookbook-grid">
+    <figure class="is-tall">
+      <img src="{{ 'product-rebuild-hoodie-v1.jpg' | asset_url }}" alt="Rebuild Yourself women's cropped hoodie back" width="1024" height="1536" loading="lazy">
+      <figcaption>01 / Reconstruction</figcaption>
+    </figure>
+    <figure>
+      <img src="{{ 'art-emotional-duality-v1.jpg' | asset_url }}" alt="Emotional duality collection artwork" width="1280" height="853" loading="lazy">
+      <figcaption>The mask / The fracture</figcaption>
+    </figure>
+    <figure>
+      <img src="{{ 'product-face-hide-hoodie-v1.jpg' | asset_url }}" alt="Face What You Hide men's oversized hoodie back" width="1024" height="1536" loading="lazy">
+      <figcaption>02 / Confrontation</figcaption>
+    </figure>
+    <figure class="is-wide">
+      <img src="{{ 'editorial-emotional-system-v1.jpg' | asset_url }}" alt="Emotional Collection hoodie design system" width="1280" height="853" loading="lazy">
+      <figcaption>The complete system</figcaption>
+    </figure>
+  </div>
+
+  <footer class="emotional-lookbook-footer">
+    <p>Face what you hide.</p>
+    <a class="button button-gold" href="{{ routes.collections_url }}">Enter the collection {% render 'icon-arrow' %}</a>
+  </footer>
 </section>
 
 {% schema %}
 {
-  "name": "Lookbook page",
+  "name": "Emotional lookbook",
   "settings": []
 }
 {% endschema %}
-

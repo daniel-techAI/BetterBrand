@@ -285,7 +285,7 @@
 
   if ("IntersectionObserver" in window) {
     const revealNodes = document.querySelectorAll(
-      ".category-tile, .product-card, .lookbook-media, .lookbook-copy, .collection-index-item, .product-media, [data-about-reveal]"
+      ".category-tile, .product-card, .lookbook-media, .lookbook-copy, .collection-index-item, .product-media, [data-about-reveal], [data-emotion-reveal]"
     );
     revealNodes.forEach((node, index) => node.style.setProperty("--reveal-delay", `${Math.min(index % 4, 3) * 110}ms`));
 
@@ -300,5 +300,16 @@
       { threshold: 0.08, rootMargin: "0px 0px -20px" }
     );
     revealNodes.forEach((node) => observer.observe(node));
+  }
+
+  if (previewMode) {
+    document.querySelectorAll(".newsletter-form").forEach((form) => {
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const status = form.querySelector(".newsletter-status");
+        const input = form.querySelector("input[type='email']");
+        if (status) status.textContent = input?.value ? "You are on the list." : "Enter an email address.";
+      });
+    });
   }
 })();
