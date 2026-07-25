@@ -26,6 +26,7 @@
     </div>
     <div class="about-hero-inner">
       <div class="about-hero-copy" data-about-reveal>
+        <p class="about-founder-kicker">Independent founder / Slovakia</p>
         <h1 id="AboutHeroHeading">{{ section.settings.hero_heading | replace: ' you ', '<br> you ' }}</h1>
         <p>{{ section.settings.hero_copy }}</p>
         <a class="about-outline-link" href="{{ hero_link }}">
@@ -36,7 +37,7 @@
     </div>
   </section>
 
-  <section class="about-manifesto" aria-labelledby="AboutManifestoHeading">
+  <section class="about-manifesto" id="founder" aria-labelledby="AboutManifestoHeading">
     <div class="about-manifesto-inner">
       <div class="about-manifesto-title" data-about-reveal>
         <h2 id="AboutManifestoHeading">{{ section.settings.manifesto_heading }}</h2>
@@ -201,14 +202,14 @@
   "settings": [
     { "type": "image_picker", "id": "hero_image", "label": "Hero image" },
     { "type": "text", "id": "hero_heading", "label": "Hero heading", "default": "Wear what you survived." },
-    { "type": "textarea", "id": "hero_copy", "label": "Hero copy", "default": "R/CREATION turns the inner life into objects you can carry: apparel for the everyday, footwear shaped by hand, and Hades Theory as the world beneath both." },
+    { "type": "textarea", "id": "hero_copy", "label": "Hero copy", "default": "I built R/CREATION to turn the inner life into objects you can carry: apparel for the everyday, footwear shaped by hand, and Hades Theory as the world beneath both." },
     { "type": "text", "id": "hero_button_label", "label": "Hero button", "default": "Explore the first chapter" },
     { "type": "url", "id": "hero_button_link", "label": "Hero button link" },
 
     { "type": "image_picker", "id": "manifesto_image", "label": "Manifesto image" },
     { "type": "text", "id": "manifesto_heading", "label": "Manifesto heading", "default": "Not built to hide you." },
     { "type": "textarea", "id": "manifesto_copy_one", "label": "Manifesto first paragraph", "default": "Clothing can cover the body without concealing the person." },
-    { "type": "textarea", "id": "manifesto_copy_two", "label": "Manifesto second paragraph", "default": "We design around contradiction: restraint and chaos, armor and vulnerability, the face shown and the face protected." },
+    { "type": "textarea", "id": "manifesto_copy_two", "label": "Manifesto second paragraph", "default": "I design around contradiction: restraint and chaos, armor and vulnerability, the face shown and the face protected. This is an independent studio, built one tested chapter at a time." },
 
     { "type": "text", "id": "pillars_heading", "label": "Pillars heading", "default": "One inner world. Three expressions." },
     { "type": "textarea", "id": "pillars_copy", "label": "Pillars introduction", "default": "The medium changes. The source does not." },
@@ -228,7 +229,7 @@
 
     { "type": "checkbox", "id": "show_roadmap", "label": "Show the road", "default": true },
     { "type": "text", "id": "roadmap_heading", "label": "Road heading", "default": "The road, not the rush." },
-    { "type": "textarea", "id": "roadmap_copy", "label": "Road introduction", "default": "Every chapter earns its release through the same four movements." },
+    { "type": "textarea", "id": "roadmap_copy", "label": "Road introduction", "default": "I move every chapter through the same four stages before asking anyone to wear it." },
     { "type": "text", "id": "step_one_title", "label": "Step one title", "default": "Decode" },
     { "type": "text", "id": "step_one_copy", "label": "Step one copy", "default": "Emotion becomes language." },
     { "type": "text", "id": "step_two_title", "label": "Step two title", "default": "Construct" },
@@ -239,7 +240,7 @@
     { "type": "text", "id": "step_four_copy", "label": "Step four copy", "default": "Only finished chapters enter the world." },
 
     { "type": "text", "id": "social_heading", "label": "Social heading", "default": "Follow the whole story." },
-    { "type": "textarea", "id": "social_copy", "label": "Social introduction", "default": "One world, documented from three angles." },
+    { "type": "textarea", "id": "social_copy", "label": "Social introduction", "default": "I document one world from three angles: clothing, hand-built footwear, and the theory beneath both." },
     { "type": "text", "id": "apparel_instagram_handle", "label": "Apparel Instagram handle", "default": "@r_creationapparel" },
     { "type": "url", "id": "apparel_instagram_url", "label": "Apparel Instagram link" },
     { "type": "text", "id": "footwear_instagram_handle", "label": "Footwear Instagram handle", "default": "Footwear journal" },

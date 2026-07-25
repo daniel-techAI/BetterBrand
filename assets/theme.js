@@ -5,6 +5,34 @@
   const previewMode = body.dataset.previewMode === "true";
   const rootRoute = window.Shopify?.routes?.root || "/";
   let lastDrawerTrigger = null;
+  let lastMenuTrigger = null;
+
+  if (previewMode) {
+    const previewNav = document.querySelector("[data-mobile-nav]");
+    if (previewNav && !previewNav.querySelector(".catalog-drawer")) {
+      previewNav.setAttribute("aria-hidden", "true");
+      previewNav.innerHTML = `
+        <button class="catalog-drawer-overlay" type="button" data-menu-close aria-label="Close navigation"></button>
+        <aside id="CatalogDrawer" class="catalog-drawer" role="dialog" aria-modal="true" aria-label="Shop navigation">
+          <div class="catalog-drawer-heading"><span>R/CREATION / Catalog</span><button class="catalog-close" type="button" data-menu-close aria-label="Close navigation"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M5 5l14 14M19 5 5 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button></div>
+          <form class="catalog-search" action="collection.html" role="search"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="m20 20-4.4-4.4m2.4-5.1a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0Z" stroke="currentColor" stroke-width="1.7"/></svg><label class="visually-hidden" for="PreviewCatalogSearch">Search the collection</label><input id="PreviewCatalogSearch" type="search" name="q" placeholder="Search pieces" data-catalog-search><button type="submit" aria-label="Submit search"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M5 12h13m0 0-5-5m5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button></form>
+          <a class="catalog-profile" href="account.html"><span class="catalog-profile-icon"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M4.8 20c.7-4 3.1-6 7.2-6s6.5 2 7.2 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span><span><strong>Sign in</strong><small>Account access and order history</small></span><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="m9 5 7 7-7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <nav class="catalog-primary-nav" aria-label="Shop departments">
+            <a href="collection.html?view=women"><span>Women</span><small>Reconstruction</small><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="m9 5 7 7-7 7" stroke="currentColor" stroke-width="1.5"/></svg></a>
+            <a href="collection.html?view=men"><span>Men</span><small>Confrontation</small><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="m9 5 7 7-7 7" stroke="currentColor" stroke-width="1.5"/></svg></a>
+            <a href="collection.html"><span>Drop 001</span><small>View every piece</small><svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="m9 5 7 7-7 7" stroke="currentColor" stroke-width="1.5"/></svg></a>
+          </nav>
+          <nav class="catalog-category-nav" aria-label="Shop categories"><a href="collection.html?view=hoodies">Hoodies</a><a href="collection.html?view=tees">Tees</a><a href="collection.html?view=headwear">Headwear</a><a href="collection.html?view=objects">Objects</a></nav>
+          <div class="catalog-drawer-footer"><a href="lookbook.html">Editorial</a><a href="about.html">Founder story</a><a href="https://www.instagram.com/r_creationapparel/" target="_blank" rel="noopener">Instagram</a><p>Independent studio / Slovakia</p></div>
+        </aside>`;
+    }
+
+    document.querySelectorAll(".icon-link[aria-label='Search']").forEach((link) => {
+      link.dataset.catalogOpen = "search";
+      link.setAttribute("aria-controls", "CatalogDrawer");
+      link.setAttribute("aria-expanded", "false");
+    });
+  }
 
   const getCartDrawer = () => document.querySelector("[data-cart-drawer]");
   const getFilterDrawer = () => document.querySelector("[data-facets-panel]");
@@ -32,15 +60,32 @@
     }
   };
 
+  const setMenuState = (isOpen, trigger = null, focusSearch = false) => {
+    const nav = document.querySelector("[data-mobile-nav]");
+    if (!nav) return;
+
+    if (isOpen) {
+      setDrawerState("cart", false);
+      setDrawerState("filters", false);
+      lastMenuTrigger = trigger || document.activeElement;
+      body.classList.add("menu-open");
+      nav.setAttribute("aria-hidden", "false");
+      document.querySelectorAll("[data-menu-toggle], [data-catalog-open]").forEach((button) => button.setAttribute("aria-expanded", "true"));
+      window.setTimeout(() => (focusSearch ? nav.querySelector("[data-catalog-search]") : nav.querySelector("[data-menu-close]"))?.focus(), 180);
+      return;
+    }
+
+    body.classList.remove("menu-open");
+    nav.setAttribute("aria-hidden", "true");
+    document.querySelectorAll("[data-menu-toggle], [data-catalog-open]").forEach((button) => button.setAttribute("aria-expanded", "false"));
+    if (lastMenuTrigger && document.contains(lastMenuTrigger)) lastMenuTrigger.focus();
+  };
+
   if (menuToggle && header) {
-    menuToggle.addEventListener("click", () => {
-      const isOpen = body.classList.toggle("menu-open");
-      menuToggle.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
-      menuToggle.setAttribute("aria-expanded", String(isOpen));
-    });
+    menuToggle.addEventListener("click", () => setMenuState(!body.classList.contains("menu-open"), menuToggle));
 
     header.querySelectorAll("[data-mobile-nav] a").forEach((link) => {
-      link.addEventListener("click", () => body.classList.remove("menu-open"));
+      link.addEventListener("click", () => setMenuState(false));
     });
   }
 
@@ -51,6 +96,18 @@
   }
 
   document.addEventListener("click", (event) => {
+    const catalogTrigger = event.target.closest("[data-catalog-open]");
+    if (catalogTrigger && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey) {
+      event.preventDefault();
+      setMenuState(true, catalogTrigger, catalogTrigger.dataset.catalogOpen === "search");
+      return;
+    }
+
+    if (event.target.closest("[data-menu-close]")) {
+      setMenuState(false);
+      return;
+    }
+
     const cartTrigger = event.target.closest("[data-cart-open]");
     if (cartTrigger && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey) {
       event.preventDefault();
@@ -97,7 +154,7 @@
     if (event.key !== "Escape") return;
     if (body.classList.contains("cart-drawer-open")) setDrawerState("cart", false);
     if (body.classList.contains("filters-open")) setDrawerState("filters", false);
-    if (body.classList.contains("menu-open")) body.classList.remove("menu-open");
+    if (body.classList.contains("menu-open")) setMenuState(false);
   });
 
   document.addEventListener("change", (event) => {
@@ -172,7 +229,9 @@
         media.classList.toggle("is-selected", media.dataset.mediaId === String(variant.featured_media.id));
       });
     }
-    window.history.replaceState({}, "", `${window.location.pathname}?variant=${variant.id}`);
+    const nextUrl = new URL(window.location.href);
+    nextUrl.searchParams.set("variant", variant.id);
+    window.history.replaceState({}, "", `${nextUrl.pathname}${nextUrl.search}${nextUrl.hash}`);
   };
 
   const updateCartCount = (count) => {
@@ -246,6 +305,12 @@
 
       if (previewMode) {
         window.setTimeout(() => {
+          const selectedOptions = [...form.querySelectorAll("[data-option-position] input:checked")].map((input) => input.value);
+          const drawerVariant = document.querySelector("[data-cart-item] .drawer-item-details > div > p:nth-of-type(1)");
+          const drawerQuantity = document.querySelector("[data-cart-item] [data-cart-quantity]");
+          const productQuantity = form.querySelector("[name='quantity']");
+          if (drawerVariant && selectedOptions.length) drawerVariant.textContent = selectedOptions.join(" / ");
+          if (drawerQuantity && productQuantity) drawerQuantity.value = productQuantity.value;
           submit.disabled = false;
           submit.textContent = submit.dataset.availableLabel;
           updateCartCount(1);
@@ -281,6 +346,39 @@
         submit.textContent = submit.dataset.availableLabel;
       }
     });
+  });
+
+  document.querySelectorAll("[data-product-gallery]").forEach((gallery) => {
+    const track = gallery.querySelector("[data-product-gallery-track]");
+    const slides = [...gallery.querySelectorAll("[data-product-slide]")];
+    const counter = gallery.querySelector("[data-gallery-counter]");
+    const thumbs = [...gallery.querySelectorAll("[data-gallery-target]")];
+    if (!track || slides.length === 0) return;
+
+    const setActiveSlide = (index, shouldScroll = false) => {
+      const activeIndex = Math.max(0, Math.min(index, slides.length - 1));
+      slides.forEach((slide, slideIndex) => slide.classList.toggle("is-active", slideIndex === activeIndex));
+      thumbs.forEach((thumb, thumbIndex) => {
+        thumb.classList.toggle("is-active", thumbIndex === activeIndex);
+        thumb.setAttribute("aria-current", thumbIndex === activeIndex ? "true" : "false");
+      });
+      if (counter) counter.textContent = `${String(activeIndex + 1).padStart(2, "0")} / ${String(slides.length).padStart(2, "0")}`;
+      if (shouldScroll) track.scrollTo({ left: slides[activeIndex].offsetLeft, behavior: "smooth" });
+      gallery.dataset.activeSlide = String(activeIndex);
+    };
+
+    thumbs.forEach((thumb, index) => thumb.addEventListener("click", () => setActiveSlide(index, true)));
+    gallery.querySelector("[data-gallery-prev]")?.addEventListener("click", () => setActiveSlide(Number(gallery.dataset.activeSlide || 0) - 1, true));
+    gallery.querySelector("[data-gallery-next]")?.addEventListener("click", () => setActiveSlide(Number(gallery.dataset.activeSlide || 0) + 1, true));
+    let scrollFrame = 0;
+    track.addEventListener("scroll", () => {
+      window.cancelAnimationFrame(scrollFrame);
+      scrollFrame = window.requestAnimationFrame(() => {
+        const nearest = slides.reduce((best, slide, index) => Math.abs(slide.offsetLeft - track.scrollLeft) < best.distance ? { index, distance: Math.abs(slide.offsetLeft - track.scrollLeft) } : best, { index: 0, distance: Infinity });
+        setActiveSlide(nearest.index);
+      });
+    }, { passive: true });
+    setActiveSlide(0);
   });
 
   if ("IntersectionObserver" in window) {

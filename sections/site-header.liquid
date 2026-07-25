@@ -21,18 +21,18 @@
         {% endfor %}
         {% unless has_about_link %}<a href="/pages/about">About</a>{% endunless %}
       {% else %}
-        <a href="{{ routes.collections_url }}">Shop</a>
+        <a href="{{ routes.all_products_collection_url | default: routes.collections_url }}">Shop</a>
         <a href="/#collection">Drop 001</a>
-        <a href="/#women">Women</a>
-        <a href="/#men">Men</a>
-        <a href="/#objects">Objects</a>
-        <a href="/#theory">Theory</a>
+        <a href="/collections/women">Women</a>
+        <a href="/collections/men">Men</a>
+        <a href="/collections/accessories">Objects</a>
+        <a href="/pages/about#hades">Theory</a>
         <a href="/pages/about">About</a>
       {% endif %}
     </nav>
 
     <div class="header-actions">
-      <a class="icon-link" href="{{ routes.search_url }}" aria-label="Search">
+      <a class="icon-link" href="{{ routes.search_url }}" aria-label="Search" data-catalog-open="search" aria-controls="CatalogDrawer" aria-expanded="false">
         {% render 'icon-search' %}
       </a>
       <a class="cart-link" href="{{ routes.cart_url }}" aria-label="Open cart" aria-controls="CartDrawer" data-cart-open>
@@ -46,21 +46,51 @@
     </div>
   </div>
 
-  <div class="mobile-nav" data-mobile-nav>
-    {% if section.settings.menu != blank %}
-      {% for link in section.settings.menu.links %}
-        <a href="{{ link.url }}" {% if link.current %}aria-current="page"{% endif %}>{{ link.title }}</a>
-      {% endfor %}
-      {% unless has_about_link %}<a href="/pages/about">About</a>{% endunless %}
-    {% else %}
-      <a href="{{ routes.collections_url }}">Shop</a>
-      <a href="/#collection">Drop 001</a>
-      <a href="/#women">Women</a>
-      <a href="/#men">Men</a>
-      <a href="/#objects">Objects</a>
-      <a href="/#theory">Hades Theory</a>
-      <a href="/pages/about">About</a>
-    {% endif %}
+  <div class="mobile-nav" data-mobile-nav aria-hidden="true">
+    <button class="catalog-drawer-overlay" type="button" data-menu-close aria-label="Close navigation"></button>
+    <aside id="CatalogDrawer" class="catalog-drawer" role="dialog" aria-modal="true" aria-label="Shop navigation">
+      <div class="catalog-drawer-heading">
+        <span>R/CREATION / Catalog</span>
+        <button class="catalog-close" type="button" data-menu-close aria-label="Close navigation">{% render 'icon-close' %}</button>
+      </div>
+
+      <form class="catalog-search" action="{{ routes.search_url }}" method="get" role="search">
+        {% render 'icon-search' %}
+        <label class="visually-hidden" for="CatalogSearch-{{ section.id }}">Search the collection</label>
+        <input id="CatalogSearch-{{ section.id }}" type="search" name="q" placeholder="Search pieces" data-catalog-search>
+        <input type="hidden" name="type" value="product">
+        <button type="submit" aria-label="Submit search">{% render 'icon-arrow' %}</button>
+      </form>
+
+      <a class="catalog-profile" href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}">
+        <span class="catalog-profile-icon">{% render 'icon-user' %}</span>
+        <span>
+          <strong>{% if customer %}Your account{% else %}Sign in{% endif %}</strong>
+          <small>{% if customer %}Orders, addresses, and profile{% else %}Account access and order history{% endif %}</small>
+        </span>
+        {% render 'icon-chevron' %}
+      </a>
+
+      <nav class="catalog-primary-nav" aria-label="Shop departments">
+        <a href="/collections/women"><span>Women</span><small>Reconstruction</small>{% render 'icon-chevron' %}</a>
+        <a href="/collections/men"><span>Men</span><small>Confrontation</small>{% render 'icon-chevron' %}</a>
+        <a href="/collections/drop-001"><span>Drop 001</span><small>View every piece</small>{% render 'icon-chevron' %}</a>
+      </nav>
+
+      <nav class="catalog-category-nav" aria-label="Shop categories">
+        <a href="/collections/hoodies">Hoodies</a>
+        <a href="/collections/tees">Tees</a>
+        <a href="/collections/hats-caps">Headwear</a>
+        <a href="/collections/accessories">Objects</a>
+      </nav>
+
+      <div class="catalog-drawer-footer">
+        <a href="/pages/lookbook">Editorial</a>
+        <a href="/pages/about">Founder story</a>
+        <a href="https://www.instagram.com/r_creationapparel/" target="_blank" rel="noopener">Instagram</a>
+        <p>Independent studio / Slovakia</p>
+      </div>
+    </aside>
   </div>
 </header>
 
@@ -95,7 +125,7 @@
       "type": "text",
       "id": "market_text",
       "label": "Right announcement",
-      "default": "Worldwide / EUR"
+      "default": "EU launch / EUR"
     }
   ]
 }

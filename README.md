@@ -17,7 +17,8 @@ Working tagline: `You wear what you are.`
 
 - Configurable Shopify navigation with apparel collection fallbacks.
 - Collection index, category navigation, sorting, native storefront filters, and active-filter removal.
-- Responsive product galleries, color/size variants, variant pricing, availability, and quantity controls.
+- Responsive product galleries with touch swipe, thumbnails, color/size variants, variant pricing, availability, and quantity controls.
+- Catalog drawer with search, account access, Women/Men departments, and product-category routes.
 - Locale-aware Shopify Ajax cart drawer with add, remove, and quantity updates.
 - Full cart page with notes, policy acknowledgement, shipping progress, and checkout fallback.
 - Product-only storefront search and responsive desktop/mobile layouts.
@@ -34,6 +35,7 @@ The Shopify theme is connected to the `main` branch of this repository. Commits 
 Launch prep docs:
 
 - `docs/product-catalog-plan.md`
+- `docs/pricing-and-routing-plan.md`
 - `docs/store-policies-starter.md`
 - `docs/shopify-launch-checklist.md`
 
@@ -49,3 +51,5 @@ Launch prep docs:
 - `preview/collection.html` - collection and filter preview
 - `preview/product.html` - product, variant, and cart-drawer preview
 - `preview/cart.html` - full cart preview
+- `preview/account.html` - customer account preview
+- `preview/support.html` - support and policy-content preview

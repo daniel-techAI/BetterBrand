@@ -1,27 +1,51 @@
 {% assign current_variant = product.selected_or_first_available_variant %}
 
 <section class="product-page commerce-page" data-product-root data-money-format="{{ shop.money_format | escape }}">
-  <div class="product-gallery" aria-label="Product media">
-    {% if product.media.size > 0 %}
-      {% for media in product.media limit: 6 %}
-        <div class="product-media {% if forloop.first %}is-featured{% endif %}" data-media-id="{{ media.id }}">
-          {% case media.media_type %}
-            {% when 'image' %}
-              {{ media | image_url: width: 1600 | image_tag: loading: 'lazy', sizes: '(min-width: 900px) 55vw, 100vw', alt: media.alt }}
-            {% when 'video' %}
-              {{ media | video_tag: controls: true, image_size: '1200x' }}
-            {% when 'external_video' %}
-              {{ media | external_video_tag }}
-            {% when 'model' %}
-              {{ media | model_viewer_tag }}
-          {% endcase %}
-        </div>
-      {% endfor %}
-    {% else %}
-      <div class="product-media is-featured"><img src="{{ 'product-rebuild-hoodie-v1.jpg' | asset_url }}" alt="Rebuild Yourself hoodie concept" width="1024" height="1536"></div>
-      <div class="product-media"><img src="{{ 'editorial-emotional-system-v1.jpg' | asset_url }}" alt="Emotional Collection hoodie design system" width="1280" height="853"></div>
-      <div class="product-media"><img src="{{ 'art-emotional-duality-v1.jpg' | asset_url }}" alt="Emotional duality artwork" width="1280" height="853"></div>
-    {% endif %}
+  <div class="product-gallery-shell" data-product-gallery aria-label="Product media">
+    <div class="product-gallery" data-product-gallery-track>
+      {% if product.media.size > 0 %}
+        {% for media in product.media limit: 6 %}
+          <div class="product-media {% if forloop.first %}is-featured is-active{% endif %}" data-product-slide data-media-id="{{ media.id }}">
+            {% case media.media_type %}
+              {% when 'image' %}
+                {{ media | image_url: width: 1600 | image_tag: loading: 'lazy', sizes: '(min-width: 900px) 55vw, 100vw', alt: media.alt }}
+              {% when 'video' %}
+                {{ media | video_tag: controls: true, image_size: '1200x' }}
+              {% when 'external_video' %}
+                {{ media | external_video_tag }}
+              {% when 'model' %}
+                {{ media | model_viewer_tag }}
+            {% endcase %}
+          </div>
+        {% endfor %}
+      {% else %}
+        <div class="product-media is-featured is-active" data-product-slide><img src="{{ 'product-rebuild-hoodie-v1.jpg' | asset_url }}" alt="Rebuild Yourself hoodie concept" width="1024" height="1536"></div>
+        <div class="product-media" data-product-slide><img src="{{ 'editorial-emotional-system-v1.jpg' | asset_url }}" alt="Emotional Collection hoodie design system" width="1280" height="853"></div>
+        <div class="product-media" data-product-slide><img src="{{ 'art-emotional-duality-v1.jpg' | asset_url }}" alt="Emotional duality artwork" width="1280" height="853"></div>
+      {% endif %}
+    </div>
+
+    <div class="product-gallery-nav" aria-label="Product image controls">
+      <span data-gallery-counter>01 / {% if product.media.size > 0 %}{{ product.media.size | at_most: 6 | prepend: '0' | slice: -2, 2 }}{% else %}03{% endif %}</span>
+      <div>
+        <button type="button" data-gallery-prev aria-label="Previous product image">{% render 'icon-chevron' %}</button>
+        <button type="button" data-gallery-next aria-label="Next product image">{% render 'icon-chevron' %}</button>
+      </div>
+    </div>
+
+    <div class="product-gallery-thumbnails" aria-label="Choose product image">
+      {% if product.media.size > 0 %}
+        {% for media in product.media limit: 6 %}
+          <button type="button" data-gallery-target="{{ forloop.index0 }}" class="{% if forloop.first %}is-active{% endif %}" aria-label="View product image {{ forloop.index }}" {% if forloop.first %}aria-current="true"{% endif %}>
+            {% if media.preview_image %}{{ media.preview_image | image_url: width: 180 | image_tag: loading: 'lazy', alt: '' }}{% endif %}
+          </button>
+        {% endfor %}
+      {% else %}
+        <button type="button" data-gallery-target="0" class="is-active" aria-current="true" aria-label="View product image 1"><img src="{{ 'product-rebuild-hoodie-v1.jpg' | asset_url }}" alt=""></button>
+        <button type="button" data-gallery-target="1" aria-label="View product image 2"><img src="{{ 'editorial-emotional-system-v1.jpg' | asset_url }}" alt=""></button>
+        <button type="button" data-gallery-target="2" aria-label="View product image 3"><img src="{{ 'art-emotional-duality-v1.jpg' | asset_url }}" alt=""></button>
+      {% endif %}
+    </div>
   </div>
 
   <div class="product-info">
@@ -41,6 +65,7 @@
         <s>{{ current_variant.compare_at_price | money }}</s>
       {% endif %}
     </div>
+    <p class="product-price-note">Taxes included where applicable. Shipping shown at checkout.</p>
     <div class="product-description">
       {% if product.description != blank %}
         {{ product.description }}
@@ -121,7 +146,7 @@
 
     <p class="product-trust">
       <svg aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M7 10V8a5 5 0 0 1 10 0v2m-11 0h12v10H6V10Z" stroke="currentColor" stroke-width="1.4"/><path d="M12 14v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
-      Secure checkout <span aria-hidden="true">&middot;</span> Worldwide delivery
+      Secure checkout <span aria-hidden="true">&middot;</span> Produced to order
     </p>
   </div>
 

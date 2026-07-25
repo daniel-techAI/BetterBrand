@@ -36,9 +36,11 @@ Use these names for the first capsule:
 - `Face What You Hide Hoodie`
 - `Rebuild Yourself Crop Hoodie`
 - `Embrace The Chaos Crop Tee`
+- `Break The Loop Heavy Tee`
 - `Architecture Socks`
 - `Unavailable Edition Cap`
 - `Prison Edition Cap`
+- `Emotional Sticker Set`
 
 The full phrase printed on the recovered Unavailable cap needs trade mark clearance before sale. Do not use it as the product title.
 
