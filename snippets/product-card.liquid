@@ -6,7 +6,7 @@
         {{ product.images[1] | image_url: width: 1000 | image_tag: loading: 'lazy', sizes: '(min-width: 900px) 25vw, 50vw', class: 'product-card-secondary-image' }}
       {% endif %}
     {% else %}
-      <img src="{{ 'product-rebuild-hoodie-v1.jpg' | asset_url }}" alt="{{ product.title | escape }}" width="1024" height="1536" loading="lazy">
+      <img src="{{ 'product-rebuild-hoodie-v2.jpg' | asset_url }}" alt="{{ product.title | escape }}" width="1024" height="1536" loading="lazy">
     {% endif %}
     <span class="product-card-action" aria-hidden="true">{% render 'icon-arrow' %}</span>
   </a>

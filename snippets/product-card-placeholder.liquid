@@ -1,5 +1,19 @@
-<article class="product-card">
-  <a href="{{ url | default: routes.collections_url }}" class="product-card-media" aria-label="{{ title }}">
+{% liquid
+  assign concept_handle = handle | default: blank
+  assign card_url = url | default: routes.collections_url
+  if concept_handle != blank
+    assign live_product = all_products[concept_handle]
+    if live_product != blank
+      assign card_url = live_product.url
+      assign concept_handle = blank
+    else
+      assign card_url = routes.all_products_collection_url | append: '?concept=' | append: concept_handle
+    endif
+  endif
+%}
+
+<article class="product-card"{% if concept_handle != blank %} data-concept-card="{{ concept_handle }}"{% endif %}>
+  <a href="{{ card_url }}" class="product-card-media" aria-label="View {{ title }}"{% if concept_handle != blank %} data-concept-trigger="{{ concept_handle }}" aria-haspopup="dialog"{% endif %}>
     <img src="{{ image_asset | asset_url }}" alt="{{ title }}" width="1024" height="1280" loading="lazy">
     {% if secondary_asset != blank %}
       <img class="product-card-secondary-image" src="{{ secondary_asset | asset_url }}" alt="" width="1024" height="1280" loading="lazy">
@@ -10,7 +24,7 @@
   <div class="product-card-info">
     <div>
       {% if eyebrow != blank %}<span class="product-card-kicker">{{ eyebrow }}</span>{% endif %}
-      <h3><a href="{{ url | default: routes.collections_url }}">{{ title }}</a></h3>
+      <h3><a href="{{ card_url }}"{% if concept_handle != blank %} data-concept-trigger="{{ concept_handle }}" aria-haspopup="dialog"{% endif %}>{{ title }}</a></h3>
       <p>{{ price }}</p>
       <div class="product-card-swatches" aria-label="Available color concepts">
         {% assign color_list = colors | split: ',' %}

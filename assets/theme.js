@@ -81,6 +81,115 @@
     if (lastMenuTrigger && document.contains(lastMenuTrigger)) lastMenuTrigger.focus();
   };
 
+  const conceptViewer = document.querySelector("[data-concept-viewer]");
+  const conceptDataNode = document.querySelector("[data-concept-products]");
+  const conceptTrack = conceptViewer?.querySelector("[data-concept-track]");
+  const conceptThumbnails = conceptViewer?.querySelector("[data-concept-thumbnails]");
+  const conceptCounter = conceptViewer?.querySelector("[data-concept-counter]");
+  let conceptCatalog = [];
+  let conceptActiveIndex = 0;
+  let conceptLastTrigger = null;
+  let conceptScrollFrame = 0;
+
+  if (conceptDataNode) {
+    try {
+      conceptCatalog = JSON.parse(conceptDataNode.textContent);
+    } catch (error) {
+      conceptCatalog = [];
+    }
+  }
+
+  const getConceptProduct = (handle) => conceptCatalog.find((product) => product.handle === handle);
+
+  const setConceptSlide = (index, shouldScroll = false) => {
+    if (!conceptTrack) return;
+    const slides = [...conceptTrack.querySelectorAll("[data-concept-slide]")];
+    const thumbnails = [...(conceptThumbnails?.querySelectorAll("[data-concept-thumb]") || [])];
+    if (!slides.length) return;
+
+    conceptActiveIndex = Math.max(0, Math.min(index, slides.length - 1));
+    thumbnails.forEach((thumbnail, thumbnailIndex) => {
+      const isActive = thumbnailIndex === conceptActiveIndex;
+      thumbnail.classList.toggle("is-active", isActive);
+      thumbnail.setAttribute("aria-current", isActive ? "true" : "false");
+    });
+    if (conceptCounter) {
+      conceptCounter.textContent = `${String(conceptActiveIndex + 1).padStart(2, "0")} / ${String(slides.length).padStart(2, "0")}`;
+    }
+    if (shouldScroll) {
+      conceptTrack.scrollTo({ left: slides[conceptActiveIndex].offsetLeft, behavior: "smooth" });
+    }
+  };
+
+  const renderConceptOptions = (selector, labelSelector, values) => {
+    const container = conceptViewer?.querySelector(selector);
+    const label = conceptViewer?.querySelector(labelSelector);
+    if (!container || !values?.length) return;
+    container.innerHTML = values.map((value, index) => `<button class="concept-option${index === 0 ? " is-active" : ""}" type="button" data-concept-option data-concept-value="${value}" aria-pressed="${index === 0 ? "true" : "false"}">${value}</button>`).join("");
+    if (label) label.textContent = values[0];
+  };
+
+  const openConceptViewer = (handle, trigger = null, updateUrl = true) => {
+    const product = getConceptProduct(handle);
+    if (!conceptViewer || !conceptTrack || !conceptThumbnails || !product) return false;
+
+    setDrawerState("cart", false);
+    setDrawerState("filters", false);
+    setMenuState(false);
+    conceptLastTrigger = trigger || document.activeElement;
+    conceptActiveIndex = 0;
+
+    conceptViewer.querySelector("[data-concept-title]").textContent = product.title;
+    conceptViewer.querySelector("[data-concept-price]").textContent = product.price;
+    conceptViewer.querySelector("[data-concept-eyebrow]").textContent = product.eyebrow;
+    conceptViewer.querySelector("[data-concept-position]").textContent = product.eyebrow;
+    conceptViewer.querySelector("[data-concept-description]").textContent = product.description;
+    conceptViewer.querySelector("[data-concept-story]").textContent = product.story;
+    conceptViewer.querySelector("[data-concept-fit]").textContent = product.fit;
+
+    conceptTrack.innerHTML = product.images.map((image, index) => `<figure class="concept-viewer-slide" data-concept-slide><img src="${image}" alt="${product.title} ${index === 0 ? "product view" : `design detail ${index + 1}`}" ${index === 0 ? "fetchpriority=\"high\"" : "loading=\"lazy\""}></figure>`).join("");
+    conceptThumbnails.innerHTML = product.images.map((image, index) => `<button type="button" data-concept-thumb="${index}" class="${index === 0 ? "is-active" : ""}" aria-current="${index === 0 ? "true" : "false"}" aria-label="View product image ${index + 1}"><img src="${image}" alt=""></button>`).join("");
+    renderConceptOptions("[data-concept-colors]", "[data-concept-color-label]", product.colors);
+    renderConceptOptions("[data-concept-sizes]", "[data-concept-size-label]", product.sizes);
+    conceptTrack.scrollLeft = 0;
+    setConceptSlide(0);
+
+    body.classList.add("concept-viewer-open");
+    conceptViewer.setAttribute("aria-hidden", "false");
+    window.setTimeout(() => conceptViewer.querySelector(".concept-viewer-panel")?.focus(), 160);
+
+    if (updateUrl) {
+      const nextUrl = new URL(window.location.href);
+      nextUrl.searchParams.set("concept", product.handle);
+      window.history.replaceState({}, "", `${nextUrl.pathname}${nextUrl.search}${nextUrl.hash}`);
+    }
+    return true;
+  };
+
+  const closeConceptViewer = (updateUrl = true) => {
+    if (!conceptViewer || conceptViewer.getAttribute("aria-hidden") === "true") return;
+    conceptViewer.setAttribute("aria-hidden", "true");
+    body.classList.remove("concept-viewer-open");
+    if (updateUrl) {
+      const nextUrl = new URL(window.location.href);
+      nextUrl.searchParams.delete("concept");
+      window.history.replaceState({}, "", `${nextUrl.pathname}${nextUrl.search}${nextUrl.hash}`);
+    }
+    if (conceptLastTrigger && document.contains(conceptLastTrigger)) conceptLastTrigger.focus();
+  };
+
+  conceptTrack?.addEventListener("scroll", () => {
+    window.cancelAnimationFrame(conceptScrollFrame);
+    conceptScrollFrame = window.requestAnimationFrame(() => {
+      const slides = [...conceptTrack.querySelectorAll("[data-concept-slide]")];
+      const nearest = slides.reduce((best, slide, index) => {
+        const distance = Math.abs(slide.offsetLeft - conceptTrack.scrollLeft);
+        return distance < best.distance ? { index, distance } : best;
+      }, { index: 0, distance: Infinity });
+      setConceptSlide(nearest.index);
+    });
+  }, { passive: true });
+
   if (menuToggle && header) {
     menuToggle.addEventListener("click", () => setMenuState(!body.classList.contains("menu-open"), menuToggle));
 
@@ -96,6 +205,47 @@
   }
 
   document.addEventListener("click", (event) => {
+    const conceptTrigger = event.target.closest("[data-concept-trigger]");
+    if (conceptTrigger && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey) {
+      event.preventDefault();
+      openConceptViewer(conceptTrigger.dataset.conceptTrigger, conceptTrigger);
+      return;
+    }
+
+    if (event.target.closest("[data-concept-close]")) {
+      closeConceptViewer();
+      return;
+    }
+
+    const conceptThumbnail = event.target.closest("[data-concept-thumb]");
+    if (conceptThumbnail) {
+      setConceptSlide(Number(conceptThumbnail.dataset.conceptThumb), true);
+      return;
+    }
+
+    if (event.target.closest("[data-concept-prev]")) {
+      setConceptSlide(conceptActiveIndex - 1, true);
+      return;
+    }
+
+    if (event.target.closest("[data-concept-next]")) {
+      setConceptSlide(conceptActiveIndex + 1, true);
+      return;
+    }
+
+    const conceptOption = event.target.closest("[data-concept-option]");
+    if (conceptOption) {
+      const fieldset = conceptOption.closest("fieldset");
+      fieldset.querySelectorAll("[data-concept-option]").forEach((option) => {
+        const isActive = option === conceptOption;
+        option.classList.toggle("is-active", isActive);
+        option.setAttribute("aria-pressed", isActive ? "true" : "false");
+      });
+      const label = fieldset.querySelector("legend span");
+      if (label) label.textContent = conceptOption.dataset.conceptValue;
+      return;
+    }
+
     const catalogTrigger = event.target.closest("[data-catalog-open]");
     if (catalogTrigger && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey) {
       event.preventDefault();
@@ -152,10 +302,20 @@
 
   document.addEventListener("keydown", (event) => {
     if (event.key !== "Escape") return;
+    if (body.classList.contains("concept-viewer-open")) closeConceptViewer();
     if (body.classList.contains("cart-drawer-open")) setDrawerState("cart", false);
     if (body.classList.contains("filters-open")) setDrawerState("filters", false);
     if (body.classList.contains("menu-open")) setMenuState(false);
   });
+
+  window.addEventListener("popstate", () => {
+    const handle = new URLSearchParams(window.location.search).get("concept");
+    if (handle) openConceptViewer(handle, null, false);
+    else closeConceptViewer(false);
+  });
+
+  const initialConcept = new URLSearchParams(window.location.search).get("concept");
+  if (initialConcept) openConceptViewer(initialConcept, null, false);
 
   document.addEventListener("change", (event) => {
     const drawerQuantity = event.target.closest("[data-cart-item] [data-cart-quantity]");

@@ -1,0 +1,162 @@
+<div class="concept-viewer" data-concept-viewer aria-hidden="true">
+  <button class="concept-viewer-overlay" type="button" data-concept-close aria-label="Close product preview"></button>
+  <section class="concept-viewer-panel" role="dialog" aria-modal="true" aria-labelledby="ConceptProductTitle" tabindex="-1">
+    <header class="concept-viewer-header">
+      <span>R/CREATION / Drop 001</span>
+      <span data-concept-position>Product study</span>
+      <button type="button" data-concept-close aria-label="Close product preview">{% render 'icon-close' %}</button>
+    </header>
+
+    <div class="concept-viewer-layout">
+      <div class="concept-viewer-gallery" data-concept-gallery>
+        <div class="concept-viewer-track" data-concept-track></div>
+        <div class="concept-viewer-gallery-controls">
+          <span data-concept-counter>01 / 03</span>
+          <div>
+            <button type="button" data-concept-prev aria-label="Previous product image">{% render 'icon-chevron' %}</button>
+            <button type="button" data-concept-next aria-label="Next product image">{% render 'icon-chevron' %}</button>
+          </div>
+        </div>
+        <div class="concept-viewer-thumbnails" data-concept-thumbnails aria-label="Choose product image"></div>
+      </div>
+
+      <div class="concept-viewer-info">
+        <div class="concept-viewer-heading">
+          <span class="product-card-kicker" data-concept-eyebrow></span>
+          <h2 id="ConceptProductTitle" data-concept-title></h2>
+          <p class="concept-viewer-price" data-concept-price></p>
+        </div>
+        <p class="concept-viewer-description" data-concept-description></p>
+
+        <div class="concept-viewer-options">
+          <fieldset>
+            <legend>Color <span data-concept-color-label></span></legend>
+            <div data-concept-colors></div>
+          </fieldset>
+          <fieldset>
+            <legend>Size <span data-concept-size-label></span></legend>
+            <div data-concept-sizes></div>
+          </fieldset>
+        </div>
+
+        <div class="concept-viewer-notes">
+          <details open>
+            <summary><span>The design</span><span aria-hidden="true"></span></summary>
+            <p data-concept-story></p>
+          </details>
+          <details>
+            <summary><span>Fit and production</span><span aria-hidden="true"></span></summary>
+            <p data-concept-fit></p>
+          </details>
+        </div>
+
+        <div class="concept-viewer-status">
+          <span>Concept preview / sample pending</span>
+          <p>This piece becomes purchasable after the physical sample, print, and fit pass inspection.</p>
+          <a class="button button-ink" href="/#access">Join private access {% render 'icon-arrow' %}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script type="application/json" data-concept-products>
+[
+  {
+    "handle": "rebuild-yourself-crop-hoodie",
+    "title": "Rebuild Yourself Crop Hoodie",
+    "price": "EUR 84.00",
+    "eyebrow": "Women / Reconstruction",
+    "description": "A cropped heavyweight layer about rebuilding without pretending the fracture never happened.",
+    "story": "Halo, split identity, flowers, and serpent hold softness and damage in the same frame. Reconstruction is shown as control, not perfection.",
+    "fit": "Relaxed cropped fit. Heavyweight cotton concept. Final measurements and fiber composition will be confirmed after the first physical sample.",
+    "colors": ["Black", "Deep Heather", "Mauve"],
+    "sizes": ["XS", "S", "M", "L", "XL"],
+    "images": ["{{ 'product-rebuild-hoodie-v2.jpg' | asset_url }}", "{{ 'art-emotional-architecture-v1.jpg' | asset_url }}", "{{ 'editorial-emotional-system-v1.jpg' | asset_url }}"]
+  },
+  {
+    "handle": "face-what-you-hide-hoodie",
+    "title": "Face What You Hide Hoodie",
+    "price": "EUR 89.00",
+    "eyebrow": "Men / Confrontation",
+    "description": "The mask protects you until it becomes the prison. An oversized layer built around truth and the decision to break repetition.",
+    "story": "A fractured statue, serpent, halo, and exposed skull turn the hidden fight into a visible emotional system.",
+    "fit": "Oversized unisex fit. Heavyweight cotton concept. Final fabric weight and measurements will be confirmed after sampling.",
+    "colors": ["Black", "Charcoal", "Bone"],
+    "sizes": ["XS", "S", "M", "L", "XL", "XXL"],
+    "images": ["{{ 'product-face-hide-hoodie-v2.jpg' | asset_url }}", "{{ 'art-emotional-duality-v1.jpg' | asset_url }}", "{{ 'editorial-emotional-lineup-v1.jpg' | asset_url }}"]
+  },
+  {
+    "handle": "embrace-the-chaos-crop-tee",
+    "title": "Embrace The Chaos Crop Tee",
+    "price": "EUR 42.00",
+    "eyebrow": "Women / First layer",
+    "description": "A compact first layer carrying the collection's quietest instruction: stop waiting for life to become clean before you begin.",
+    "story": "The front keeps the message small and direct. It is the entry point to the larger architecture artwork used across the reconstruction chapter.",
+    "fit": "Close cropped fit. Midweight cotton concept. Opacity, neckline recovery, and print scale will be checked on the first sample.",
+    "colors": ["Black", "Bone", "Dusty Rose"],
+    "sizes": ["XS", "S", "M", "L", "XL"],
+    "images": ["{{ 'product-embrace-tee-v1.jpg' | asset_url }}", "{{ 'art-emotional-architecture-v1.jpg' | asset_url }}", "{{ 'editorial-emotional-system-v1.jpg' | asset_url }}"]
+  },
+  {
+    "handle": "break-the-loop-heavy-tee",
+    "title": "Break The Loop Heavy Tee",
+    "price": "EUR 46.00",
+    "eyebrow": "Men / Confrontation",
+    "description": "A washed oversized first layer with a restrained front mark and the split-identity system across the back.",
+    "story": "The ouroboros is reduced to a warning on the chest. The back makes the loop visible: face, skull, halo, and serpent locked into one form.",
+    "fit": "Boxy oversized fit with dropped shoulders. Print hand-feel and back placement will be validated on a physical sample.",
+    "colors": ["Washed Black", "Charcoal"],
+    "sizes": ["XS", "S", "M", "L", "XL", "XXL"],
+    "images": ["{{ 'product-break-loop-tee-v1.jpg' | asset_url }}", "{{ 'art-emotional-duality-v1.jpg' | asset_url }}", "{{ 'editorial-emotional-lineup-v1.jpg' | asset_url }}"]
+  },
+  {
+    "handle": "unavailable-edition-cap",
+    "title": "Unavailable Edition Cap",
+    "price": "EUR 34.00",
+    "eyebrow": "Objects / Guarded vulnerability",
+    "description": "A washed low-profile cap about boundaries, distance, and the tension between control and connection.",
+    "story": "Minimal script from the front, with mirrored identity and tethered-chain details revealed at the back.",
+    "fit": "Washed cotton cap concept with an adjustable metal closure. Embroidery scale and legibility require a sample before release.",
+    "colors": ["Washed Black"],
+    "sizes": ["One Size"],
+    "images": ["{{ 'product-emotional-caps-v1.jpg' | asset_url }}", "{{ 'editorial-emotional-system-v1.jpg' | asset_url }}", "{{ 'sticker-concepts-v1.jpg' | asset_url }}"]
+  },
+  {
+    "handle": "prison-edition-cap",
+    "title": "Prison Edition Cap",
+    "price": "EUR 34.00",
+    "eyebrow": "Objects / Captivity + release",
+    "description": "A washed low-profile cap about the structures that protect you until they begin to contain you.",
+    "story": "The front is reduced to one word. Cage, key, chain, and release appear quietly around the back so the piece reveals itself slowly.",
+    "fit": "Washed cotton cap concept with an adjustable metal closure. Back embroidery placement will be checked before release.",
+    "colors": ["Washed Black"],
+    "sizes": ["One Size"],
+    "images": ["{{ 'product-emotional-caps-v1.jpg' | asset_url }}", "{{ 'editorial-emotional-system-v1.jpg' | asset_url }}", "{{ 'art-emotional-duality-v1.jpg' | asset_url }}"]
+  },
+  {
+    "handle": "architecture-socks",
+    "title": "Architecture Socks",
+    "price": "EUR 19.00",
+    "eyebrow": "Objects / Everyday symbols",
+    "description": "Two emotional symbols reduced to an everyday object: the closed loop and the heart held under pressure.",
+    "story": "The pair is intentionally mismatched. One side carries repetition; the other carries pressure and the choice to keep moving.",
+    "fit": "Mid-calf knit sock concept. Stretch, knit detail, and wash recovery will be confirmed before opening orders.",
+    "colors": ["Black", "Bone"],
+    "sizes": ["S/M", "L/XL"],
+    "images": ["{{ 'product-emotional-socks-v1.jpg' | asset_url }}", "{{ 'art-emotional-duality-v1.jpg' | asset_url }}", "{{ 'editorial-emotional-system-v1.jpg' | asset_url }}"]
+  },
+  {
+    "handle": "emotional-sticker-set",
+    "title": "Emotional Sticker Set",
+    "price": "EUR 9.00",
+    "eyebrow": "Objects / Symbols",
+    "description": "Four monochrome symbols from Drop 001 for notebooks, cases, packaging, and the objects carried every day.",
+    "story": "Ouroboros, fractured face, permanent change, and the broken loop become the smallest entry point into the collection.",
+    "fit": "Four die-cut vinyl sticker concepts. Final dimensions and finish will be confirmed with the first proof.",
+    "colors": ["Black / Bone"],
+    "sizes": ["One Size"],
+    "images": ["{{ 'sticker-concepts-v1.jpg' | asset_url }}", "{{ 'accessory-cases-v1.jpg' | asset_url }}", "{{ 'art-emotional-architecture-v1.jpg' | asset_url }}"]
+  }
+]
+</script>

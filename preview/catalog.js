@@ -13,7 +13,7 @@
       fit: "Relaxed cropped fit. Heavyweight cotton concept. Confirm final measurements after the first physical sample.",
       colors: ["Black", "Deep Heather", "Mauve"],
       sizes: ["XS", "S", "M", "L", "XL"],
-      images: ["product-rebuild-hoodie-v1.jpg", "editorial-emotional-system-v1.jpg", "art-emotional-architecture-v1.jpg"]
+      images: ["product-rebuild-hoodie-v2.jpg", "art-emotional-architecture-v1.jpg", "editorial-emotional-system-v1.jpg"]
     },
     {
       handle: "face-what-you-hide-hoodie",
@@ -29,7 +29,7 @@
       colors: ["Black", "Charcoal", "Bone"],
       sizes: ["XS", "S", "M", "L", "XL", "XXL"],
       soldOut: ["Black|XL"],
-      images: ["product-face-hide-hoodie-v1.jpg", "editorial-emotional-lineup-v1.jpg", "art-emotional-duality-v1.jpg"]
+      images: ["product-face-hide-hoodie-v2.jpg", "art-emotional-duality-v1.jpg", "editorial-emotional-lineup-v1.jpg"]
     },
     {
       handle: "embrace-the-chaos-crop-tee",
