@@ -13,7 +13,7 @@
       fit: "Relaxed cropped fit. Heavyweight cotton concept. Confirm final measurements after the first physical sample.",
       colors: ["Black", "Deep Heather", "Mauve"],
       sizes: ["XS", "S", "M", "L", "XL"],
-      images: ["product-rebuild-hoodie-v2.jpg", "art-emotional-architecture-v1.jpg", "editorial-emotional-system-v1.jpg"]
+      images: ["product-rebuild-hoodie-front-v3.jpg", "product-rebuild-hoodie-detail-v3.jpg", "product-rebuild-hoodie-back-v3.jpg"]
     },
     {
       handle: "face-what-you-hide-hoodie",
@@ -29,7 +29,7 @@
       colors: ["Black", "Charcoal", "Bone"],
       sizes: ["XS", "S", "M", "L", "XL", "XXL"],
       soldOut: ["Black|XL"],
-      images: ["product-face-hide-hoodie-v2.jpg", "art-emotional-duality-v1.jpg", "editorial-emotional-lineup-v1.jpg"]
+      images: ["product-face-hide-hoodie-front-v3.jpg", "product-face-hide-hoodie-detail-v3.jpg", "product-face-hide-hoodie-back-v3.jpg"]
     },
     {
       handle: "embrace-the-chaos-crop-tee",
@@ -44,7 +44,7 @@
       fit: "Close cropped fit. Midweight cotton concept. Sample for opacity, neckline recovery, and print scale before release.",
       colors: ["Black", "Bone", "Dusty Rose"],
       sizes: ["XS", "S", "M", "L", "XL"],
-      images: ["product-embrace-tee-v1.jpg", "art-emotional-architecture-v1.jpg", "editorial-emotional-system-v1.jpg"]
+      images: ["product-embrace-tee-v1.jpg", "product-embrace-tee-detail-v2.jpg", "product-embrace-tee-flat-v2.jpg"]
     },
     {
       handle: "break-the-loop-heavy-tee",
@@ -59,7 +59,7 @@
       fit: "Boxy oversized fit. Heavy cotton concept with dropped shoulders. Validate print hand-feel and back placement on a physical sample.",
       colors: ["Washed Black", "Charcoal"],
       sizes: ["XS", "S", "M", "L", "XL", "XXL"],
-      images: ["product-break-loop-tee-v1.jpg", "art-emotional-duality-v1.jpg", "editorial-emotional-lineup-v1.jpg"]
+      images: ["product-break-loop-tee-front-v2.jpg", "product-break-loop-tee-detail-v2.jpg", "product-break-loop-tee-back-v2.jpg"]
     },
     {
       handle: "unavailable-edition-cap",
@@ -74,7 +74,7 @@
       fit: "Washed cotton cap concept with adjustable metal closure. One size; sample embroidery scale and legibility.",
       colors: ["Washed Black"],
       sizes: ["One Size"],
-      images: ["product-emotional-caps-v1.jpg", "../docs/recovered-collection/emotional-cap-concepts.jpg", "sticker-concepts-v1.jpg"]
+      images: ["product-unavailable-cap-v2.jpg", "product-unavailable-cap-detail-v2.jpg", "product-emotional-caps-v1.jpg"]
     },
     {
       handle: "prison-edition-cap",
@@ -89,7 +89,7 @@
       fit: "Washed cotton cap concept with adjustable metal closure. One size; sample the back embroidery before release.",
       colors: ["Washed Black"],
       sizes: ["One Size"],
-      images: ["product-emotional-caps-v1.jpg", "../docs/recovered-collection/emotional-cap-concepts.jpg", "editorial-emotional-system-v1.jpg"]
+      images: ["product-prison-cap-v2.jpg", "product-prison-cap-detail-v2.jpg", "product-emotional-caps-v1.jpg"]
     },
     {
       handle: "architecture-socks",
@@ -104,7 +104,7 @@
       fit: "Mid-calf knit sock concept. Confirm stretch, knit detail, and wash recovery before opening orders.",
       colors: ["Black", "Bone"],
       sizes: ["S/M", "L/XL"],
-      images: ["product-emotional-socks-v1.jpg", "art-emotional-duality-v1.jpg", "editorial-emotional-system-v1.jpg"]
+      images: ["product-emotional-socks-v1.jpg", "product-emotional-socks-detail-v2.jpg", "product-emotional-socks-worn-v2.jpg"]
     },
     {
       handle: "emotional-sticker-set",
@@ -119,7 +119,7 @@
       fit: "Four die-cut vinyl sticker concepts. Final dimensions and finish will be confirmed with the first proof.",
       colors: ["Black / Bone"],
       sizes: ["One Size"],
-      images: ["sticker-concepts-v1.jpg", "art-emotional-architecture-v1.jpg", "accessory-cases-v1.jpg"]
+      images: ["product-emotional-stickers-v2.jpg", "product-emotional-stickers-detail-v2.jpg"]
     }
   ];
 

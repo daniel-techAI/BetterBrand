@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "main": {
+      "type": "withdrawal-page",
+      "settings": {}
+    }
+  },
+  "order": ["main"]
+}

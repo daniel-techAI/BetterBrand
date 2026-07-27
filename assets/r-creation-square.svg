@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-labelledby="title desc">
+  <title id="title">R/CREATION square monogram</title>
+  <desc id="desc">R slash C monogram in warm white and muted gold on black.</desc>
+  <rect width="1024" height="1024" fill="#090909"/>
+  <rect x="48" y="48" width="928" height="928" fill="none" stroke="#c8aa68" stroke-width="4"/>
+  <line x1="512" y1="175" x2="512" y2="849" stroke="#c8aa68" stroke-width="3"/>
+  <line x1="175" y1="512" x2="849" y2="512" stroke="#c8aa68" stroke-width="3"/>
+  <circle cx="512" cy="512" r="276" fill="#090909" stroke="#f4f2ed" stroke-width="5"/>
+  <g font-family="Arial, Helvetica, sans-serif" font-weight="500" text-anchor="middle">
+    <text x="512" y="594" fill="#f4f2ed" font-size="246">R/C</text>
+    <text x="512" y="724" fill="#c8aa68" font-size="54">R/CREATION</text>
+  </g>
+</svg>

@@ -1,0 +1,125 @@
+<section class="content-page withdrawal-page">
+  <div class="withdrawal-intro">
+    <p class="eyebrow">Customer rights</p>
+    <h1>Withdraw from a contract</h1>
+    <p>
+      Use this form to tell R/CREATION that you are withdrawing from an eligible online purchase.
+      You do not need to give a reason. This form does not limit any separate rights you may have
+      for damaged, defective, or incorrect goods.
+    </p>
+  </div>
+
+  {% form 'contact', id: 'ContractWithdrawalForm', class: 'contact-form withdrawal-form' %}
+    {% if form.posted_successfully? %}
+      <div class="form-status form-status-success" tabindex="-1">
+        <h2>Withdrawal submitted</h2>
+        <p>
+          Your request has reached R/CREATION. We will send a dated acknowledgement to the email
+          address you provided without undue delay. Keep that email with your order records.
+        </p>
+      </div>
+    {% else %}
+      {% if form.errors %}
+        <div class="form-status form-status-error" role="alert">
+          <h2>Check the form</h2>
+          {{ form.errors | default_errors }}
+        </div>
+      {% endif %}
+
+      <input type="hidden" name="contact[Request type]" value="Contract withdrawal">
+      <input
+        type="hidden"
+        name="contact[Submitted at UTC]"
+        value=""
+        data-withdrawal-submitted-at
+      >
+      <input
+        type="hidden"
+        name="contact[Withdrawal statement]"
+        value="I withdraw from the identified distance contract."
+      >
+
+      <div class="form-field">
+        <label for="WithdrawalName">Full name</label>
+        <input
+          id="WithdrawalName"
+          type="text"
+          name="contact[name]"
+          value="{% if form.name %}{{ form.name | escape }}{% endif %}"
+          autocomplete="name"
+          required
+        >
+      </div>
+
+      <div class="form-field">
+        <label for="WithdrawalEmail">Order email</label>
+        <input
+          id="WithdrawalEmail"
+          type="email"
+          name="contact[email]"
+          value="{% if form.email %}{{ form.email | escape }}{% endif %}"
+          autocomplete="email"
+          required
+        >
+      </div>
+
+      <div class="form-field">
+        <label for="WithdrawalOrder">Order number or contract identifier</label>
+        <input
+          id="WithdrawalOrder"
+          type="text"
+          name="contact[Order number or contract identifier]"
+          autocomplete="off"
+          required
+        >
+      </div>
+
+      <div class="form-field">
+        <label for="WithdrawalProducts">Products covered by the withdrawal</label>
+        <textarea
+          id="WithdrawalProducts"
+          name="contact[Products covered]"
+          rows="4"
+          placeholder="Write 'whole order' or list the product names and quantities."
+          required
+        ></textarea>
+      </div>
+
+      <div class="form-field">
+        <label for="WithdrawalNotes">Additional information <span>Optional</span></label>
+        <textarea
+          id="WithdrawalNotes"
+          name="contact[body]"
+          rows="4"
+          placeholder="Add anything needed to identify the purchase. A reason is not required."
+        ></textarea>
+      </div>
+
+      <p class="withdrawal-note">
+        Submit this notice within the applicable withdrawal period. Return instructions and the
+        return address will be sent separately. Do not send goods to a production partner unless
+        R/CREATION instructs you to do so.
+      </p>
+
+      <button class="button button-primary" type="submit">Confirm withdrawal</button>
+    {% endif %}
+  {% endform %}
+</section>
+
+<script>
+  (() => {
+    const form = document.getElementById('ContractWithdrawalForm');
+    const submittedAt = form?.querySelector('[data-withdrawal-submitted-at]');
+
+    form?.addEventListener('submit', () => {
+      if (submittedAt) submittedAt.value = new Date().toISOString();
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Withdrawal page",
+  "settings": []
+}
+{% endschema %}

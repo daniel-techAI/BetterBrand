@@ -1106,6 +1106,76 @@ summary {
   padding: 14px;
 }
 
+.withdrawal-page {
+  max-width: 960px;
+}
+
+.withdrawal-intro {
+  max-width: 760px;
+}
+
+.withdrawal-intro .eyebrow {
+  margin-bottom: 16px;
+  color: var(--gold);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.withdrawal-form {
+  max-width: 760px;
+  gap: 20px;
+}
+
+.form-field {
+  display: grid;
+  gap: 8px;
+}
+
+.form-field label {
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.form-field label span {
+  margin-left: 6px;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.withdrawal-form textarea {
+  resize: vertical;
+}
+
+.withdrawal-note {
+  margin: 4px 0;
+  padding: 18px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 13px !important;
+  line-height: 1.7;
+}
+
+.form-status {
+  padding: 22px;
+  border: 1px solid var(--line);
+}
+
+.form-status h2,
+.form-status p {
+  margin-top: 0;
+}
+
+.form-status-success {
+  border-color: rgba(128, 104, 47, 0.5);
+}
+
+.form-status-error {
+  border-color: var(--emotion-rose, #a76165);
+}
+
 .cart-form {
   display: grid;
   gap: 18px;
@@ -3938,6 +4008,16 @@ summary:focus-visible {
 
   .collection-page {
     padding: 54px var(--gutter) 88px;
+    min-width: 0;
+    overflow-x: clip;
+  }
+
+  .collection-page .collection-hero,
+  .collection-page .collection-grid,
+  .collection-page .product-card,
+  .collection-page .product-card-info,
+  .collection-page .product-card-info > div {
+    min-width: 0;
   }
 
   .collection-page .collection-hero {
@@ -3971,6 +4051,7 @@ summary:focus-visible {
   .collection-page .toolbar-actions {
     width: auto;
     gap: 16px;
+    min-width: 0;
   }
 
   .collection-page .sort-form label,
@@ -3980,6 +4061,7 @@ summary:focus-visible {
 
   .collection-page .sort-form select {
     min-width: 102px;
+    max-width: 120px;
     padding-right: 18px;
   }
 
@@ -3996,6 +4078,7 @@ summary:focus-visible {
 
   .product-card-info h3 {
     font-size: 12px;
+    overflow-wrap: anywhere;
   }
 
   .product-card-info p {

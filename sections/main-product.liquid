@@ -1,4 +1,25 @@
-{% assign current_variant = product.selected_or_first_available_variant %}
+{% liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign fallback_images_csv = 'product-rebuild-hoodie-front-v3.jpg,product-rebuild-hoodie-detail-v3.jpg,product-rebuild-hoodie-back-v3.jpg'
+  case product.handle
+    when 'face-what-you-hide-hoodie'
+      assign fallback_images_csv = 'product-face-hide-hoodie-front-v3.jpg,product-face-hide-hoodie-detail-v3.jpg,product-face-hide-hoodie-back-v3.jpg'
+    when 'embrace-the-chaos-crop-tee'
+      assign fallback_images_csv = 'product-embrace-tee-v1.jpg,product-embrace-tee-detail-v2.jpg,product-embrace-tee-flat-v2.jpg'
+    when 'break-the-loop-heavy-tee'
+      assign fallback_images_csv = 'product-break-loop-tee-front-v2.jpg,product-break-loop-tee-detail-v2.jpg,product-break-loop-tee-back-v2.jpg'
+    when 'unavailable-edition-cap'
+      assign fallback_images_csv = 'product-unavailable-cap-v2.jpg,product-unavailable-cap-detail-v2.jpg,product-emotional-caps-v1.jpg'
+    when 'prison-edition-cap'
+      assign fallback_images_csv = 'product-prison-cap-v2.jpg,product-prison-cap-detail-v2.jpg,product-emotional-caps-v1.jpg'
+    when 'architecture-socks'
+      assign fallback_images_csv = 'product-emotional-socks-v1.jpg,product-emotional-socks-detail-v2.jpg,product-emotional-socks-worn-v2.jpg'
+    when 'emotional-sticker-set'
+      assign fallback_images_csv = 'product-emotional-stickers-v2.jpg,product-emotional-stickers-detail-v2.jpg'
+  endcase
+  assign fallback_images = fallback_images_csv | split: ','
+  assign fallback_image_count = fallback_images.size
+%}
 
 <section class="product-page commerce-page" data-product-root data-money-format="{{ shop.money_format | escape }}">
   <div class="product-gallery-shell" data-product-gallery aria-label="Product media">
@@ -19,14 +40,16 @@
           </div>
         {% endfor %}
       {% else %}
-        <div class="product-media is-featured is-active" data-product-slide><img src="{{ 'product-rebuild-hoodie-v2.jpg' | asset_url }}" alt="Rebuild Yourself hoodie concept" width="1024" height="1536"></div>
-        <div class="product-media" data-product-slide><img src="{{ 'art-emotional-architecture-v1.jpg' | asset_url }}" alt="Emotional architecture artwork" width="853" height="1280"></div>
-        <div class="product-media" data-product-slide><img src="{{ 'editorial-emotional-system-v1.jpg' | asset_url }}" alt="Emotional Collection design system" width="1280" height="853"></div>
+        {% for fallback_image in fallback_images %}
+          <div class="product-media {% if forloop.first %}is-featured is-active{% endif %}" data-product-slide>
+            <img src="{{ fallback_image | asset_url }}" alt="{{ product.title | default: 'R/CREATION product' | escape }} view {{ forloop.index }}" width="1024" height="1280">
+          </div>
+        {% endfor %}
       {% endif %}
     </div>
 
     <div class="product-gallery-nav" aria-label="Product image controls">
-      <span data-gallery-counter>01 / {% if product.media.size > 0 %}{{ product.media.size | at_most: 6 | prepend: '0' | slice: -2, 2 }}{% else %}03{% endif %}</span>
+      <span data-gallery-counter>01 / {% if product.media.size > 0 %}{{ product.media.size | at_most: 6 | prepend: '0' | slice: -2, 2 }}{% else %}{{ fallback_image_count | prepend: '0' | slice: -2, 2 }}{% endif %}</span>
       <div>
         <button type="button" data-gallery-prev aria-label="Previous product image">{% render 'icon-chevron' %}</button>
         <button type="button" data-gallery-next aria-label="Next product image">{% render 'icon-chevron' %}</button>
@@ -41,9 +64,11 @@
           </button>
         {% endfor %}
       {% else %}
-        <button type="button" data-gallery-target="0" class="is-active" aria-current="true" aria-label="View product image 1"><img src="{{ 'product-rebuild-hoodie-v2.jpg' | asset_url }}" alt=""></button>
-        <button type="button" data-gallery-target="1" aria-label="View product image 2"><img src="{{ 'art-emotional-architecture-v1.jpg' | asset_url }}" alt=""></button>
-        <button type="button" data-gallery-target="2" aria-label="View product image 3"><img src="{{ 'editorial-emotional-system-v1.jpg' | asset_url }}" alt=""></button>
+        {% for fallback_image in fallback_images %}
+          <button type="button" data-gallery-target="{{ forloop.index0 }}" class="{% if forloop.first %}is-active{% endif %}" aria-label="View product image {{ forloop.index }}" {% if forloop.first %}aria-current="true"{% endif %}>
+            <img src="{{ fallback_image | asset_url }}" alt="">
+          </button>
+        {% endfor %}
       {% endif %}
     </div>
   </div>

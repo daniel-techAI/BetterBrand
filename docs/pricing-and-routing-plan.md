@@ -1,6 +1,6 @@
 # R/CREATION launch pricing and Shopify routing
 
-This is the working launch model for Drop 001. Prices are customer-facing EUR prices. Recalculate every item after the physical Printify sample and before publishing it for sale.
+This is the working launch model for Drop 001. Prices are customer-facing EUR prices. They are positioning targets, not final prices. Recalculate every item after approving the physical sample, selecting the fulfillment provider, and confirming the tax treatment.
 
 ## Launch prices
 
@@ -21,37 +21,52 @@ This is the working launch model for Drop 001. Prices are customer-facing EUR pr
 
 A flat EUR 10 markup is not the same as EUR 10 profit. Production is only one cost. A sale may also need to cover payment fees, Shopify, VAT when applicable, Printify delivery, replacements, returns, discounts, samples, and customer acquisition. A EUR 10 hoodie markup can disappear after one replacement or discounted order.
 
-Printify describes a typical print-on-demand margin of roughly 25-40%, while its listed product cost does not include shipping, taxes, or storefront expenses. Treat that range as an operating reference, not a guarantee.
+A EUR 10 markup is too small for the hero garments. Production is only one cost, and one reprint, return, discount, or subsidized delivery can consume it. As a working gate, target at least 35% contribution before paid advertising after production, payment fees, delivery subsidy, and a returns/defect reserve. This is an operating target, not a promise that every sale will reach it.
 
 ## Pricing formula
 
-Use the conservative VAT-registered model until an accountant confirms the correct treatment:
+Use the model that matches the accountant's decision. Do not divide every sale by 1.23 unless R/CREATION is registered and 23% Slovak VAT is actually the correct rate for that transaction.
+
+Scenario A, not VAT registered:
 
 ```text
-net revenue = retail price / 1.23
-contribution = net revenue
-             - production and print cost
+contribution = customer product price
+             - supplier invoice cost, including non-recoverable VAT
+             - payment and Shopify transaction fees
+             - shipping subsidy
+             - returns / defects reserve
+             - per-order software allocation
+```
+
+Scenario B, VAT registered and the sale carries 23% VAT:
+
+```text
+net product revenue = VAT-inclusive product price / 1.23
+contribution = net product revenue
+             - production and print cost excluding recoverable input VAT
              - payment fees
              - shipping subsidy
-             - 8% returns / defect reserve
-             - per-order software and marketing allocation
+             - returns / defects reserve
+             - per-order software allocation
 ```
 
 For each SKU:
 
-1. Enter the exact Printify production price for every size and color.
+1. Enter the exact selected provider's production price for every size and color.
 2. Add any print-area or embroidery surcharge.
 3. Keep delivery separate at launch.
 4. Use the most expensive normal variant when checking the ceiling.
 5. Reject the provider or raise the retail price if the ceiling is exceeded.
-6. Order a sample before opening sales.
+6. Reserve 8% of product revenue during validation for returns, defects, and reprints; replace that assumption with actual data later.
+7. Order and wash-test a sample before opening sales.
+8. Keep paid advertising outside the product contribution calculation until organic conversion is proven.
 
-Slovakia's standard VAT rate is currently 23%, but whether and when the business must register, and how EU distance sales apply, depends on the actual legal setup and turnover. Confirm this with a Slovak accountant before accepting orders.
+Slovakia's standard VAT rate is currently 23%, but whether and when the business must register, whether supplier VAT is recoverable, and how EU distance sales apply depends on the actual structure. Confirm this with a Slovak accountant before accepting orders.
 
 ## Delivery strategy
 
 - Charge the real delivery rate at launch. Do not hide it inside the garment price before provider rates are known.
-- Use one EU provider per product family where possible to reduce split shipments and inconsistent delivery times.
+- Use one tested EU provider per product family where possible to reduce split shipments and inconsistent delivery times.
 - Show production time separately from carrier transit time.
 - Test complimentary delivery only at EUR 150 or more, after real order economics are available.
 - Never advertise "worldwide delivery" for a SKU until its selected provider and destination list are confirmed.
@@ -78,27 +93,29 @@ Create automated Shopify collections with these exact handles:
 | Collection | Handle | Suggested rule |
 | --- | --- | --- |
 | Drop 001 | `drop-001` | Product tag is `drop-001` |
-| Women | `women` | Product tag is `women` |
-| Men | `men` | Product tag is `men` |
+| Women | `women` | Product tag includes `chapter-reconstruction` |
+| Men | `men` | Product tag includes `chapter-confrontation` |
 | Hoodies | `hoodies` | Product type is `Hoodie` |
 | Tees | `tees` | Product type is `T-Shirt` |
-| Hats & Caps | `hats-caps` | Product type is `Hat` |
-| Objects | `accessories` | Product tag is `object` |
+| Socks | `socks` | Product type is `Socks` |
+| Hats & Caps | `hats-caps` | Product type is `Cap` or `Hat` |
+| Objects | `accessories` | Product tag includes `chapter-objects` |
 
-Recommended product tags: `drop-001`, `women` or `men` or `unisex`, `hoodie` / `tee` / `headwear` / `object`, and `reconstruction` / `confrontation` / `symbols`.
+Recommended product tags: `drop-001`, the applicable `chapter-*` tag, fit, weight, season, and color tags defined in `docs/product-catalog-plan.md`.
 
 ## Required launch decisions
 
 - Clear or replace any phrase that may belong to another brand before sale, especially recovered cap wording.
 - Add final garment composition, care, country of production, measured size chart, production estimate, and provider-specific delivery estimate.
-- Replace mockups with approved sample photos before paid advertising.
+- Treat repository mockups as concept merchandising only and replace them with approved sample photos before paid advertising.
 - Insert the legal business name, Slovak address, company ID, VAT ID if applicable, and support email into Shopify policies and the footer.
 
 ## Sources checked July 2026
 
-- [Printify product-pricing guide](https://printify.com/blog/how-to-price-a-product-for-ultimate-success/)
-- [Printify plan and cost exclusions](https://printify.com/pricing/)
-- [Printify Europe shipping rates](https://printify.com/shipping-rates/textildruck-europa/)
+- [Printify provider differences](https://help.printify.com/hc/en-us/articles/4483618188689-What-are-Print-Provider-differences)
+- [Printify Shopify shipping](https://help.printify.com/hc/en-us/articles/19421332555665-How-do-I-set-up-shipping-with-Shopify)
+- [Printful sample orders](https://help.printful.com/hc/en-us/articles/360014067959-How-do-sample-orders-work)
+- [Printful European fulfillment centers](https://help.printful.com/hc/en-us/articles/360014067239-Where-are-the-European-fulfillment-centers-located)
 - [Slovak Financial Administration VAT rates](https://www.financnasprava.sk/sk/podnikatelia/dane/dan-z-pridanej-hodnoty/sadzby-dane)
 - [Shopify Slovakia pricing](https://www.shopify.com/sk/pricing)
 - [Nude Project hoodie reference](https://nude-project.com/en-eu/collections/hoodies/products/nude-tour-hood-fw25-black)

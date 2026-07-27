@@ -38,31 +38,33 @@ We may also collect technical and usage information, including IP address, brows
 
 Payment information is processed by Shopify and its payment providers. We do not store full payment card details on our own systems.
 
-### How We Use Information
+### Purposes And Legal Bases
 
-We use personal information to process orders, arrange fulfillment and delivery, provide customer support, send order updates, prevent fraud, improve the store, comply with legal obligations, and send marketing messages if you choose to receive them.
+We process personal information where needed to perform a contract with you, including checkout, payment, production, delivery, returns, and support. We also process information to comply with tax, accounting, product-safety, consumer-protection, and other legal obligations.
+
+Where necessary for our legitimate interests, we may protect the store against fraud and misuse, secure and improve the service, keep business records, and establish or defend legal claims. We balance those interests against your rights. Marketing and non-essential cookies are used on the basis of consent where consent is required, and you can withdraw consent at any time without affecting earlier lawful processing.
 
 ### Sharing Information
 
-We may share necessary information with service providers that help operate the store, including Shopify, payment processors, fulfillment partners such as Printify, shipping carriers, email providers, analytics providers, and professional advisers where required.
+We may share necessary information with service providers that help operate the store, including Shopify, payment processors, the selected print and fulfillment provider, shipping carriers, email providers, analytics providers, and professional advisers where required.
 
-We do not sell personal information in the ordinary meaning of selling customer data for money. If applicable privacy law treats certain advertising or analytics sharing as a sale or sharing of personal information, customers may have opt-out rights.
+We do not sell personal data. Each provider may process data only for the applicable service and under its own legal obligations and contractual safeguards.
 
 ### Cookies
 
-Our store may use cookies and similar technologies for checkout, cart functionality, analytics, fraud prevention, personalization, and marketing. You can control cookies through your browser settings. Some features may not work correctly if cookies are disabled.
+Our store may use cookies and similar technologies for checkout, cart functionality, security, analytics, personalization, and marketing. Strictly necessary technologies support the service. Where required, analytics and marketing technologies are activated only after consent. You can change your consent choices through `[COOKIE SETTINGS LINK]` and can also control cookies through your browser.
 
 ### Your Rights
 
-Depending on where you live, you may have rights to access, correct, delete, restrict, or receive a copy of your personal information, and to object to certain processing or opt out of certain uses. To make a request, contact `[SUPPORT EMAIL]`.
+Subject to applicable conditions, you may request access, correction, deletion, restriction, or portability of your personal data; object to processing based on legitimate interests; and withdraw consent. You may also complain to the Office for Personal Data Protection of the Slovak Republic or another competent supervisory authority. To exercise a right, contact `[SUPPORT EMAIL]`. We may need enough information to verify your identity and locate the relevant records.
 
 ### Data Retention
 
-We keep personal information as long as needed for orders, customer support, legal compliance, fraud prevention, accounting, and business records.
+We keep personal information only as long as needed for the stated purpose, contractual warranty/complaint periods, tax and accounting duties, fraud prevention, and legal claims. Insert the actual retention periods for order/accounting records, customer support, marketing consent, and analytics here after legal review: `[RETENTION SCHEDULE]`.
 
 ### International Transfers
 
-Because we use Shopify and other service providers, personal information may be processed in countries other than where you live. We use service providers that apply appropriate safeguards where required.
+Because Shopify and other providers operate internationally, personal data may be processed outside Slovakia or the European Economic Area. Where required, transfers use an adequacy decision, approved contractual clauses, or another lawful safeguard. Add links to the final providers' privacy and transfer information: `[PROCESSOR LIST / SAFEGUARDS]`.
 
 ### Changes
 
@@ -86,23 +88,37 @@ We sell apparel and accessories, including made-to-order products fulfilled thro
 
 By placing an order, you confirm that your order information, shipping address, size, color, and product selections are accurate. Once an order enters production, changes or cancellations may not be possible.
 
-We reserve the right to refuse, cancel, or limit orders where necessary, including suspected fraud, incorrect pricing, product unavailability, or operational issues.
+The checkout page allows you to review and correct the order before submitting it. An order is accepted when we send the order confirmation, unless that message clearly states that it is only an acknowledgement. We may refuse or cancel an order for a lawful reason such as suspected fraud, an obvious pricing error, product unavailability, or an impossible delivery. Any captured payment for a cancelled order will be refunded.
 
 ### Pricing And Payment
 
-Prices are shown in `[STORE CURRENCY]` unless stated otherwise. Taxes, duties, and shipping may be calculated at checkout. Payment is processed through Shopify and its payment providers.
+Prices are shown in `[STORE CURRENCY]` unless stated otherwise. State clearly whether displayed consumer prices include VAT: `[VAT DISPLAY STATEMENT]`. Shipping and any other unavoidable charges are shown before the customer submits the order. Duties or import charges for destinations outside the applicable customs area are handled as stated at checkout and in the Shipping Policy. Payment is processed through Shopify and the selected payment provider.
 
 ### Shipping
 
 Shipping times are estimates and may vary due to production, carrier delays, customs, holidays, weather, or incorrect delivery information.
 
+The product page and checkout state the available delivery methods and expected production/delivery window. Mandatory remedies for late or failed delivery remain available.
+
+### Withdrawal, Returns, And Complaints
+
+The Refund and Return Policy explains the statutory withdrawal process, the online withdrawal form, returns, and remedies for non-conforming goods. Those rights form part of these Terms and are not removed by made-to-order production.
+
 ### Intellectual Property
 
 All brand names, designs, product artwork, copy, images, graphics, and site content are owned by or licensed to R/CREATION and may not be copied, reproduced, resold, or used without permission.
 
-### Limitation Of Liability
+### Mandatory Rights And Liability
 
-To the fullest extent permitted by law, R/CREATION is not liable for indirect, incidental, special, or consequential damages arising from use of the site or products.
+Nothing in these Terms excludes or restricts liability or consumer rights that cannot lawfully be excluded, including rights relating to death or personal injury caused by negligence, fraud, product safety, non-conforming goods, statutory withdrawal, or the legal guarantee.
+
+### Alternative Dispute Resolution
+
+Contact `[SUPPORT EMAIL]` first so we can try to resolve a complaint. If a Slovak consumer's request for remedy is rejected or receives no response within the applicable period, the consumer may be entitled to submit the dispute to an alternative dispute resolution entity, including the Slovak Trade Inspection where it is competent. Add the final current ARS information after legal review: [Slovak Trade Inspection ARS](https://www.soi.sk/alternativne-riesenie-spotrebitelskych-sporov). Do not publish an obsolete link to the discontinued EU ODR platform.
+
+### Governing Law
+
+These Terms are governed by `[GOVERNING LAW]`. This choice does not deprive a consumer of mandatory protection provided by the law that would otherwise apply in the consumer's country of residence.
 
 ### Contact
 
@@ -112,25 +128,39 @@ Effective date: `[DATE]`
 
 ## Refund And Return Policy
 
-Because many R/CREATION products are made to order, we do not accept returns or exchanges for wrong size, wrong color, buyer's remorse, or incorrect shipping details entered at checkout.
+This starter policy assumes R/CREATION will sell ordinary, non-personalized garments and accessories to consumers in the European Union. Mandatory consumer rights always apply. Being produced only after an order is placed does not, by itself, remove a consumer's withdrawal right.
+
+### 14-Day Withdrawal Right
+
+For eligible online purchases, you may withdraw from the contract without giving a reason within 14 days after you, or a person nominated by you other than the carrier, receives the goods. Where one order is delivered in separate shipments, the period begins when the final item is received.
+
+Tell us before the deadline by using the [online withdrawal form](/pages/withdraw-from-contract) or by sending a clear withdrawal statement to `[SUPPORT EMAIL]`. Include your name, order number, order email, and the products covered by the withdrawal. We will acknowledge the request by email without undue delay.
+
+After notifying us, return the goods within 14 days using the return address and instructions we provide. Do not return goods to a print or fulfillment partner unless we explicitly instruct you to do so.
+
+You are responsible for the direct return cost where we told you about that cost before purchase. You may handle the goods only as needed to establish their nature, characteristics, and fit. A deduction may be made for diminished value caused by handling beyond that level, where permitted by law.
+
+We will reimburse eligible payments, including the least expensive standard outbound delivery option offered for the order, within 14 days after receiving your withdrawal notice. We may withhold reimbursement until we receive the returned goods or you provide evidence that they were sent back, whichever occurs first. Refunds will normally use the original payment method unless another method is agreed.
+
+### Personalized Products
+
+The withdrawal right may not apply to goods made to the consumer's individual specifications or clearly personalized for that consumer. This exception applies only when the product is genuinely customized for the buyer. A standard design printed after purchase is not automatically a personalized product.
 
 ### Damaged, Defective, Or Incorrect Items
 
-If your item arrives damaged, defective, misprinted, or incorrect, contact us at `[SUPPORT EMAIL]` within 30 days of delivery. Include your order number, a clear description of the issue, and clear photos showing the problem.
+Withdrawal rights are separate from your rights when goods are damaged, defective, misprinted, incorrect, or not as described. Contact `[SUPPORT EMAIL]` promptly with the order number, a description, and clear photos where relevant. We will provide a repair, replacement, price reduction, refund, or other remedy required by applicable law. Consumers in the EU have a minimum two-year legal guarantee for faulty or non-conforming goods.
 
-If the issue is confirmed, we will arrange a replacement, reprint, refund, or other appropriate solution.
+### Exchanges
 
-### Size And Color
-
-Please check the size guide before ordering. We cannot guarantee replacements or refunds for products ordered in the wrong size or color.
+We do not operate automatic size or color exchanges. For an eligible product, use the withdrawal process and place a new order for the preferred variant. This does not affect mandatory rights for faulty or incorrectly supplied goods.
 
 ### Failed Delivery Or Wrong Address
 
-If an order cannot be delivered because of an incorrect or incomplete address, refusal, or failure to collect the package, additional shipping or production costs may apply.
+If delivery fails because the customer supplied an incorrect or incomplete address, refused delivery, or did not collect the package, contact `[SUPPORT EMAIL]`. Any charge for reshipping or another lawful remedy will be explained before action is taken. Mandatory consumer rights remain unaffected.
 
-### Cancellations
+### Cancellations Before Dispatch
 
-Orders may not be cancelable after they enter production. Contact `[SUPPORT EMAIL]` as soon as possible if you need help with an order.
+Contact `[SUPPORT EMAIL]` immediately if you need to cancel. Production can start quickly, but any inability to stop production does not remove a statutory withdrawal right that applies after delivery.
 
 Effective date: `[DATE]`
 
@@ -174,4 +204,3 @@ Email: `[SUPPORT EMAIL]`
 Phone: `[PHONE NUMBER, IF REQUIRED]`
 
 If you use a third-party fulfillment partner, disclose it plainly in your store policies and customer support flow.
-
