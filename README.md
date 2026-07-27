@@ -23,14 +23,30 @@ Working tagline: `You wear what you are.`
 - Full cart page with notes, policy acknowledgement, shipping progress, and checkout fallback.
 - Product-only storefront search and responsive desktop/mobile layouts.
 
-## Connected Workflow
+## Deployment Workflow
 
-The Shopify theme is connected to the `main` branch of this repository. Commits pushed to `main` update the connected theme automatically.
+The `main` branch is the source of truth. Shopify's GitHub integration is currently flagged, so GitHub commits do not automatically update the store. The validated workaround is Shopify CLI.
+
+Current unpublished Shopify theme:
+
+- Theme ID: `193799881037`
+- Theme name: `R-Creation Emotional c5b7d8a`
+- Store: `betterbrand-rc.myshopify.com`
+
+After each approved theme change:
+
+1. Commit and push the source to `main`.
+2. Run `shopify theme check --path .`.
+3. Run `shopify theme push --theme 193799881037 --strict --store betterbrand-rc.myshopify.com --path .`.
+4. Preview the unpublished theme in Shopify before publishing.
+5. Publish only after every item in `docs/shopify-launch-checklist.md` is complete.
+
+Store setup continues separately:
 
 1. Add products and collections in Shopify using the handles in `docs/product-catalog-plan.md`.
 2. Configure storefront filters through Shopify Search & Discovery.
-3. Connect Printify products and fulfillment inside Shopify.
-4. Preview and test product, cart, payment, shipping, and policy behavior before publishing.
+3. Connect Printful or Printify products and fulfillment inside Shopify.
+4. Test product, cart, payment, shipping, policy, and fulfillment behavior before launch.
 
 Launch prep docs:
 
@@ -42,7 +58,7 @@ Launch prep docs:
 ## Structure
 
 - `layout/theme.liquid` - main Shopify layout
-- `templates/*.json` - Online Store 2.0 templates
+- `templates/*.json` and `templates/policy.liquid` - Shopify storefront templates
 - `sections/*.liquid` - editable Shopify sections
 - `snippets/*.liquid` - reusable Liquid pieces
 - `assets/theme.css` - theme styling

@@ -4,7 +4,10 @@ Use the detailed `docs/slovakia-launch-runbook.md` for instructions and official
 
 ## Complete
 
-- [x] Connect the GitHub theme to Shopify.
+- [x] Store the theme source on GitHub `main` and validate commit `c5b7d8a`.
+- [x] Work around the flagged GitHub integration with authenticated Shopify CLI deployment.
+- [x] Upload unpublished theme `R-Creation Emotional c5b7d8a` as Shopify theme ID `193799881037`.
+- [x] Verify the uploaded hero, collection cards, realistic product concepts, and accessories section in Shopify's theme editor.
 - [x] Configure store name, brand description, colors, Instagram, EUR, metric units, kilograms, and Bratislava timezone.
 - [x] Enable email marketing double opt-in and Shopify customer privacy controls.
 - [x] Create product metafields for fit, fabric, fabric weight, season, drop, chapter, production, and care.
@@ -26,6 +29,8 @@ Use the detailed `docs/slovakia-launch-runbook.md` for instructions and official
 
 ## Then Configure Shopify
 
+- [ ] Preview theme ID `193799881037` on desktop and mobile; do not publish it until the launch gate passes.
+- [ ] Resolve the Shopify/GitHub account flag only if automatic deployment is still wanted; CLI deployment already works.
 - [ ] Upload `r-creation-wordmark.svg`, `r-creation-square.svg`, and `r-creation-cover-v1.jpg` in `Settings > Brand`.
 - [ ] Replace the accidental Netherlands market with the intentional launch market setup.
 - [ ] Sync only sampled products and preserve provider variant/SKU mappings.
