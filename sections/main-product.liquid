@@ -66,7 +66,7 @@
       {% else %}
         {% for fallback_image in fallback_images %}
           <button type="button" data-gallery-target="{{ forloop.index0 }}" class="{% if forloop.first %}is-active{% endif %}" aria-label="View product image {{ forloop.index }}" {% if forloop.first %}aria-current="true"{% endif %}>
-            <img src="{{ fallback_image | asset_url }}" alt="">
+            <img src="{{ fallback_image | asset_url }}" alt="" width="1024" height="1280" loading="lazy">
           </button>
         {% endfor %}
       {% endif %}

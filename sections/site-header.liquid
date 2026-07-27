@@ -16,18 +16,18 @@
     <nav class="main-nav" aria-label="Main navigation">
       {% if section.settings.menu != blank %}
         {% for link in section.settings.menu.links %}
-          {% if link.url == '/pages/about' %}{% assign has_about_link = true %}{% endif %}
+          {% if link.type == 'page_link' and link.object.handle == 'about' %}{% assign has_about_link = true %}{% endif %}
           <a href="{{ link.url }}" {% if link.current %}aria-current="page"{% endif %}>{{ link.title }}</a>
         {% endfor %}
-        {% unless has_about_link %}<a href="/pages/about">About</a>{% endunless %}
+        {% unless has_about_link %}<a href="{{ routes.root_url }}pages/about">About</a>{% endunless %}
       {% else %}
         <a href="{{ routes.all_products_collection_url | default: routes.collections_url }}">Shop</a>
-        <a href="/#collection">Drop 001</a>
-        <a href="/collections/women">Women</a>
-        <a href="/collections/men">Men</a>
-        <a href="/collections/accessories">Objects</a>
-        <a href="/pages/about#hades">Theory</a>
-        <a href="/pages/about">About</a>
+        <a href="{{ routes.root_url }}#collection">Drop 001</a>
+        <a href="{{ routes.collections_url }}/women">Women</a>
+        <a href="{{ routes.collections_url }}/men">Men</a>
+        <a href="{{ routes.collections_url }}/accessories">Objects</a>
+        <a href="{{ routes.root_url }}pages/about#hades">Theory</a>
+        <a href="{{ routes.root_url }}pages/about">About</a>
       {% endif %}
     </nav>
 
@@ -72,21 +72,21 @@
       </a>
 
       <nav class="catalog-primary-nav" aria-label="Shop departments">
-        <a href="/collections/women"><span>Women</span><small>Reconstruction</small>{% render 'icon-chevron' %}</a>
-        <a href="/collections/men"><span>Men</span><small>Confrontation</small>{% render 'icon-chevron' %}</a>
-        <a href="/collections/drop-001"><span>Drop 001</span><small>View every piece</small>{% render 'icon-chevron' %}</a>
+        <a href="{{ routes.collections_url }}/women"><span>Women</span><small>Reconstruction</small>{% render 'icon-chevron' %}</a>
+        <a href="{{ routes.collections_url }}/men"><span>Men</span><small>Confrontation</small>{% render 'icon-chevron' %}</a>
+        <a href="{{ routes.collections_url }}/drop-001"><span>Drop 001</span><small>View every piece</small>{% render 'icon-chevron' %}</a>
       </nav>
 
       <nav class="catalog-category-nav" aria-label="Shop categories">
-        <a href="/collections/hoodies">Hoodies</a>
-        <a href="/collections/tees">Tees</a>
-        <a href="/collections/hats-caps">Headwear</a>
-        <a href="/collections/accessories">Objects</a>
+        <a href="{{ routes.collections_url }}/hoodies">Hoodies</a>
+        <a href="{{ routes.collections_url }}/tees">Tees</a>
+        <a href="{{ routes.collections_url }}/hats-caps">Headwear</a>
+        <a href="{{ routes.collections_url }}/accessories">Objects</a>
       </nav>
 
       <div class="catalog-drawer-footer">
-        <a href="/pages/lookbook">Editorial</a>
-        <a href="/pages/about">Founder story</a>
+        <a href="{{ routes.root_url }}pages/lookbook">Editorial</a>
+        <a href="{{ routes.root_url }}pages/about">Founder story</a>
         <a href="https://www.instagram.com/r_creationapparel/" target="_blank" rel="noopener">Instagram</a>
         <p>Independent studio / Slovakia</p>
       </div>

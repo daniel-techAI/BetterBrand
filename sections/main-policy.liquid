@@ -1,9 +1,12 @@
+{% # Shopify exposes the documented policy object on policy templates. %}
+{% # theme-check-disable UndefinedObject %}
 <section class="content-page policy-page">
   <h1>{{ policy.title }}</h1>
   <div class="policy-body">
     {{ policy.body }}
   </div>
 </section>
+{% # theme-check-enable UndefinedObject %}
 
 {% schema %}
 {

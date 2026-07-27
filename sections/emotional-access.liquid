@@ -29,7 +29,7 @@
           {{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}
         {% endif %}
       </p>
-      <small class="emotion-access-legal">By joining, you agree to receive email updates. Unsubscribe anytime. <a href="/policies/privacy-policy">Privacy</a>.</small>
+      <small class="emotion-access-legal">By joining, you agree to receive email updates. Unsubscribe anytime. <a href="{{ routes.root_url }}policies/privacy-policy">Privacy</a>.</small>
     {% endform %}
   </div>
 

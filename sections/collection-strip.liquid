@@ -30,7 +30,7 @@
           {% assign category_note = 'Socks + editions' %}
       {% endcase %}
 
-      <a class="category-tile" href="/collections/{{ category_handle }}">
+      <a class="category-tile" href="{{ routes.collections_url }}/{{ category_handle }}">
         <span class="category-media">
           {% if category_image %}
             {{ category_image | image_url: width: 1200 | image_tag: loading: 'lazy', sizes: '(min-width: 1000px) 25vw, 76vw', alt: category }}
