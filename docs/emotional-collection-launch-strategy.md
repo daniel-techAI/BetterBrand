@@ -72,7 +72,7 @@ Order one men's hoodie sample and one women's hoodie or tee sample first. Photog
 ### Days 14-8: Show the work
 
 - Reveal the front, then the back, then the fit.
-- Show the Printify sample arriving and inspect it honestly.
+- Show the production sample arriving and inspect it honestly.
 - Post one rejected detail and the correction.
 - Let the audience vote on black versus charcoal or one placement decision.
 
@@ -105,7 +105,7 @@ Film vertically for TikTok and Reels first. Recut the strongest process videos f
 
 ## Channel Order
 
-1. **Shopify with a custom domain:** primary brand home, checkout, customer data, Printify connection, and Instagram catalog.
+1. **Shopify with a custom domain:** primary brand home, checkout, customer data, fulfillment integration, and Instagram catalog.
 2. **Instagram:** visual world, founder journal, product proof, and customer identity.
 3. **TikTok:** discovery through process, honest revisions, and Hades Theory hooks.
 4. **Etsy later:** test stickers, socks, or art-led accessories if they fit Etsy's current production-partner rules.

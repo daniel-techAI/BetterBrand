@@ -2,7 +2,9 @@
 
 Checked against official sources on 2026-07-27. This is an implementation checklist, not a substitute for advice from a Slovak accountant or lawyer. Reconfirm amounts and rules when filing because they can change.
 
-## Current Launch Gate
+## Launch-gate snapshot
+
+This table records planning assumptions reviewed on 2026-07-27. Recheck the actual Shopify store and supplier state before relying on it.
 
 Do not accept a live payment until every `BLOCKER` item below is complete.
 
@@ -13,7 +15,7 @@ Do not accept a live payment until every `BLOCKER` item below is complete.
 | Legal operator | BLOCKER | Register the business and obtain the final legal name, ICO, DIC, address, and support contact. |
 | Products | BLOCKER | Select a POD provider, order samples, approve quality, and sync final variants. There are currently no live Shopify products. |
 | Payments | BLOCKER | Select an available third-party payment provider, complete identity checks, and verify payouts. |
-| Markets, VAT, and tax | BLOCKER | Correct the active market, decide launch countries, confirm VAT treatment, and test tax display. |
+| Markets, VAT, and tax | BLOCKER | Remove any unintended market, decide launch countries, confirm VAT treatment, and test tax display. |
 | Shipping and returns | BLOCKER | Confirm provider-specific costs, configure profiles, establish a real return address/process, and test a returned order. |
 | Policies and withdrawal receipt | BLOCKER | Replace policy placeholders, obtain legal review, publish the withdrawal page, and establish prompt email acknowledgement. |
 | Domain and email | BLOCKER | Connect the final domain and authenticate a branded sender/support mailbox. |
@@ -78,7 +80,7 @@ The Financial Administration states that physical-person entrepreneurs are outsi
 
 ### 6. Start with one market scope
 
-Recommended validation scope: Slovakia plus a deliberately selected small EU group only after delivery rates and consumer-language requirements are verified. Do not leave the current Netherlands market active by accident.
+Recommended validation scope: Slovakia plus a deliberately selected small EU group only after delivery rates and consumer-language requirements are verified. Remove any market that was enabled unintentionally.
 
 Write down:
 
@@ -277,7 +279,7 @@ Only then publish the selected launch products and remove the password.
 - Legal name, address, ICO, DIC, and VAT ID: the verified registration details do not yet exist and must never be guessed.
 - Payments and payouts: these require the owner's identity verification, banking agreement, and acceptance of provider terms.
 - Tax registration/VAT collection: this depends on the legal setup, turnover, markets, and professional tax decision.
-- Active markets: Netherlands is currently active, but changing it without the final country plan could alter prices, domains, and checkout availability.
+- Active markets: confirm the actual store state and change markets only after the final country plan is approved, because this can alter prices, domains, and checkout availability.
 - Final shipping rates: the supplier, product weights, fulfillment origins, and app-created profiles are not final.
 - Final policies: legal placeholders and the real return address/process are still missing.
 - Products: no approved provider products or physical samples exist yet.
