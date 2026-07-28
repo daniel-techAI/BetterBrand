@@ -1,16 +1,19 @@
 [
   {
-    "name": "Theme info",
-    "settings": [
-      {
-        "type": "paragraph",
-        "content": "R/CREATION Emotional Collection theme. Replace concept products with final Printify products and sampled campaign photography before launch."
-      }
-    ]
+    "name": "theme_info",
+    "theme_name": "R-Creation Emotional Collection",
+    "theme_author": "R/CREATION",
+    "theme_version": "1.0.0",
+    "theme_documentation_url": "https://github.com/daniel-techAI/BetterBrand#readme",
+    "theme_support_url": "https://github.com/daniel-techAI/BetterBrand/issues"
   },
   {
     "name": "Brand",
     "settings": [
+      {
+        "type": "paragraph",
+        "content": "Replace concept products with final Printify products and sampled campaign photography before launch."
+      },
       {
         "type": "text",
         "id": "brand_name",
