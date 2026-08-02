@@ -10,3 +10,5 @@ node_modules/
 dist/
 release/
 preview/*.png
+playwright-report/
+test-results/

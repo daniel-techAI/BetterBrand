@@ -25,13 +25,14 @@ shopify theme check --path . --fail-level error
 shopify theme dev --store your-store.myshopify.com --path .
 ```
 
-Shopify CLI opens the authenticated development preview. For a design-only local preview, serve the repository root and open `/preview/`:
+Shopify CLI opens the authenticated development preview. For a design-only local preview, install the pinned validation tools and open `/preview/`:
 
 ```bash
-python -m http.server 8080
+npm ci
+npm run preview
 ```
 
-The static preview is not Shopify: account, payment, order, tax, inventory, and fulfillment behavior must be tested in a development or unpublished theme.
+The preview runs at `http://127.0.0.1:4173/preview/`. Run `npm run test:a11y` to check all preview routes in desktop and mobile Chromium for serious WCAG violations and page overflow. The static preview is not Shopify: account, payment, order, tax, inventory, and fulfillment behavior must be tested in a development or unpublished theme.
 
 ## Safe Shopify delivery
 

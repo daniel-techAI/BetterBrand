@@ -11,13 +11,14 @@ Use your own store hostname in examples. Never put a Theme Access password or Ad
 
 ## Static design preview
 
-Serve the repository root with any local static server:
+Install the pinned validation tools and serve the repository root:
 
 ```bash
-python -m http.server 8080
+npm ci
+npm run preview
 ```
 
-Open `http://127.0.0.1:8080/preview/`. Static routes use a small preview catalog and simulated interactions. They are useful for layout and interaction review, but they cannot validate Liquid rendering, localization, inventory, checkout, accounts, tax, payment, or fulfillment.
+Open `http://127.0.0.1:4173/preview/`. Static routes use a small preview catalog and simulated interactions. Run `npm run test:a11y` to exercise every preview route in desktop and mobile Chromium. The previews are useful for layout and interaction review, but they cannot validate Liquid rendering, localization, inventory, checkout, accounts, tax, payment, or fulfillment.
 
 ## Shopify development preview
 
@@ -48,7 +49,7 @@ Never run a real payment or release an order to a fulfillment provider during th
 
 1. Update `theme_version` in `config/settings_schema.json` using semantic versioning.
 2. Update `CHANGELOG.md` with user-visible changes.
-3. Run Theme Check and `git diff --check`.
+3. Run Theme Check, `npm run test:a11y`, and `git diff --check`.
 4. Exercise the affected static and Shopify routes.
 5. Run `shopify theme package --path .` and inspect the generated ZIP name and contents.
 6. Keep the ZIP outside Git; `*.zip` is ignored intentionally.

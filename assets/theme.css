@@ -8,7 +8,8 @@
   --stone: #b9aa94;
   --gold: #c8aa68;
   --brown: #655143;
-  --muted: #6e6b65;
+  --muted: #56524c;
+  --muted-on-dark: #aaa69f;
   --line: rgba(9, 9, 9, 0.16);
   --line-dark: rgba(255, 255, 255, 0.16);
   --max: 1600px;
@@ -1721,6 +1722,20 @@ summary {
   background: #d8d0c3;
 }
 
+.account-intro .emotion-eyebrow,
+.support-hero .emotion-eyebrow {
+  color: var(--emotion-champagne);
+}
+
+.account-form-wrap > .section-index,
+.support-business > .section-index {
+  color: var(--muted-on-dark);
+}
+
+.account-benefits > .section-index {
+  color: #514d47;
+}
+
 .account-form-wrap h2,
 .account-benefits h2,
 .support-business h2,
@@ -2363,13 +2378,13 @@ a.about-social-link:hover {
 }
 
 .about-social-link.is-pending {
-  color: #77716a;
+  color: #5b5650;
 }
 
 .about-social-link.is-pending em {
   text-align: right;
-  color: #77716a;
-  font-size: 9px;
+  color: #5b5650;
+  font-size: 10px;
 }
 
 @media (max-width: 1180px) {
@@ -2809,6 +2824,10 @@ summary:focus-visible {
   padding: 9px 28px 9px 0;
 }
 
+.collection-page .sort-form label {
+  color: var(--muted-on-dark);
+}
+
 .collection-page .collection-count {
   display: inline;
   margin: 0;
@@ -2845,6 +2864,10 @@ summary:focus-visible {
 
 .template-collection .product-card-info p {
   color: rgba(255, 255, 255, 0.66);
+}
+
+.template-collection .product-card-kicker {
+  color: #d7a0a7;
 }
 
 .template-collection .swatch {
@@ -4054,9 +4077,20 @@ summary:focus-visible {
     min-width: 0;
   }
 
-  .collection-page .sort-form label,
   .collection-page .collection-count {
     display: none;
+  }
+
+  .collection-page .sort-form label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
   }
 
   .collection-page .sort-form select {
@@ -4291,7 +4325,7 @@ summary:focus-visible {
 
 .emotion-eyebrow {
   margin: 0;
-  color: var(--emotion-rose);
+  color: #88444d;
   font-size: 10px;
   font-weight: 700;
   text-transform: uppercase;
@@ -4622,16 +4656,16 @@ summary:focus-visible {
   right: 34px;
   font-family: var(--emotion-serif);
   font-size: 42px;
-  color: rgba(9, 9, 9, 0.22);
+  color: rgba(9, 9, 9, 0.62);
 }
 
 .emotion-chapter-men .emotion-chapter-number {
-  color: rgba(255, 255, 255, 0.24);
+  color: rgba(255, 255, 255, 0.46);
 }
 
 .emotion-chapter-copy .emotion-eyebrow {
   color: inherit;
-  opacity: 0.58;
+  opacity: 1;
 }
 
 .emotion-chapter-copy h3 {
@@ -4648,7 +4682,7 @@ summary:focus-visible {
   margin: 0;
   color: inherit;
   font-size: 16px;
-  opacity: 0.7;
+  opacity: 0.84;
 }
 
 .emotion-chapter-copy ul {
@@ -4736,8 +4770,8 @@ summary:focus-visible {
 .product-card-kicker {
   display: block;
   margin-bottom: 7px;
-  color: var(--emotion-rose);
-  font-size: 8px;
+  color: #88444d;
+  font-size: 10px;
   font-weight: 700;
   text-transform: uppercase;
 }
@@ -4922,7 +4956,7 @@ summary:focus-visible {
 }
 
 .emotion-access-copy .emotion-eyebrow {
-  color: #2b2021;
+  color: #120f0f;
 }
 
 .emotion-access h2 {
@@ -4933,7 +4967,7 @@ summary:focus-visible {
 .emotion-access-copy > p:not(.emotion-eyebrow) {
   max-width: 570px;
   margin: 26px 0 0;
-  color: rgba(18, 15, 15, 0.72);
+  color: #120f0f;
   font-size: 16px;
 }
 
@@ -4954,7 +4988,7 @@ summary:focus-visible {
 }
 
 .emotion-access-form input::placeholder {
-  color: rgba(18, 15, 15, 0.62);
+  color: #120f0f;
 }
 
 .emotion-access-form button {
@@ -4975,8 +5009,8 @@ summary:focus-visible {
 .emotion-access-legal {
   grid-column: 1 / -1;
   margin-top: 5px;
-  color: rgba(18, 15, 15, 0.62);
-  font-size: 9px;
+  color: #120f0f;
+  font-size: 11px;
 }
 
 .emotion-access-legal a {
@@ -5008,7 +5042,7 @@ summary:focus-visible {
 
 .emotion-access-principles p {
   margin: 0;
-  color: rgba(18, 15, 15, 0.68);
+  color: #120f0f;
   font-size: 12px;
 }
 

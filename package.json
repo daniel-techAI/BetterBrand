@@ -1,0 +1,19 @@
+{
+  "name": "r-creation-shopify-theme",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Validation tooling for the R/CREATION Shopify theme and its static previews.",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "preview": "serve . -l 4173 --no-clipboard",
+    "test": "npm run test:a11y",
+    "test:a11y": "playwright test"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.12.1",
+    "@playwright/test": "1.62.1",
+    "serve": "14.2.6"
+  }
+}
