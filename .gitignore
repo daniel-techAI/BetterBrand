@@ -3,6 +3,12 @@ Thumbs.db
 node_modules/
 .env
 .env.*
+!.env.example
 .shopify/
 *.log
+*.zip
+dist/
+release/
 preview/*.png
+playwright-report/
+test-results/

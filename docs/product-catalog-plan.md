@@ -1,6 +1,6 @@
 # Product Catalog Plan
 
-Use this when recreating products in Shopify and Printify.
+Use this when creating products in Shopify and the selected fulfillment provider.
 
 ## Shopify Setup Status
 
@@ -33,10 +33,10 @@ Shopify also provides the built-in `/collections/all` catalog route.
 Still requires owner confirmation before launch:
 
 - Connect a custom domain and branded sender email.
-- Choose the active selling markets; the current active market is Netherlands even though the business location is Slovakia.
-- Confirm shipping rates against the selected Printify provider and product costs.
+- Confirm the intended selling markets and remove any market that was enabled unintentionally.
+- Confirm shipping rates against the selected fulfillment provider and product costs.
 - Review and publish the written return, shipping, privacy, and terms policies.
-- Upload `assets/r-creation-wordmark.svg`, `assets/r-creation-square.svg`, and `assets/r-creation-cover-v1.jpg` to Shopify Brand settings. Browser upload remains blocked until the ChatGPT Chrome extension is allowed to access file URLs.
+- Upload `assets/r-creation-wordmark.svg`, `assets/r-creation-square.svg`, and `assets/r-creation-cover-v1.jpg` to Shopify Brand settings.
 - Install or configure Shopify Search & Discovery before enabling storefront filters.
 
 ## Collections

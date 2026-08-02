@@ -1,0 +1,51 @@
+name: Theme bug
+description: Report a reproducible problem in the theme source or static preview.
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: Do not include credentials, customer information, order details, or private store URLs. Security reports belong in GitHub private vulnerability reporting.
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What happened, and what did you expect instead?
+    validations:
+      required: true
+  - type: input
+    id: route
+    attributes:
+      label: Affected template or preview route
+      placeholder: templates/product.json or /preview/product.html
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Reproduction steps
+      placeholder: "1. Open…\n2. Select…\n3. Observe…"
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Browser, device, viewport, and whether this is a static, development, or unpublished-theme preview.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Add sanitized screenshots, console output, or Theme Check output when useful.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Safety checks
+      options:
+        - label: I removed personal data, credentials, tokens, order information, and private store identifiers.
+          required: true
+        - label: This is not a confidential security vulnerability.
+          required: true

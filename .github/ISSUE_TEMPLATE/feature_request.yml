@@ -1,0 +1,32 @@
+name: Feature request
+description: Propose a focused storefront or maintenance improvement.
+title: "[Feature]: "
+labels:
+  - enhancement
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What merchant or customer problem should this solve?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed outcome
+      description: Describe the desired behavior, not only an implementation.
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Routes and Shopify configuration affected
+      description: List templates, sections, settings, apps, metafields, or Admin changes that may be involved.
+    validations:
+      required: true
+  - type: textarea
+    id: accessibility
+    attributes:
+      label: Accessibility and fallback considerations
+      description: Note keyboard, screen reader, reduced-motion, localization, mobile, and no-JavaScript behavior.

@@ -1,71 +1,70 @@
-# R/CREATION Shopify Theme
+# R/CREATION Shopify theme
 
-Custom Shopify Online Store 2.0 theme for a premium apparel brand.
+Custom Shopify Online Store 2.0 theme for R/CREATION, an independent apparel concept built around the line “Emotions are architecture.”
 
-Working brand: `R/CREATION`
-Working tagline: `You wear what you are.`
+![R/CREATION storefront concept](assets/brand-hero-v2.png)
 
-## Direction
+> **Project status:** pre-launch. The theme is suitable for development and unpublished Shopify previews. Product imagery, prices, policies, fulfillment details, and seller information are concepts until the launch checklist is complete.
 
-- Luxury streetwear with a product-led tech-site feel.
-- Palette: black, white, warm beige, champagne gold, charcoal, muted brown.
-- Built for Shopify products, checkout, payments, orders, and Printify fulfillment.
-- Editorial product layouts with slower, restrained motion and minimal card framing.
-- Local static commerce previews for design and interaction review without Shopify data.
+## Highlights
 
-## Commerce Features
+- Editorial home, collection, product, search, cart, lookbook, about, FAQ, contact, and withdrawal experiences.
+- Native Shopify products, variants, availability, storefront filters, customer accounts, policy routes, and checkout handoff.
+- Responsive product galleries, touch navigation, quick views, and a locale-aware Ajax cart drawer.
+- Theme-editor sections and global brand/color settings.
+- Static preview pages for reviewing the visual system without Shopify data or checkout access.
+- EU/Slovakia launch planning documents with explicit legal, payment, tax, fulfillment, and testing gates.
 
-- Configurable Shopify navigation with apparel collection fallbacks.
-- Collection index, category navigation, sorting, native storefront filters, and active-filter removal.
-- Responsive product galleries with touch swipe, thumbnails, color/size variants, variant pricing, availability, and quantity controls.
-- Catalog drawer with search, account access, Women/Men departments, and product-category routes.
-- Locale-aware Shopify Ajax cart drawer with add, remove, and quantity updates.
-- Full cart page with notes, policy acknowledgement, shipping progress, and checkout fallback.
-- Product-only storefront search and responsive desktop/mobile layouts.
+## Quick start
 
-## Deployment Workflow
+Requirements: Git 2.28+, Node.js 22.12+, a Shopify store with theme permission, and the latest [Shopify CLI](https://shopify.dev/docs/api/shopify-cli).
 
-The `main` branch is the source of truth. Shopify's GitHub integration is currently flagged, so GitHub commits do not automatically update the store. The validated workaround is Shopify CLI.
+```bash
+npm install -g @shopify/cli@latest
+shopify theme check --path . --fail-level error
+shopify theme dev --store your-store.myshopify.com --path .
+```
 
-Current unpublished Shopify theme:
+Shopify CLI opens the authenticated development preview. For a design-only local preview, install the pinned validation tools and open `/preview/`:
 
-- Theme ID: `193799881037`
-- Theme name: `R-Creation Emotional c5b7d8a`
-- Store: `betterbrand-rc.myshopify.com`
+```bash
+npm ci
+npm run preview
+```
 
-After each approved theme change:
+The preview runs at `http://127.0.0.1:4173/preview/`. Run `npm run test:a11y` to check all preview routes in desktop and mobile Chromium for serious WCAG violations and page overflow. The static preview is not Shopify: account, payment, order, tax, inventory, and fulfillment behavior must be tested in a development or unpublished theme.
 
-1. Commit and push the source to `main`.
-2. Run `shopify theme check --path .`.
-3. Run `shopify theme push --theme 193799881037 --strict --store betterbrand-rc.myshopify.com --path .`.
-4. Preview the unpublished theme in Shopify before publishing.
-5. Publish only after every item in `docs/shopify-launch-checklist.md` is complete.
+## Safe Shopify delivery
 
-Store setup continues separately:
+Validate and package the source:
 
-1. Add products and collections in Shopify using the handles in `docs/product-catalog-plan.md`.
-2. Configure storefront filters through Shopify Search & Discovery.
-3. Connect Printful or Printify products and fulfillment inside Shopify.
-4. Test product, cart, payment, shipping, policy, and fulfillment behavior before launch.
+```bash
+shopify theme check --path . --fail-level error
+shopify theme package --path .
+```
 
-Launch prep docs:
+Create a new unpublished theme:
 
-- `docs/product-catalog-plan.md`
-- `docs/pricing-and-routing-plan.md`
-- `docs/store-policies-starter.md`
-- `docs/shopify-launch-checklist.md`
+```bash
+shopify theme push --unpublished --strict --store your-store.myshopify.com --path .
+```
 
-## Structure
+Never use `--publish`, `--live`, or `--allow-live` during routine development. Preview the uploaded draft on desktop and mobile, then complete [the launch checklist](docs/shopify-launch-checklist.md) before deliberately publishing from Shopify Admin. See [deployment](docs/deployment.md) for updating an existing draft, manual ZIP upload, verification, and rollback.
 
-- `layout/theme.liquid` - main Shopify layout
-- `templates/*.json` and `templates/policy.liquid` - Shopify storefront templates
-- `sections/*.liquid` - editable Shopify sections
-- `snippets/*.liquid` - reusable Liquid pieces
-- `assets/theme.css` - theme styling
-- `assets/theme.js` - interactions
-- `preview/index.html` - storefront homepage preview
-- `preview/collection.html` - collection and filter preview
-- `preview/product.html` - product, variant, and cart-drawer preview
-- `preview/cart.html` - full cart preview
-- `preview/account.html` - customer account preview
-- `preview/support.html` - support and policy-content preview
+## Repository map
+
+- `layout/`, `templates/`, `sections/`, `snippets/` — Shopify Liquid storefront.
+- `assets/` — theme CSS, JavaScript, brand artwork, and concept product media.
+- `config/` and `locales/` — theme settings and English translations.
+- `preview/` — static design-review routes; not included in Shopify theme packages.
+- `docs/` — product, pricing, operational, legal-preparation, and launch material.
+- `design-qa.md` — recorded responsive and interaction review.
+
+Products, collections, inventory, customers, orders, payments, markets, navigation, metafield definitions, app configuration, and Shopify Admin policies are store data and are not contained in this repository or a theme ZIP.
+
+## Project policies
+
+- Read [CONTRIBUTING.md](CONTRIBUTING.md) before proposing a change.
+- Report vulnerabilities through [SECURITY.md](SECURITY.md), never through a public issue.
+- Use [SUPPORT.md](SUPPORT.md) to choose the right support channel.
+- Theme source code is MIT-licensed. R/CREATION names, marks, copy, artwork, photographs, and product designs are excluded; see [LICENSE](LICENSE) and [NOTICE.md](NOTICE.md).
